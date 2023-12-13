@@ -1,33 +1,64 @@
 const userModel = require('../models/userModel');
+const moment = require('moment');
+const bcrypt = require('bcrypt');
 
-exports.home = (req, res) => {
-    res.send("WELCOME TO ECOMMERCE HOMEPAGE");
+const check = (req, res) => {
+    res.status(200).json({
+        success: true,
+        message: "WELCOME TO ECOMMERCE HOMEPAGE"
+    });
 };
 
-exports.createUser = async (req, res) => {
+const register = async (req, res) => {
     try {
-        const {name, dob, mail, password} = req.body;
-
-        if(!password || !mail) {
-            throw new error("NAME AND EMAIL ARE REQUIRED");
-            return;
+        console.log("Request to create a user received");
+        // collect data
+        const {firstName, lastName, dob, mail, password} = req.body;
+        // existing user check
+        const userExists = await userModel.findOne({ mail });
+        // validate date
+        function isValidDate(dob) {
+            return moment(dob, 'DDMMYYYY', true).isValid();
         }
-
-        const userExists = await userModel.findOne({mail});
+        if(!firstName || !mail || !password) {
+            throw new Error("NAME, MAIL & PASSWORD MANDATORY");
+        }
+        if (firstName === lastName) {
+            throw new Error("Firstname cannot be repeated as the Lastname");
+        }
+        if (!isValidDate(dob)) {
+            throw new Error("Invalid date entered");
+        }
         if (userExists) {
-            throw new Error("User already Exists");
-            return;
+            return res.status(400).json({
+                success: false,
+                message: "User already exists",
+            });
         }
-        
-        const user = await userModel.create({ password, mail });
+        const hashedPassword = await bcrypt.hash(password, 10);
+        const newUser = new userModel({
+            firstName,
+            lastName,
+            dob,
+            mail,
+            password: hashedPassword,
+        });
+        await newUser.save();
         res.status(201).json({
             success: true,
             message: "User created Successfully !",
-            user,
+            user: newUser,
         })
-        console.log(`User: ${name} Created Successfully`);
+        console.log(`User: ${firstName} Created Successfully`);
     
-    } catch (error) {
-        console.error('Error:', error.message); 
+    } catch (err) {
+        console.error('Error:', err.message);
+        console.log('Error ! Registration Failed');
+        return res.status(400).json({
+            success: false,
+            message: err.message,
+        });
     }
 }
+
+module.exports = { check, register};

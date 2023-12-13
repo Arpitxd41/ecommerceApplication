@@ -3,14 +3,14 @@
 const express = require("express");
 
 const {
-    home,
-    createUser,
+    check,
+    register,
 } = require("../controllers/user"); // IMPORTING CONTROLLER
 
 const router = express.Router();
 
-router.get("/" , home);
-router.post("/register", createUser);
+router.get("/" , check);
+router.post("/register", register);
 
 
 module.exports = router;

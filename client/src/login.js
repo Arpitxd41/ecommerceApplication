@@ -9,16 +9,18 @@ import fri from './images/fri.png';
 import pay from './images/pay.png';
 
 const Login = () => {
+
+    
     return (
         <div className='flex flex-col lg:flex-row'>
-            <div className="lg:w-2/5 lg:float-right grid gap-2 grid-cols-12 bg-yellow-400">
-                <img src={deli} className="bg-yellow-400 col-span-12" />
-                <img src={pay} className="bg-gray-100 col-span-4 border-4 border-gray-50 h-42" />
-                <img src={shop} className="bg-pink-400 col-span-4 border-8 border-gray-50" />
-                <img src={sale} className="bg-gray-100 col-span-4 border-4 border-gray-50 h-42" />
-                <img src={santa} className="bg-gray-100 col-span-4 border-4 border-gray-50 h-42" />
-                <img src={cart} className="bg-cyan-400 col-span-4 border-4 border-gray-50" />
-                <img src={fri} className="bg-gray-100 col-span-4 border-4 border-gray-50 h-42" />
+            <div className="lg:w-2/5 lg:float-right grid grid-cols-12 bg-yellow-400">
+                <img alt='' src={deli} className="bg-orange-400 col-span-12 h-42" />
+                <img alt='' src={pay} className="bg-orange-400 col-span-4 h-42" />
+                <img alt='' src={shop} className="bg-orange-400 col-span-4 h-42" />
+                <img alt='' src={sale} className="bg-orange-400 col-span-4 h-42" />
+                <img alt='' src={santa} className="bg-orange-400 col-span-4 h-42" />
+                <img alt='' src={cart} className="bg-orange-400 col-span-4 h-42"/>
+                <img alt='' src={fri} className="bg-orange-400 col-span-4 h-42" />
             </div>
             <div className="lg:w-3/5 lg:float-right text-gray-300 bg-slate-900 py-8 px-16 space-y-4">
                 <form className='space-y-6'>
@@ -42,7 +44,7 @@ const Login = () => {
                         </button>
 
                     <div id="emailHelp" className="text-xs pb-3">(*We do not share personal data of the users to any external third party read :
-                        <a className="text-red-500" href="#">shoppers user privacy code</a>)
+                        <a className="text-red-500" href="chicken">shoppers user privacy code</a>)
                     </div>
                   </div>
                 </form>
