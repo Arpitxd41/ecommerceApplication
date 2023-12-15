@@ -1,6 +1,7 @@
 # dependencies
 node_modules/
 .env
+./server/.env
 
 # testing
 coverage/
