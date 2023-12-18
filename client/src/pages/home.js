@@ -5,6 +5,7 @@ import NavbarOne from '../components/navbarOne';
 import FeaturedProducts from './featuredProducts';
 import SpecialOffers from './specialOffers';
 import NavbarTwo from '../components/navbarTwo';
+import Corousel from '../components/corousel';
 
 const HomePage = () => {
   const [featuredProducts, setFeaturedProducts] = useState([]);
@@ -19,12 +20,28 @@ const HomePage = () => {
   }, []);
 
   return (
-    <div className='px-4 py-2 bg-gray-900 text-white'>
-      <NavbarOne />
-      <NavbarTwo />
-      <h1 className='text-8xl font-bold'>Welcome to Our E-commerce Store</h1>
-      <FeaturedProducts products={featuredProducts} />
-      <SpecialOffers offers={specialOffers} />
+    <div className='px-4 py-2 bg-gray-950 text-white space-y-12'>
+      <div>
+        <NavbarOne />
+        <NavbarTwo />
+      </div>
+      <div className='text-center'>
+        <h4 className='text-5xl font-bold'>WELCOME !</h4>
+        <h1 className='text-2xl'>to Ecommerce Application Landing Page</h1>
+      </div>
+      <div>
+        <FeaturedProducts products={featuredProducts} />
+        <SpecialOffers offers={specialOffers} />
+      </div>
+      <Corousel />
+      <hr className='border-gray-800'/>
+      <div className='w-full text-center flex justify-center'>
+        <div class="text-slate-600 text-md leading-6 w-1/4  space-y-2 p-4 object-contain text-center flex justify-center">
+            <p class="object-contain">Made with <i class="fa fa-heart animate-characters h-12 text-sm"></i> by <a href="" class="hover:underline mb-2">Arpit</a></p>
+            {/* <p class="">last updated :</p> */}
+            {/* <p class="date"></p> */}
+        </div>
+      </div>
     </div>
   );
 };

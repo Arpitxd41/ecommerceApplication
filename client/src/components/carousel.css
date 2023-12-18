@@ -1,0 +1,136 @@
+.carousel-wrapper {
+  width: 95vw; /* Full width of the viewport */
+  height: 45vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 5px 5px 25px 0px rgba(46, 61, 73, 0.2);
+  border-radius: 20px;
+  margin: 100px auto 20px;
+}
+
+.carousel-container {
+  width: 95vw; /* Full width of the viewport */
+  height: 30vw;
+  overflow: hidden;
+  margin: 0 auto;
+  box-shadow: -20px 35px #000;
+}
+
+.carousel {
+  display: flex;
+  width: 500vw; /* Five times the viewport width for 5 images */
+  animation: sliding 20s infinite linear; /* Adjusted duration for five images */
+}
+
+.carousel div {
+  flex: 1;
+  min-width: 100vw; /* Full width of the viewport for each image */
+  height: 30vw;
+  background-size: cover;
+  background-position: center;
+}
+/* 
+.carousel:hover {
+  animation-play-state: paused;
+} */
+
+.carousel .image-one {
+  background-image: url("../images/image1.jpg");
+}
+
+.carousel .image-two {
+  background-image: url("../images/image2.jpg");
+}
+
+.carousel .image-three {
+  background-image: url("../images/image3.jpg");
+}
+
+.carousel .image-four {
+  background-image: url("../images/image5.jpg");
+}
+
+.carousel .image-five {
+  background-image: url("../images/image4.jpg");
+}
+
+@keyframes sliding {
+  0% {
+    transform: translateX(0);
+  }
+  20% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-100vw);
+  }
+  45% {
+    transform: translateX(-100vw);
+  }
+  50% {
+    transform: translateX(-200vw);
+  }
+  70% {
+    transform: translateX(-200vw);
+  }
+  75% {
+    transform: translateX(-300vw);
+  }
+  95% {
+    transform: translateX(-300vw);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .carousel-wrapper {
+    width: 100vw;
+    height: 210px;
+  }
+
+  .carousel-container {
+    width: 100vw;
+    height: 150px;
+  }
+
+  .carousel {
+    width: 500vw;
+  }
+
+  .carousel > div {
+    min-width: 100vw;
+  }
+
+  @keyframes sliding {
+    0% {
+      transform: translateX(0);
+    }
+    20% {
+      transform: translateX(0);
+    }
+    25% {
+      transform: translateX(-100vw);
+    }
+    45% {
+      transform: translateX(-100vw);
+    }
+    50% {
+      transform: translateX(-200vw);
+    }
+    70% {
+      transform: translateX(-200vw);
+    }
+    75% {
+      transform: translateX(-300vw);
+    }
+    95% {
+      transform: translateX(-300vw);
+    }
+    100% {
+      transform: translateX(0);
+    }
+  }
+}
