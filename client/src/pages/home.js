@@ -6,6 +6,7 @@ import FeaturedProducts from './featuredProducts';
 import SpecialOffers from './specialOffers';
 import NavbarTwo from '../components/navbarTwo';
 import Corousel from '../components/corousel';
+import ProductList from '../components/productList';
 
 const HomePage = () => {
   const [featuredProducts, setFeaturedProducts] = useState([]);
@@ -28,6 +29,9 @@ const HomePage = () => {
       <div className='text-center'>
         <h4 className='text-5xl font-bold'>WELCOME !</h4>
         <h1 className='text-2xl'>to Ecommerce Application Landing Page</h1>
+      </div>
+      <div className='bg-yellow-300 py-12 px-6 rounded-sm'>
+        <ProductList />
       </div>
       <div>
         <FeaturedProducts products={featuredProducts} />
