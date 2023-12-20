@@ -1,12 +1,74 @@
-# MERN STACK E-Commerce Project
 
->
 
-This is a standard E-Commerce project I am designing from scratch as a complete representation of my knowledge as a MERN STACK developer and impress whoever accesses my profile. This Project will ensure that I have learned how to build Web Applications highlighting the complex understanding through the detailed concepts used in this project. I will keep updating this project for better and will add other such Full Stack Projects using various tools and new concepts that I have at my disposal or will acquire along the way to become a Full Stack Web Developer.
+| - | - | - |
+| *ISSUE* : | 001, MERN STACK PROJECT |
+| *TOPIC* : | Ecommerce Web Application | :paperclip: [open](/) |
+| *AUTHOR* : | Arpit Tiwari | :paperclip: [Profile](https://portfolio.arpit.netlify.com) |
+| *DESIGNATION* : | Full Stack Javascript Web Developer |
 
-- My main concern will be on the Server side of the project but as we move forward I will try to strike a balance between the Frontend and the Backend of the Project.
-- The  project needs to be accurate in use of the modern tools and updated concepts.
-- The project must be free from any and all runtime errors 
+
+---
+
+# :shopping: [Full Stack e-Commerce Project]() 
+
+This is a standard E-Commerce project I am designing from scratch as a MERN STACK developer. Through this Project I will showcase how an actual ECOMMERCE-WEB APPLICATION is built along with the architecture of the Web Applications, highlighting the complex understanding of the environment we are working on with the detailed concepts used in this project. I will keep updating this project for better functions and UI/UX, better functionalities including most of what can be embedded into one Full Stack Project.
+
+
+
+## :label: MERN STACK :
+
+Well then, What is a MERN Stack..? The MERN stack is a popular technology stack used for building _web applications_. It is an 'acronym' that represents a set of technologies:
+
+- `MongoDB` : A *NoSQL* database that stores data in a flexible, *JSON*-like format called *BSON* (Binary JSON). MongoDB is known for its *scalability, flexibility, and ease of integration with web applications*.
+
+- `Express.js` : A *back-end web application framework* for Node.js. "Express.js simplifies the process of building robust and scalable web applications" by providing a set of features for *routing, middleware, and handling HTTP requests and responses*.
+
+- `React.js` : A *JavaScript library* for building user interfaces. React is maintained by Facebook and is widely used for creating *dynamic and interactive front-end components*. It allows developers to build reusable UI components that update efficiently based on changes in the application state.
+
+- `Node.js` : A *JavaScript runtime environment that executes server-side code*. Node.js is built on the V8 JavaScript engine and enables developers to use JavaScript for both server-side and client-side development, creating a more unified development experience.
+
+When combined, these technologies form the **MERN stack**, which covers the full development cycle of a web application—from database management to server-side scripting, API development, and front-end development. Here's a brief overview of each component in the MERN stack:
+
+1. **Front-end (Client-Side)**:   
+    - **ReactJS**: Manages the user interface and facilitates the creation of interactive components.
+
+2. **Back-end (Server-Side)**:   
+    - **NodeJS**: Executes server-side JavaScript code and handles server logic.   
+    - **ExpressJS**: A web application framework for Node.js, simplifying the development of server-side applications.
+
+3. **Database**:   
+    - **MongoDB**: A NoSQL database that stores data in a flexible, JSON-like format. It is often used to store and retrieve data for web applications.
+
+:paperclip: The MERN stack provides a cohesive and streamlined development experience for building modern, scalable, and efficient web applications. It is widely adopted by developers and organizations for its flexibility, performance, and the ability to use JavaScript across the entire development stack.
+
+
+
+
+
+## :label: Roadmap for the Project : 
+
+- [x]  **PROJECT ARCHITECTURE** : with Frontend in `JavaScript` , `React` , `ReactRouter` , `CSS` , `TailwindCSS` & Backend with `NodeJS` , `Express`
+- [x]  **AXIOS** : For the communication between the frontend and the backend of the project
+- [x]  **NODEMON**
+- [x]  **DATABASE** : `MongoDB` as my first choics for database but I will for sure use `mySQL` in the next Project. `http` methods, pushing data to the database, store/manage/create/remove data, to communicate to DB used `mongoose`
+- [x]  **REST API** : API handeling and data management in the frontend and backend
+- [x]  **AUTHORIZATION & AUTHENTICATION** : User and Admin routes, User Management, using `JWT` and `bryptJS`, hashing and encryption used
+- [x]  **USER & PRODUCT MANAGEMENT** : Cart Management, Orders Management, Product Handeling
+- [ ]  **PAYEMENT GATEWAY** : RazorPay Gateway for the payement.
+- [ ]  **HOSTING** :
+- [ ]  **SERVER DEPLOYMENT** :
+- [ ]  **TESTING, CODE FORMATTING** :
+- [ ]  **VERSION CONTROL, CODE MANAGEMENT & CONTINUOUS INTEGRATION** :
+
+### Stage Two: Further Improvising
+- Use of `MySQL DB`
+- Github Management
+- New seller route to be added to the app
+- Automation in testing
+- API Documentation
+- Error Monitoring & Debugging
+- Web Performance Analytics
+
 
 <!-- #### REFERENCES  -->
 <!-- 
