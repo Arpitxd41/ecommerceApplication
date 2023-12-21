@@ -1,10 +1,10 @@
 
-
-| - | - | - |
-| *ISSUE* : | 001, MERN STACK PROJECT |
+| Label | Discription | links |
+| :- | :- | :-: |
+| *ISSUE* : | 001, MERN STACK PROJECT | - |
 | *TOPIC* : | Ecommerce Web Application | :paperclip: [open](/) |
 | *AUTHOR* : | Arpit Tiwari | :paperclip: [Profile](https://portfolio.arpit.netlify.com) |
-| *DESIGNATION* : | Full Stack Javascript Web Developer |
+| *DESIGNATION* : | Full Stack Javascript Web Developer | - |
 
 
 ---
