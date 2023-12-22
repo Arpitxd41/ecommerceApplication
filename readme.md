@@ -9,7 +9,8 @@
 
 ---
 
-# :shopping: [Full Stack e-Commerce Project]() 
+# :shopping: Full Stack e-Commerce Project
+([Go to app:paperclip:](https://))
 
 This is a standard E-Commerce project I am designing from scratch as a MERN STACK developer. Through this Project I will showcase how an actual ECOMMERCE-WEB APPLICATION is built along with the architecture of the Web Applications, highlighting the complex understanding of the environment we are working on with the detailed concepts used in this project. I will keep updating this project for better functions and UI/UX, better functionalities including most of what can be embedded into one Full Stack Project.
 

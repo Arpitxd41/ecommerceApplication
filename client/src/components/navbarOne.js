@@ -7,7 +7,7 @@ import logo from '../images/logo512.png';
 const NavbarOne = () => {
   return (
     <nav>
-        <div className='flex flex-row rounded-t-sm py-2 px-4 justify-evenly bg-gray-600 text-teal-50 font-bold'>
+        <div className='flex flex-row rounded-t-sm py-2 px-4 justify-evenly bg-stone-900 text-teal-50 font-bold'>
             <div className="logo w-1/12 h-12">
               <a href='' >
                   <img src={logo} className='h-12' />
@@ -23,13 +23,7 @@ const NavbarOne = () => {
                     </div>
                     <input class="peer rounded-r-full h-full w-full outline-none text-sm text-gray-700 pr-2 border-2 border-white font-semibold" type="text" id="search" placeholder="Search something.." /> 
                 </div>
-              </li>
-              <li className='rounded-sm hover:shadow-black hover:shadow-md px-5 py-2'>
-                <Link className='flex flex-row items-center' to="/products">
-                  <i class="fa fa-th-large" aria-hidden="true"></i> 
-                  <p className='hidden lg:flex ml-2  font-semibold'>Categories</p> 
-                </Link>
-              </li>
+              </li>              
               <li className='rounded-sm hover:shadow-black hover:shadow-md px-5 py-2'>
                 <Link className='flex flex-row items-center' to="/cart">
                   <i class="fa fa-shopping-cart" aria-hidden="true"> </i> 
