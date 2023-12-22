@@ -30,19 +30,7 @@ const HomePage = () => {
         <h4 className='text-5xl font-bold'>WELCOME !</h4>
         <h1 className='text-2xl'>to Ecommerce Application</h1>
       </div>
-      <div className='flex flex-row bg-stone-900 rounded-sm object-conver'>
-        <div className='float-left w-1/3'>
-          <h2>Filter</h2>
-        </div>
-        <div className='float-right w-2/3 p-6'>
-          <ProductList />
-        </div>
-      </div>
-      <div>
-        <FeaturedProducts products={featuredProducts} />
-        <SpecialOffers offers={specialOffers} />
-      </div>
-      
+      <ProductList />
       <Corousel />
 
       <hr className='border-gray-800'/>
