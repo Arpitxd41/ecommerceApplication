@@ -14,65 +14,57 @@ import Subscriptions from '../images/icons/subscription.png'
 
 const NavbarTwo = () => {
   return (
-    <nav className='w-full'>
-        <div>
-        </div>
-        <ul className='h-24 overflow-x-auto w-full flex flex-row justify-between bg-yellow-300 text-gray-950 rounded-b-sm py-2 text-xs space-x-7 px-6'>
-          <li className="flex-shrink-0 bg-yellow-300 w-1/8 rounded-md text-center shadow-black hover:shadow-md hover:shadow-black h-17 items-baseline align-middle overflow-hidden px-6 pb-3 pt-2">
+    <nav className='w-full hidden'>
+        <ul className='h-24 overflow-x-auto w-full flex flex-row justify-between bg-gradient-to-t from-gray-500 to-gray-800 text-gray-950 rounded-b-sm py-2 text-xs font-semibold space-x-7 px-6'>
+          <li className="flex-shrink-0 w-1/8 rounded-md text-center shadow-black hover:shadow-md hover:shadow-black h-17 items-baseline align-middle overflow-hidden px-6 pb-3 pt-2">
             <a href='' className="flex flex-col">
                 <img src={offerSectionLabel} className="h-10 w-full object-contain"/>
                 <p>Best Offers</p>
             </a>
           </li>
-          <li className="flex-shrink-0 bg-yellow-300 w-1/8 rounded-md text-center shadow-black hover:shadow-md hover:shadow-black h-17 items-baseline align-middle overflow-hidden px-6 pb-3 pt-2">
+          <li className="flex-shrink-0 w-1/8 rounded-md text-center shadow-black hover:shadow-md hover:shadow-black h-17 items-baseline align-middle overflow-hidden px-6 pb-3 pt-2">
             <a href='' className="flex flex-col">
                 <img src={clothing} className="h-10 w-full object-contain"/>
                 <p>Clothing</p>
             </a>
           </li>
-          <li className="flex-shrink-0 bg-yellow-300 w-1/8 rounded-md text-center shadow-black hover:shadow-md hover:shadow-black h-17 items-baseline align-middle overflow-hidden px-6 pb-3 pt-2">
+          <li className="flex-shrink-0 w-1/8 rounded-md text-center shadow-black hover:shadow-md hover:shadow-black h-17 items-baseline align-middle overflow-hidden px-6 pb-3 pt-2">
             <a href='' className="flex flex-col">
                 <img src={gadgets} className="h-10 w-full object-contain"/>
                 <p>Electronics</p>
             </a>
           </li>
-          <li className="flex-shrink-0 bg-yellow-300 w-1/8 rounded-md text-center shadow-black hover:shadow-md hover:shadow-black h-17 items-baseline align-middle overflow-hidden px-6 pb-3 pt-2">
+          <li className="flex-shrink-0 w-1/8 rounded-md text-center shadow-black hover:shadow-md hover:shadow-black h-17 items-baseline align-middle overflow-hidden px-6 pb-3 pt-2">
             <a href='' className="flex flex-col">
                 <img src={cosmetics} className="h-10 w-full object-contain"/>
-                <p>cosmetics</p>
+                <p>Cosmetics</p>
             </a>
           </li>
-          <li className="flex-shrink-0 bg-yellow-300 w-1/8 rounded-md text-center shadow-black hover:shadow-md hover:shadow-black h-17 items-baseline align-middle overflow-hidden px-6 pb-3 pt-2">
+          <li className="flex-shrink-0 w-1/8 rounded-md text-center shadow-black hover:shadow-md hover:shadow-black h-17 items-baseline align-middle overflow-hidden px-6 pb-3 pt-2">
             <a href='' className="flex flex-col">
                 <img src={camping} className="h-10 w-full object-contain"/>
-                <p>Outdoor Specials</p>
+                <p>Travel Essentials</p>
             </a>
           </li>
-          <li className="flex-shrink-0 bg-yellow-300 w-1/8 rounded-md text-center shadow-black hover:shadow-md hover:shadow-black h-17 items-baseline align-middle overflow-hidden px-6 pb-3 pt-2">
+          <li className="flex-shrink-0 w-1/8 rounded-md text-center shadow-black hover:shadow-md hover:shadow-black h-17 items-baseline align-middle overflow-hidden px-6 pb-3 pt-2">
             <a href='' className="flex flex-col">
                 <img src={whey} className="h-10 w-full object-contain"/>
-                <p>Nutrition & Supplements</p>
+                <p>Groceries</p>
             </a>
-          </li>
-          <li className="flex-shrink-0 bg-yellow-300 w-1/8 rounded-md text-center shadow-black hover:shadow-md hover:shadow-black h-17 items-baseline align-middle overflow-hidden px-6 pb-3 pt-2">
-            <a href='' className="flex flex-col">
-                <img src={Subscriptions} className="h-10 w-full object-contain"/>
-                <p>Subscriptions</p>
-            </a>
-          </li>
-          <li className="flex-shrink-0 bg-yellow-300 w-1/8 rounded-md text-center shadow-black hover:shadow-md hover:shadow-black h-17 items-baseline align-middle overflow-hidden px-6 pb-3 pt-2">
+          </li>          
+          <li className="flex-shrink-0 w-1/8 rounded-md text-center shadow-black hover:shadow-md hover:shadow-black h-17 items-baseline align-middle overflow-hidden px-6 pb-3 pt-2">
             <a href='' className="flex flex-col">
                 <img src={premium} className="h-10 w-full object-contain"/>
                 <p>Premium Membership</p>
             </a>
           </li>
-          <li className="flex-shrink-0 bg-yellow-300 w-1/8 rounded-md text-center shadow-black hover:shadow-md hover:shadow-black h-17 items-baseline align-middle overflow-hidden px-6 pb-3 pt-2">
+          <li className="flex-shrink-0 w-1/8 rounded-md text-center shadow-black hover:shadow-md hover:shadow-black h-17 items-baseline align-middle overflow-hidden px-6 pb-3 pt-2">
             <a href='' className="flex flex-col">
                 <img src={event} className="h-10 w-full object-contain"/>
                 <p>Local Events</p>
             </a>
           </li>
-          <li className="flex-shrink-0 bg-yellow-300 w-1/8 rounded-md text-center shadow-black hover:shadow-md hover:shadow-black h-17 items-baseline align-middle overflow-hidden px-6 pb-3 pt-2">
+          <li className="flex-shrink-0 w-1/8 rounded-md text-center shadow-black hover:shadow-md hover:shadow-black h-17 items-baseline align-middle overflow-hidden px-6 pb-3 pt-2">
             <a href='' className="flex flex-col">
                 <img src={seller} className="h-10 w-full object-contain"/>
                 <p>Join as Seller</p>
