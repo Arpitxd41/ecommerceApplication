@@ -27,44 +27,67 @@ const ProductFilter = ({ onCategoryChange, onSortingTypeChange, onSortingChange 
   };
 
   return (
-    <div className='bg-gradient-to-b from-pink-600 to-violet-900 w-full item-center flex flex-row lg:flex-col space-y-12 justify-evenly lg:justify-center py-20 px-9 h-fit rounded-sm'>
-      
-{/* Category Selection */}
-      <div className='flex flex-col rounded-md items-center'>
-        <label htmlFor="category" className='font-semibold'>Category:
-          <select id="category" onChange={handleCategoryChange} value={selectedCategory} className='w-40 lg:w-64 rounded-md bg-stone-950 border-stone-950 text-white'>
-            <option value="">All</option>
-            {categories.map(category => (
-              <option key={category} value={category}>
-                {category}
-              </option>
-            ))}
-          </select>
-        </label>
+    <div className='bg-gradient-to-b from-pink-600 to-violet-900 w-full flex flex-col space-y-2 py-2 h-fit rounded-sm
+    lg:py-16 lg:px-5 lg:justify-evenly px-4'>
+      <div className='hidden lg:block text-center border w-fit
+       lg:px-10'>
+        <h2 className='text-yellow-400 rounded-full w-fit px-8 text-lg md:text-3xl
+         lg:py-2'>FILTER</h2>
       </div>
 
-{/* Sorting Type */}
-      <div className='flex flex-col rounded-lg items-center'>
-        <label htmlFor='sortbyDropdown' className='font-semibold mb-2'>Sort:
-          <select id='sortbyDropdown' onChange={(e) => handleSortingTypeChange(e.target.value)} className='w-40 lg:w-64 rounded-md bg-stone-950 border-stone-950 text-white' >
-            <option value="none">None</option>
-            <option value="rating">By Rating</option>
-            <option value="price">By Price</option>
-          </select>
-        </label>
-      </div>
+      <div className='flex flex-col justify-evenly py-5 object-contain space-y-10
+      lg:space-y-12 lg:flex-col md:space-y-2 md:flex-row'>
 
-{/* Order dropdown */}
-      <div className='flex flex-col rounded-lg items-center'>
-        <label htmlFor='orderDropdown' className='font-semibold mb-2'>Order:
-          <select id='orderDropdown' onChange={(e) => handleSortingChange(e.target.value)} className='w-40 lg:w-64 rounded-md bg-stone-950 border-stone-950 text-white' >
-            <option value="default">Default</option>
-            <option value="descending">High to Low</option>
-            <option value="ascending">Low to High</option>
-          </select>
-        </label>
-      </div>
+        {/* Category Selection */}      
+        <div className='-ml-0 md:-ml-52 lg:ml-0 mt-2'>
+          <label htmlFor="category" className='md:font-semibold'>Category:
+            <select
+              id="category"
+              onChange={handleCategoryChange}
+              value={selectedCategory}
+              className='w-60 rounded-md bg-stone-950 border-stone-950 text-white
+             lg:w-64'>
+              <option value="">All</option>
+              {categories.map(category => (
+                <option key={category} value={category}>
+                  {category}
+                </option>
+              ))}
+            </select>
+          </label>
+        </div>
 
+        {/* Sorting Type */}
+        <div className=''>
+          <label htmlFor='sortbyDropdown' className='md:font-semibold mb-2'>Sort:
+            <select
+              id='sortbyDropdown'
+              onChange={(e) => handleSortingTypeChange(e.target.value)}
+              className='w-60 rounded-md bg-stone-950 border-stone-950 text-white
+             lg:w-64' >
+              <option value="none">None</option>
+              <option value="rating">By Rating</option>
+              <option value="price">By Price</option>
+            </select>
+          </label>
+        </div>
+
+        {/* Order dropdown */}
+        <div className=''>
+          <label htmlFor='orderDropdown' className='md:font-semibold mb-2'>Order:
+            <select
+              id='orderDropdown'
+              onChange={(e) => handleSortingChange(e.target.value)}
+              className='w-60 rounded-md bg-stone-950 border-stone-950 text-white
+             lg:w-64' >
+              <option value="default">Default</option>
+              <option value="descending">High to Low</option>
+              <option value="ascending">Low to High</option>
+            </select>
+          </label>
+        </div>
+
+      </div>
 
     </div>
   );
