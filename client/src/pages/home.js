@@ -20,7 +20,7 @@ const HomePage = () => {
   }, []);
 
   return (
-    <div className='bg-gradient-to-r from-black  to-fuchsia-900 text-white space-y-12 border
+    <div className='bg-gradient-to-r from-black to-fuchsia-900 text-white space-y-12
     lg:px-12 md:px-4 md:py-4'>
       <div>
         <NavbarOne />

@@ -1,59 +1,44 @@
 const userModel = require('../models/userModel');
 const moment = require('moment');
 const bcrypt = require('bcrypt');
+const jwtToken = require('jsonwebtoken');
 
-const check = (req, res) => {
-// Check if the user is logged in
-    if (req.isAuthenticated()) {
-    // If logged in, send a welcome message and user details
-        res.status(200).json({
-            success: true,
-            message: `Welcome to the E-commerce homepage, ${req.user.firstName}!`,
-            user: {
-                firstName: req.user.firstName,
-                lastName: req.user.lastName,
-    // Include other user data you want to send in the response
-            },
-        });
-    } else {
-    // If not logged in, send a generic welcome message
-        res.status(200).json({
-            success: true,
-            message: "Welcome to the E-commerce homepage",
-        });
-    }
+const check = (userModel) => {
+    // GENERATING TOKEN
+    return jwt.sign({ userId: user._id, email: user.mail }, 'your-secret-key', { expiresIn: '1h' });
 };
 
 
 const register = async (req, res) => {
     try {
         console.log("Request to create a user received");
-// collect data
+        // collect data
         const {firstName, lastName, dob, mail, password} = req.body;
 
-// existing user check
+        // Check if the user already exists in Database
         const userExists = await userModel.findOne({ mail });
         if (userExists) {
+            console.log('User already exists');            
             return res.status(400).json({
                 success: false,
                 message: "User already exists",
             });
         }
-// validate date entry
+        // Validate date entry for DOB
         function isValidDate(dob) {
             return moment(dob, 'DDMMYYYY', true).isValid();
         }
         if (!isValidDate(dob)) {
             throw new Error("Invalid date entered");
         }
-//  empty input fields
+        //  Check if input fields are empty
         if(!firstName || !mail || !password) {
             throw new Error("NAME, MAIL & PASSWORD MANDATORY");
         }
         if (firstName === lastName) {
             throw new Error("Firstname cannot be repeated as the Lastname");
         }
-// password hashing
+        // Hashing Password
         const hashedPassword = await bcrypt.hash(password, 10);
         const newUser = new userModel({
             firstName,
@@ -63,13 +48,17 @@ const register = async (req, res) => {
             password: hashedPassword,
         });
         await newUser.save();
+
+        const token = generateToken(newUser);
         res.status(201).json({
             success: true,
-            message: "User created Successfully !",
-            user: newUser,
+            message: 'User creation successful',
+            token,
         })
         console.log(`User: ${firstName} Created Successfully`);
-        return res.redirect('/');
+        window.alert(`User: ${firstName} Created Successfully`);
+
+        res.redirect('/');
     } catch (err) {
         console.error('Error:', err.message);
         console.log('Error ! Registration Failed');
@@ -87,13 +76,14 @@ const login = async (req, res) => {
         // collect data
         const { mail, password } = req.body;
         const user = await userModel.findOne({ mail });
+        // User not in DB
         if (!user) {
             return res.status(404).json({
                 success: false,
                 message: "User not found...........",
             });
         }
-        // compare password
+        // Compare password
         const passwordMatch = await bcrypt.compare(password, user.password);
         if (!passwordMatch) {
             return res.status(401).json({
@@ -101,9 +91,18 @@ const login = async (req, res) => {
                 message: 'unauthorized'
             });
         }
+
+        const token = generateToken(user);
+
+        res.status(200).json({
+            success: true,
+            message: 'Login Successful',
+            token,
+        });
         // Return a response for successful login        
         console.log(`User: ${user.firstName} Login Successful`);
-        return res.redirect('/');
+        Window.alert(`User: ${user.firstName} Login Successful`);
+        res.redirect('/');
     } catch (error) {
         console.error('Error:', error.message);
         console.log('Error ! Login Failed');
