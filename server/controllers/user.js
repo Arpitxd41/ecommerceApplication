@@ -3,22 +3,21 @@ const moment = require('moment');
 const bcrypt = require('bcrypt');
 const jwtToken = require('jsonwebtoken');
 
-const check = (userModel) => {
+const generateToken = (user) => {
     // GENERATING TOKEN
-    return jwt.sign({ userId: user._id, email: user.mail }, 'your-secret-key', { expiresIn: '1h' });
+    return jwtToken.sign({ userId: user._id, email: user.mail }, 'your-secret-key', { expiresIn: '1h' });
 };
-
 
 const register = async (req, res) => {
     try {
         console.log("Request to create a user received");
         // collect data
-        const {firstName, lastName, dob, mail, password} = req.body;
+        const { firstName, lastName, dob, mail, password } = req.body;
 
         // Check if the user already exists in Database
         const userExists = await userModel.findOne({ mail });
         if (userExists) {
-            console.log('User already exists');            
+            console.log('User already exists');
             return res.status(400).json({
                 success: false,
                 message: "User already exists",
@@ -32,7 +31,7 @@ const register = async (req, res) => {
             throw new Error("Invalid date entered");
         }
         //  Check if input fields are empty
-        if(!firstName || !mail || !password) {
+        if (!firstName || !mail || !password) {
             throw new Error("NAME, MAIL & PASSWORD MANDATORY");
         }
         if (firstName === lastName) {
@@ -54,11 +53,8 @@ const register = async (req, res) => {
             success: true,
             message: 'User creation successful',
             token,
-        })
+        });
         console.log(`User: ${firstName} Created Successfully`);
-        window.alert(`User: ${firstName} Created Successfully`);
-
-        res.redirect('/');
     } catch (err) {
         console.error('Error:', err.message);
         console.log('Error ! Registration Failed');
@@ -67,7 +63,7 @@ const register = async (req, res) => {
             message: err.message,
         });
     }
-}
+};
 
 // USER LOGIN :-
 const login = async (req, res) => {
@@ -88,7 +84,7 @@ const login = async (req, res) => {
         if (!passwordMatch) {
             return res.status(401).json({
                 success: false,
-                message: 'unauthorized'
+                message: 'Unauthorized'
             });
         }
 
@@ -101,8 +97,6 @@ const login = async (req, res) => {
         });
         // Return a response for successful login        
         console.log(`User: ${user.firstName} Login Successful`);
-        Window.alert(`User: ${user.firstName} Login Successful`);
-        res.redirect('/');
     } catch (error) {
         console.error('Error:', error.message);
         console.log('Error ! Login Failed');
@@ -113,5 +107,4 @@ const login = async (req, res) => {
     }
 };
 
-
-module.exports = { check, register, login};
+module.exports = { generateToken, register, login };

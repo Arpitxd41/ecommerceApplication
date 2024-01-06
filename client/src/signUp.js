@@ -1,42 +1,51 @@
 import { useState } from "react";
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import axios from "axios";
 import unregProfile from "./images/profile_Reg.png";
 import regProfile from "./images/profile_Unreg.png";
 import frame from "./images/frame.png";
 
 const Signup = () => {
-  const [token, setToken] = useState("");
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [dob, setDob] = useState("");
-  const [mail, setMail] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
+    const [firstName, setFirstName] = useState("");
+    const [lastName, setLastName] = useState("");
+    const [dob, setDob] = useState("");
+    const [mail, setMail] = useState("");
+    const [password, setPassword] = useState("");
+    const [error, setError] = useState("");
+    const [confirmPassword, setConfirmPassword] = useState("");
 
-  const history = useHistory();
-  
-  const handleSubmit = async (e) => {
+    const navigate = useNavigate();
+
+    const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
-      const response = await axios.post("https://localhost:4000/register", {
-        firstName,
-        lastName,
-        dob,
-        mail,
-        password,
-      });
-      console.log(response.data);
-      setToken(response.data.token);
 
-      // Redirect to login page with success message
-      history.push('/login', { successMessage: 'New user successfully registered. Please login!' });
-      
-    } catch (error) {
-      console.error(error);
-      setError("Registration failed. Please try again."); // Set an error message
-    }
-  };
+        // Confirm Password
+        if (password !== confirmPassword) {
+            setError("Passwords do not match.");
+            return;
+        }
+
+        try {
+            const response = await axios.post("https://localhost:4000/register", {
+              firstName,
+              lastName,
+              dob,
+              mail,
+              password,
+            });
+
+            const userToken = response.data.token;
+          
+            localStorage.setItem('token', userToken);
+          
+            // Redirect to login page with success message
+            navigate('/login',{state : { successMessage: 'New user successfully registered. Please login to Continue...!' }});
+
+        } catch (error) {
+            console.error(error);
+            setError("Registration failed. Please try again."); // Set an error message
+        }
+    };
 
   return (
     <div className="flex flex-col lg:flex-row bg-black p-8">
@@ -52,7 +61,7 @@ const Signup = () => {
                     />
                     <h2 className="text-2xl font-bold text-green-500">REGISTER :</h2>
                 </div>
-                <div className="bg-stone-900 text-yellow-400 shadow-lg px-4 md:px-12 py-8 flex flex-col space-y-4 rounded-sm text-center items-center md:text-left md:items-start">
+                <div className="bg-stone-950 text-yellow-400 shadow-lg px-4 md:px-12 py-8 flex flex-col space-y-4 rounded-sm text-center items-center md:text-left md:items-start">
                     <div className="">
                         <h4 className="text-md w-fit">NAME :</h4>
                         <div className="flex-col md:flex-row justify-between flex md:space-y-0 space-y-4 md:space-x-4">
@@ -112,11 +121,11 @@ const Signup = () => {
                         <div>
                             <h4 className="text-md w-fit">CONFIRM PASSWORD :</h4>
                             <input
-                                onChange={(e) => setPassword(e.target.value)}
+                                onChange={(e) => setConfirmPassword(e.target.value)}
                                 type="password"
                                 className="bg-transparent rounded-sm pl-3 text-gray-50"
                                 id=""
-                                placeholder="Enter password"
+                                placeholder="Confirm password"
                             />
                         </div>
                     </div>
@@ -130,24 +139,23 @@ const Signup = () => {
                         {" "}
                         SUBMIT{" "}
                     </button>{" "}
-                        {error && <div className="text-red-500 text-sm">{error}</div>}
+                        {error && <div className="text-red-600 text-sm">{error}</div>}
                     <div
                         id="emailHelp"
                         className="text-xs pb-3">
-                        {" "}
-                        (*We do not share personal data of the users to any external third party read :
-                            <a
-                              className="text-red-500"
-                              href="chicken">
-                              shoppers user privacy code
-                            </a>
-                        )
+                        *We do not share personal data of the users to any external third party read :
+                        <a
+                        className="text-blue-600"
+                        href="chicken">
+                            {" "} shoppers user privacy code
+                        </a>
+                        
                     </div>
                 </div>
             </form>
             <div className="flex flex-row space-x-2 h-20 items-center">
                 <img
-                    className="h-12 p-1 border-red-500 border-2 rounded-full"
+                    className="h-12 p-1 border-red-600 border-2 rounded-full"
                     src={regProfile}
                     alt="registered-profile"
                 />

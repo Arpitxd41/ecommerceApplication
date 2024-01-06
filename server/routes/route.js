@@ -3,14 +3,14 @@
 const express = require("express");
 
 const {
-    check,
+    generateToken,
     register,
     login
 } = require("../controllers/user"); // IMPORTING CONTROLLER
 
 const router = express.Router();
 
-router.get("/" , check);
+router.get("/" , generateToken);
 router.post("/register", register);
 router.post("/login", login);
 
