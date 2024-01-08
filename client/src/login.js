@@ -20,6 +20,7 @@ const Login = () => {
         .post("https://localhost:4000/login", { mail, password })
         .then((result) => {
             if (result.data.success) {
+                localStorage.setItem('authToken', result.data.token);
                 navigate('/');
             } else {
                 const errorMessage = result.data.message || "Login Failed !";

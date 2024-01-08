@@ -1,4 +1,5 @@
-import React from "react";
+import React from 'react';
+import { Link } from 'react-router-dom';
 
 const ProductCard = ({ product }) => {
   // Check if product is undefined or null
@@ -31,9 +32,9 @@ const ProductCard = ({ product }) => {
           </div>
           <div className="flex flex-row w-9/10 justify-between">
             <button className="bg-black text-white font-bold md:px-5 md:py-2 w-1/4 md:text-md text-sm">
-              <a href={`/product/${id}`} className="text-white hover:underline">
+              <Link to={`/product/${id}`} className="text-white hover:underline">
                 <i class="fa fa-external-link" aria-hidden="true"></i>
-              </a>
+              </Link>
             </button>
             <button className="bg-yellow-400 text-black md:text-md text-sm font-bold py-2 md:py-3 w-3/4">
               <a href="{cart}" className="flex flex-row items-center justify-evenly md:px-4">

@@ -1,11 +1,11 @@
 import React from 'react';
-import './carousel.css';
+// import './carousel.css';
 
 const Corousel = () => {
   return (	
-      <div className='px-8'>
+      <div className='absolute z-0 opacity-50 -top-12'>
         <div class="carousel-container">
-          <div className="carousel border-yellow-500">
+          <div className="carousel">
             <div class="image-one"></div>
             <div class="image-two"></div>
             <div class="image-three"></div>

@@ -1,22 +1,34 @@
 // Navbar.js
 import React, {useState} from 'react';
-import { Link } from 'react-router-dom';
-import './navbar.css'
+import { Link, useNavigate } from 'react-router-dom';
+// import './navbar.css'
 import logo from '../images/logo512.png';
 
-const NavbarOne = ({ onSearch }) => {
+const NavbarOne = ({ onSearch, isLoggedIn }) => {
   const [ searchQuery, setSearchQuery ] = useState('');
-
+  const navigate = useNavigate();
   const handleSearch = () => {
     // Call the callback function passed from the parent component
     onSearch(searchQuery);
   };
+
+  const handleKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      // Trigger search on Enter key press
+      handleSearch();
+    }
+  };
+
+  const handleLogoClick = () => {
+    // Handle navigation to home when the logo is clicked
+    navigate('/');
+  };
   return (
-    <nav>
-        <div className='flex flex-row py-2 px-4 justify-between bg-stone-900 bg-opacity-70 text-yellow-400 shadow-md shadow-black items-center
+    <nav className='relative z-20'>
+        <div className='flex flex-row py-2 px-4 justify-between bg-stone-900  text-yellow-400 shadow-md shadow-black items-center
         lg:justify-evenly md:rounded-full'>
 
-            <div className="logo w-1/12 h-12">
+            <div className="logo w-1/12 h-12" onClick={handleLogoClick}>
               <a href='' >
                   <img src={logo} className='md:h-12 h-10 rounded-full' />
               </a>
@@ -34,7 +46,9 @@ const NavbarOne = ({ onSearch }) => {
                   type="text"
                   id="search"
                   placeholder="SEARCH SOMEHTING.."
-                  value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} /> 
+                  onKeyDown={handleKeyPress}
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)} /> 
             </div>
 
             <ul className="nav-links flex-row justify-evenly w-1/12 items-center hidden
@@ -59,7 +73,7 @@ const NavbarOne = ({ onSearch }) => {
               <li className='rounded-sm px-5 py-2
                hover:shadow-black hover:shadow-md'>
                 <Link className='flex flex-row items-center' to="/profile">
-                  <i class="fa fa-user" aria-hidden="true"></i>  
+                  <i class={`fa fa-user ${isLoggedIn ? 'text-green-500' : ''}`} aria-hidden="true"></i>  
                   <p className='hidden lg:flex ml-2 text-sm'>PROFILE</p> 
                 </Link>
               </li>

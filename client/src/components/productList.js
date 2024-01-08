@@ -71,7 +71,7 @@ const ProductList = () => {
   };
 
   return (
-    <div className="container flex flex-col-reverse px-6 py-12 bg-stone-950 bg-opacity-60 rounded-sm shadow-md justify-between max-w-max
+    <div className="container flex flex-col-reverse px-6 py-12 bg-black relative z-20 bg-opacity-80 rounded-sm shadow-md justify-between max-w-max
     lg:px-8 lg:flex-row">
 
       <div className="float-none grid grid-cols-2 gap-3 md:gap-6 mt-5

@@ -30,4 +30,193 @@
     color: #000;
   }
 
+  /* NAVBAR CSS */
+
+
   
+  #menu_checkbox {
+    display: none;
+  }
+  
+  label {
+    display: block;
+    width: 30px;
+    height: 30px;
+    transform: translateY(-50%);
+    transition: 0.3s ease transform;
+    cursor: pointer;
+  }
+  
+  label div {
+    position: relative;
+    top: 18px;
+    width: 6px;
+    height: 6px;
+    background-color: #ffc107;
+    margin-left: 0;
+    margin-bottom: 4px;
+    border-radius: 4px;
+    transition: 0.3s ease width, 0.3s ease margin-left, 0.3s ease margin-bottom,
+      0.3s ease background-color;
+  }
+  
+  label div:first-child {
+    width: 22px;
+  }
+  
+  label div:nth-child(2) {
+    width: 15px;
+  }
+  
+  label div:last-child {
+    width: 30px;
+    margin-bottom: 0;
+  }
+  
+  #menu_checkbox:checked + label {
+    transform: translateY(-50%) rotateZ(-90deg);
+  }
+  
+  #menu_checkbox:checked + label div {
+    width: 6px;
+    margin-left: 12px;
+    margin-bottom: 3px;
+    background-color: #ffc107;
+  }
+  
+/* CAROUSEL CSS */
+
+.carousel-wrapper {
+  top: 20px;
+  width: 100vw; /* Full width of the viewport */
+  height: 70vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 20px;
+}
+
+.carousel-container {
+  width: 99vw; /* Full width of the viewport */
+  height: 50vw;
+  overflow: hidden;
+  margin: 0 auto;
+}
+
+.carousel {
+  display: flex;
+  width: 500vw; /* Five times the viewport width for 5 images */
+  animation: sliding 20s infinite linear; /* Adjusted duration for five images */
+}
+
+.carousel div {
+  flex: 1;
+  min-width: 100vw; /* Full width of the viewport for each image */
+  height: 55vw;
+  background-size: cover;
+  background-position: center;
+}
+/* 
+.carousel:hover {
+  animation-play-state: paused;
+} */
+
+.carousel .image-one {
+  background-image: url("./images/image1.jpg");
+}
+
+.carousel .image-two {
+  background-image: url("./images/image2.jpg");
+}
+
+.carousel .image-three {
+  background-image: url("./images/image3.jpg");
+}
+
+.carousel .image-four {
+  background-image: url("./images/image5.jpg");
+}
+
+.carousel .image-five {
+  background-image: url("./images/image4.jpg");
+}
+
+@keyframes sliding {
+  0% {
+    transform: translateX(0);
+  }
+  20% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-100vw);
+  }
+  45% {
+    transform: translateX(-100vw);
+  }
+  50% {
+    transform: translateX(-200vw);
+  }
+  70% {
+    transform: translateX(-200vw);
+  }
+  75% {
+    transform: translateX(-300vw);
+  }
+  95% {
+    transform: translateX(-300vw);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .carousel-wrapper {
+    width: 100vw;
+    height: 210px;
+  }
+
+  .carousel-container {
+    width: 100vw;
+    height: 150px;
+  }
+
+  .carousel {
+    width: 500vw;
+  }
+
+  .carousel > div {
+    min-width: 100vw;
+  }
+
+  @keyframes sliding {
+    0% {
+      transform: translateX(0);
+    }
+    20% {
+      transform: translateX(0);
+    }
+    25% {
+      transform: translateX(-100vw);
+    }
+    45% {
+      transform: translateX(-100vw);
+    }
+    50% {
+      transform: translateX(-200vw);
+    }
+    70% {
+      transform: translateX(-200vw);
+    }
+    75% {
+      transform: translateX(-300vw);
+    }
+    95% {
+      transform: translateX(-300vw);
+    }
+    100% {
+      transform: translateX(0);
+    }
+  }
+}
