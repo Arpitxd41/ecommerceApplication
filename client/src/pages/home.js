@@ -57,7 +57,7 @@ const HomePage = () => {
   }, [ navigate ]);
 
   return (
-    <div className='bg-gradient-to-r from-black to-fuchsia-900 text-white space-y-12
+    <div className='bg-gradient-to-l from-black to-fuchsia-900 text-white md:space-y-12 
     lg:px-2 md:px-4 md:py-4'>
       <div>
         <NavbarOne />
@@ -65,13 +65,10 @@ const HomePage = () => {
       </div>
 
       <Corousel />
-      <div className='z-20 relative flex flex-col md:flex-row items-center px-12 py-24 md:py-0'>
-        <div className='quicksand md:w-3/5 bg-black px-4 py-8 font-semibold bordered text-center -mr-6 rounded-full'>
-          <h4 className='animate-characters text-6xl md:text-7xl lg:text-8xl'>WELCOME !</h4>
-          <h1 className='animate-characters text-xl md:text-3xl'>to my Ecommerce Application</h1>
-        </div>
-        <div className='md:w-2/5 relative md:block hidden rounded-full'>
-          <img src={hero} className='' />
+      <div className='z-20 relative flex flex-col justify-center md:flex-row items-center px-12 lg:py-0'>
+        <div className='quicksand bg-black md:px-12 items-center justify-center md:flex-col flex-row py-8 text-center my-8 md:my-20 lg:my-40 rounded-sm md:rounded-full align-middle lg:space-x-4'>
+          <h4 className='animate-characters text-2xl md:text-4xl lg:text-6xl'>WELCOME !</h4>
+          <h1 className='animate-characters text-lg lg:text-3xl'> to my Ecommerce Application</h1>
         </div>
       </div>
 

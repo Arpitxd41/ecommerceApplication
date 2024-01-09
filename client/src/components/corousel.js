@@ -3,7 +3,7 @@ import React from 'react';
 
 const Corousel = () => {
   return (	
-      <div className='absolute z-0 opacity-50 -top-12'>
+      <div className='md:absolute z-0 opacity-80 md:-top-12'>
         <div class="carousel-container">
           <div className="carousel">
             <div class="image-one"></div>

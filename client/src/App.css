@@ -98,7 +98,7 @@
 
 .carousel-container {
   width: 99vw; /* Full width of the viewport */
-  height: 50vw;
+  height: 45vw;
   overflow: hidden;
   margin: 0 auto;
 }
@@ -112,7 +112,7 @@
 .carousel div {
   flex: 1;
   min-width: 100vw; /* Full width of the viewport for each image */
-  height: 55vw;
+  height: 50vw;
   background-size: cover;
   background-position: center;
 }

@@ -1,4 +1,3 @@
-// SPECIFIC PRODUCT PAGE WHEN OPENED THE PRODUCT WITH THE FULL DETAILS WILL BE HERE WE CAN ALSO IMPORT A PRODUCT LIST BELOW IT WITH THE PPRODUCTS OF THE SAME CATEGORY BY DEFAULT 
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
@@ -51,7 +50,7 @@ const ProductPage = () => {
       {product && (
         <div>
           {/* Render product details using 'product' state */}
-          <h1 className='text-black'>Product Name = </h1>
+          <h1 className='text-red-500'>Product Name = </h1>
           <h2>{product.title}</h2>
           {/* Other product details */}
         </div>
@@ -69,6 +68,11 @@ const ProductPage = () => {
             </div>
           ))}
         </div>
+      )}
+
+      {/* Render JSON response */}
+      {product && (
+        <pre>{JSON.stringify(product, null, 2)}</pre>
       )}
     </div>
   );
