@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import NavbarOne from '../components/navbarOne';
-import hero from '../images/delivery.svg';
+// import hero from '../images/delivery.svg';
 import Corousel from '../components/corousel';
 import ProductList from '../components/productList';
 
@@ -31,12 +31,7 @@ const validateToken = (token) => {
 const HomePage = () => {
   const [products, setProducts] = useState([]);
   const navigate = useNavigate();
-
-  const handleSearch = (searchQuery) => {
-    // You can implement search logic here or call an API to search
-    console.log('Searching for:', searchQuery);
-  };
-
+ 
   useEffect(() => {
     const authToken = localStorage.getItem('authToken');
 
@@ -76,12 +71,12 @@ const HomePage = () => {
 
       <hr className='border-gray-800'/>
       <div className='footer w-full text-center flex justify-center'>
-        <div class="text-slate-400 text-md leading-6 md:w-1/4 space-y-2 p-4 object-contain text-center flex justify-center">
-            <p class="object-contain">
+        <div className="text-slate-400 text-md leading-6 md:w-1/4 space-y-2 p-4 object-contain text-center flex justify-center">
+            <p className="object-contain">
               Made with 
-              <i class="fa fa-heart animate-characters h-12 text-lg"></i> 
+              <i className="fa fa-heart animate-characters h-12 text-lg"></i> 
               by 
-              <a href="" class="hover:underline mb-2">
+              <a href={"somelink"} className="hover:underline mb-2">
                 Arpit
               </a>
             </p>

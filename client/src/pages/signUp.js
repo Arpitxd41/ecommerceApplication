@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import axios from "axios";
-import unregProfile from "./images/profile_Reg.png";
-import regProfile from "./images/profile_Unreg.png";
-import frame from "./images/frame.png";
+import unregProfile from "../images/profile_Reg.png";
+import regProfile from "../images/profile_Unreg.png";
+import frame from "../images/frame.png";
 
 const Signup = () => {
     const [firstName, setFirstName] = useState("");

@@ -75,10 +75,16 @@ const ProductList = () => {
     lg:px-8 lg:flex-row">
 
       <div className="float-none grid grid-cols-2 gap-3 md:gap-6 mt-5
-       md:grid-cols-3 lg:grid-cols-3 lg:w-3/4 lg:float-left">
-        {matchedProducts.length > 0 && matchedProducts.map(product => (
+        md:grid-cols-3 lg:grid-cols-3 lg:w-3/4 lg:float-left">
+        {sortedValues.length > 0 ? (
+          sortedValues.map(value => (
+          <ProductCard key={value.id} product={value} />
+            ))
+          ) : (
+            matchedProducts.length > 0 && matchedProducts.map(product => (
           <ProductCard key={product.id} product={product} />
-        ))}
+           ))
+        )}
       </div>
 
       <div className='float-none text-center align-top

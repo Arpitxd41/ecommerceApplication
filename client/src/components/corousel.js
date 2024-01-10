@@ -4,13 +4,13 @@ import React from 'react';
 const Corousel = () => {
   return (	
       <div className='md:absolute z-0 opacity-80 md:-top-12'>
-        <div class="carousel-container">
+        <div className="carousel-container">
           <div className="carousel">
-            <div class="image-one"></div>
-            <div class="image-two"></div>
-            <div class="image-three"></div>
-            <div class="image-four"></div>
-            <div class="image-five"></div>
+            <div className="image-one"></div>
+            <div className="image-two"></div>
+            <div className="image-three"></div>
+            <div className="image-four"></div>
+            <div className="image-five"></div>
           </div>
         </div>
       </div>
