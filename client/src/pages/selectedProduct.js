@@ -56,9 +56,9 @@ const ProductPage = () => {
     <div className='bg-black text-white'>
       {(loadingProduct || loadingSimilarProducts) && <p>Loading...</p>}
       {product && (
-        <div className='bg-gradient-to-r from-fuchsia-500 to-black p-8'>
+        <div className='bg-gradient-to-t from-pink-800 to-fuchsia-800 p-8'>
           {/* Image carousel */}
-          <div className='flex flex-row bg-gray-50 rounded-md py-6'>
+          <div className='flex flex-row bg-gray-50 py-6 rounded-xl drop-shadow-2xl shadow-inner shadow-black p-8 overflow-x-scroll'>
             {/* sliders */}
             <div className="image-carousel flex flex-col justify-center items-center w-1/2 space-y-4">
               <img
@@ -82,24 +82,28 @@ const ProductPage = () => {
             <div className='details w-1/2 px-8 py-5 border-l border-black rounded-r-md'>
               <h2 className='quicksand text-black text-6xl font-bold'>{product.title}</h2>
               <h5 className='text-white bg-red-600 rounded-full w-fit px-5 py-1 my-8'>
-                <i class="fa fa-tag" aria-hidden="true"></i>
                 {product.discountPercentage} % OFF
+                <i class="fa fa-tag ml-2" aria-hidden="true"></i>
               </h5>
-              <div className='px-5 space-y-2 my-5'>
-                <p className='text-black'>
-                  <i class="fa fa-star text-yellow-400" aria-hidden="true"></i>
-                  {product.rating}
-                </p>
-                <p className='text-black'>
-                  <i class="fa fa-certificate text-yellow-400" aria-hidden="true"></i>
-                  Official {product.brand} Product
-                </p>
-                <p className='text-black text-xl'>${product.price} /-</p>
-                <p className='text-black'>
-                  <i class="fa fa-cart-plus" aria-hidden="true"></i>
-                  {product.stock} Units available
-                </p>
-                <img src={product.thumbnail} alt='thumbnail' className='h-12' />
+              <div className='flex flex-row'>
+                <div className='float-left w-3/5 px-5 space-y-2 my-5'>
+                  <p className='text-black'>
+                    <i class="fa fa-star text-yellow-400 mr-2" aria-hidden="true"></i>
+                    {product.rating}
+                  </p>
+                  <p className='text-black'>
+                    <i class="fa fa-certificate text-yellow-400 mr-2" aria-hidden="true"></i>
+                    Official <a href='somelink' className='text-gray-400 font-bold'>{product.brand}</a> Product
+                  </p>
+                  <p className='text-black text-4xl'>${product.price} /-</p>
+                  <p className='text-black'>
+                    <i class="fa fa-cart-plus text-blue-700 mr-2" aria-hidden="true"></i>
+                    {product.stock} Units available
+                  </p>
+                </div>
+                <div className='float-right w-2/5 h-40 border overflow-hidden object-contain aspect-square'>
+                  <img src={product.thumbnail} alt='thumbnail' className='h-auto' />
+                </div>
               </div>
               <h2 className='text-black'>{product.description}</h2>
             </div>
@@ -109,18 +113,16 @@ const ProductPage = () => {
       )}
 
       {similarProducts.length > 0 && (
-        <div>
-          <h2>Similar Products</h2>
-          <div className="grid grid-cols-2 gap-3 md:gap-6 mt-5 md:grid-cols-3 lg:grid-cols-3 lg:w-3/4 lg:float-left">
-            {similarProducts.map((similarProduct) => (
-              <ProductCard key={similarProduct.id} product={similarProduct} />
-            ))}
+        <div className='bg-gradient-to-b from-pink-800 to-fuchsia-800 p-8 text-center'>
+          <h2 className='quicksand my-8 text-4xl'>SIMILAR PRODUCTS</h2>
+          <div className="bg-gray-300 rounded-xl drop-shadow-2xl shadow-inner shadow-black object-contain overflow-x-scroll justify-around mt-5 py-8 px-6">
+            <div className='flex flex-row object-contain space-x-6 w-fit'>
+              {similarProducts.map((similarProduct) => (
+                <ProductCard key={similarProduct.id} product={similarProduct} />
+              ))}
+            </div>
           </div>
         </div>
-      )}
-
-      {(!loadingProduct && !loadingSimilarProducts && !product && similarProducts.length === 0) && (
-        <p>No product details found</p>
       )}
     </div>
   );
