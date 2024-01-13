@@ -27,11 +27,11 @@ const ProductFilter = ({ onCategoryChange, onSortingTypeChange, onSortingChange 
   };
 
   return (
-    <div className='bg-gradient-to-b from-pink-600 to-violet-900 w-full flex flex-col space-y-2 py-2 h-fit rounded-sm
-    lg:py-16 lg:px-5 lg:justify-evenly px-4'>
-      <div className='hidden lg:block text-center border w-fit
-       lg:px-10'>
-        <h2 className='text-yellow-400 rounded-full w-fit px-8 text-lg md:text-3xl
+    <div className='bg-gradient-to-b from-pink-600 to-violet-900 flex flex-col space-y-2 py-2 h-fit rounded-sm px-2 w-80
+    md:w-11/12 lg:py-16 lg:px-3 lg:justify-evenly'>
+      <div className='hidden text-center border-2 bg-black border-black rounded-md
+       lg:px-10 lg:block'>
+        <h2 className='animate-characters rounded-full w-fit px-8 text-lg font-semibold md:text-3xl
          lg:py-2'>FILTER</h2>
       </div>
 
@@ -45,8 +45,8 @@ const ProductFilter = ({ onCategoryChange, onSortingTypeChange, onSortingChange 
               id="category"
               onChange={handleCategoryChange}
               value={selectedCategory}
-              className='w-60 rounded-md bg-stone-950 border-stone-950 text-white
-             lg:w-64'>
+              className='rounded-md bg-black border-black text-white w-72 mx-1
+              md:w-60 lg:w-64'>
               <option value="">All</option>
               {categories.map(category => (
                 <option key={category} value={category}>
@@ -63,8 +63,8 @@ const ProductFilter = ({ onCategoryChange, onSortingTypeChange, onSortingChange 
             <select
               id='sortbyDropdown'
               onChange={(e) => handleSortingTypeChange(e.target.value)}
-              className='w-60 rounded-md bg-stone-950 border-stone-950 text-white
-             lg:w-64' >
+              className='rounded-md bg-black border-black text-white w-72 mx-1
+              md:w-60 lg:w-64' >
               <option value="none">None</option>
               <option value="rating">By Rating</option>
               <option value="price">By Price</option>
@@ -78,8 +78,8 @@ const ProductFilter = ({ onCategoryChange, onSortingTypeChange, onSortingChange 
             <select
               id='orderDropdown'
               onChange={(e) => handleSortingChange(e.target.value)}
-              className='w-60 rounded-md bg-stone-950 border-stone-950 text-white
-             lg:w-64' >
+              className='rounded-md bg-black border-black text-white w-72 mx-1
+              md:w-60 lg:w-64' >
               <option value="default">Default</option>
               <option value="descending">High to Low</option>
               <option value="ascending">Low to High</option>

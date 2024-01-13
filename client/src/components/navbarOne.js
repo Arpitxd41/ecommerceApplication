@@ -34,9 +34,9 @@ const NavbarOne = ({ onSearch, isLoggedIn }) => {
     navigate('/');
   };
   return (
-    <nav className='relative z-20 w-11/12'>
+    <nav className='relative z-40 w-full'>
         <div className='flex flex-row py-2 px-4 justify-between bg-black  text-yellow-400 shadow-md shadow-black items-center
-        lg:justify-evenly md:rounded-full'>
+        lg:justify-evenly'>
 
             <div className="logo w-1/12 h-12" onClick={handleLogoClick}>
               <a href={'somelink'} >

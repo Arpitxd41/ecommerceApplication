@@ -71,10 +71,11 @@ const ProductList = () => {
   };
 
   return (
-    <div className="container flex flex-col-reverse px-6 py-12 bg-opacity-80 bg-black relative z-20 rounded-sm shadow-md justify-between mt-8 space-x-8
-        lg:px-8 lg:flex-row">
-      <div className="float-none grid grid-cols-2 gap-3 md:gap-8 mt-5
-        md:grid-cols-3 lg:grid-cols-3 lg:w-3/4 lg:float-left">
+    <div className="w-full flex flex-col-reverse bg-black relative z-20 rounded-sm shadow-md justify-center py-5 lg:px-12 
+    md:px-1 lg:flex-row">
+      <div className="float-none grid grid-cols-2 gap-1 mt-5
+        md:grid-cols-4
+        lg:gap-6 lg:grid-cols-3 lg:w-3/4 lg:float-left">
         {sortedValues.length > 0 ? (
           sortedValues.map(value => (
           <ProductCard key={value.id} product={value} />
@@ -86,7 +87,7 @@ const ProductList = () => {
         )}
       </div>
 
-      <div className='float-none text-center align-top
+      <div className='flex justify-center float-none text-center align-top
       lg:w-80 lg:float-right lg:mt-5 lg:ml-5'>
         <ProductFilter 
           onCategoryChange={handleCategoryChange}

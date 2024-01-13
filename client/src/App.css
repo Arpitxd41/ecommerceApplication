@@ -4,7 +4,7 @@
     font-family: 'Montserrat', sans-serif;
 }
 
-.quicksand {
+* {
   font-family: 'Quicksand', sans-serif;
 }
 .animate-characters {
@@ -172,23 +172,29 @@
   }
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (min-width: 768px) and ( max-width: 1023px ) {
   .carousel-wrapper {
     width: 100vw;
-    height: 210px;
+    height: 200vh;    
+    border: 2px solid blue;
   }
 
   .carousel-container {
     width: 100vw;
-    height: 150px;
+    height: 140vh;
+    padding: 2px;
   }
 
   .carousel {
-    width: 500vw;
+    width: 100vw;
+    height: 150vh;
+    margin: 2px;
   }
 
   .carousel > div {
     min-width: 100vw;
+    padding: 2px;
+    height: 150vh;
   }
 
   @keyframes sliding {
@@ -196,25 +202,78 @@
       transform: translateX(0);
     }
     20% {
-      transform: translateX(0);
+      transform: translateX(-100vw);
     }
     25% {
       transform: translateX(-100vw);
     }
     45% {
-      transform: translateX(-100vw);
+      transform: translateX(-200vw);
     }
     50% {
       transform: translateX(-200vw);
     }
     70% {
-      transform: translateX(-200vw);
+      transform: translateX(-300vw);
     }
     75% {
-      transform: translateX(-300vw);
+      transform: translateX(-340vw);
     }
     95% {
+      transform: translateX(-400vw);
+    }
+    100% {
+      transform: translateX(0);
+    }
+  }
+}
+@media screen and (max-width: 768px) {
+  .carousel-wrapper {
+    width: 100vw;
+    height: 210vh;    
+  }
+
+  .carousel-container {
+    width: 100vw;
+    height: 100vh;
+    padding: 2px;
+  }
+
+  .carousel {
+    width: 800vw;
+    height: 100vh;
+  }
+
+  .carousel > div {
+    min-width: 50vw;
+    padding: 2px;
+    height: 650px;
+  }
+
+  @keyframes sliding {
+    0% {
+      transform: translateX(0);
+    }
+    20% {
+      transform: translateX(-100vw);
+    }
+    25% {
+      transform: translateX(-200vw);
+    }
+    45% {
       transform: translateX(-300vw);
+    }
+    50% {
+      transform: translateX(-400vw);
+    }
+    70% {
+      transform: translateX(-500vw);
+    }
+    75% {
+      transform: translateX(-600vw);
+    }
+    95% {
+      transform: translateX(-650vw);
     }
     100% {
       transform: translateX(0);

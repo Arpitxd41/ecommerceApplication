@@ -54,10 +54,12 @@ const ProductPage = () => {
 
   return (
     <div className='bg-black text-white'>
+
+      {/* PRODUCT */}
       {(loadingProduct || loadingSimilarProducts) && <p>Loading...</p>}
       {product && (
         <div className='bg-gradient-to-t from-pink-800 to-fuchsia-800 p-8'>
-          {/* Image carousel */}
+          {/* IMAGE SLIDERS */}
           <div className='flex flex-row bg-gray-50 py-6 rounded-xl drop-shadow-2xl shadow-inner shadow-black p-8 overflow-x-scroll'>
             {/* sliders */}
             <div className="image-carousel flex flex-col justify-center items-center w-1/2 space-y-4">
@@ -80,13 +82,13 @@ const ProductPage = () => {
             </div>
             {/* details */}
             <div className='details w-1/2 px-8 py-5 border-l border-black rounded-r-md'>
-              <h2 className='quicksand text-black text-6xl font-bold'>{product.title}</h2>
-              <h5 className='text-white bg-red-600 rounded-full w-fit px-5 py-1 my-8'>
+              <h2 className='quicksand text-black text-5xl font-bold'>{product.title}</h2>
+              <h5 className='text-white bg-red-600 rounded-full w-fit px-5 py-1 my-5'>
                 {product.discountPercentage} % OFF
                 <i class="fa fa-tag ml-2" aria-hidden="true"></i>
               </h5>
               <div className='flex flex-row'>
-                <div className='float-left w-3/5 px-5 space-y-2 my-5'>
+                <div className='float-left w-3/5 px-5 space-y-2'>
                   <p className='text-black'>
                     <i class="fa fa-star text-yellow-400 mr-2" aria-hidden="true"></i>
                     {product.rating}
@@ -100,18 +102,27 @@ const ProductPage = () => {
                     <i class="fa fa-cart-plus text-blue-700 mr-2" aria-hidden="true"></i>
                     {product.stock} Units available
                   </p>
+                  <h2 className='text-black'>{product.description}</h2>
                 </div>
                 <div className='float-right w-2/5 h-40 border overflow-hidden object-contain aspect-square'>
                   <img src={product.thumbnail} alt='thumbnail' className='h-auto' />
                 </div>
               </div>
-              <h2 className='text-black'>{product.description}</h2>
+              <div className='flex flex-row text-black text-md font-semibold justify-between w-fit mt-5'>
+                <button className='bg-yellow-400 px-12 py-3 rounded-sm shadow-sm shadow-black'>
+                  <a>ADD TO CART</a>
+                </button>
+                <button className='bg-orange-500 px-12 py-3 rounded-sm shadow-sm shadow-black'>
+                  <a>BUY NOW</a>
+                </button>
+              </div>
             </div>
           </div>
           {/* Other product details */}
         </div>
       )}
-
+      
+      {/* SIMILAR PRODUCTS */}
       {similarProducts.length > 0 && (
         <div className='bg-gradient-to-b from-pink-800 to-fuchsia-800 p-8 text-center'>
           <h2 className='quicksand my-8 text-4xl'>SIMILAR PRODUCTS</h2>
