@@ -29,8 +29,8 @@ const ProductFilter = ({ onCategoryChange, onSortingTypeChange, onSortingChange 
   return (
     <div className='bg-gradient-to-b from-pink-600 to-violet-900 flex flex-col space-y-2 py-2 h-fit rounded-sm px-2 w-80
     md:w-11/12 lg:py-16 lg:px-3 lg:justify-evenly'>
-      <div className='hidden text-center border-2 bg-black border-black rounded-md
-       lg:px-10 lg:block'>
+      <div className='lg:block hidden text-center border-2 bg-black border-black rounded-md
+       lg:px-10'>
         <h2 className='animate-characters rounded-full w-fit px-8 text-lg font-semibold md:text-3xl
          lg:py-2'>FILTER</h2>
       </div>

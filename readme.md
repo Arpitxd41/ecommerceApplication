@@ -42,9 +42,13 @@ When combined, these technologies form the **MERN stack**, which covers the full
 
 :paperclip: The MERN stack provides a cohesive and streamlined development experience for building modern, scalable, and efficient web applications. It is widely adopted by developers and organizations for its flexibility, performance, and the ability to use JavaScript across the entire development stack.
 
+## :label: Frontend Catalog Only :
+In the frontend of the project I added a catalog where the user can see the products fetched from external. The product cards with limited details based on first-response-importance, without making any additional requests to the backend. When the user adds the item to cart triggering a request to backend with neccessary information, which then associates the product to the users cart updating the database accordingly. 
 
-
-
+- With this, my frontend doesn't need - to fetch the entire catalog each time a product information is required or to fire an api-request to fetch the data for the required product info.
+- It minimizes the data-tranfer between frontend and backend.
+- Users can get quick access to the product info without additional load from the backend.
+- Reduces the load on the frontend speeding up the UX. Contributing to smooth and responsive UX
 
 ## :label: Roadmap for the Project : 
 

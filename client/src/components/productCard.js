@@ -38,7 +38,7 @@ const ProductCard = ({ product }) => {
                 <i className="fa fa-external-link" aria-hidden="true"></i>
               </Link>
             </button>
-            <button className="bg-yellow-400 text-black lg:text-lg text-sm font-bold py-2 md:py-3 w-3/4 border border-gray-200 rounded-br-sm">
+            <button className="bg-gradient-to-r from-pink-600 to-violet-900 text-white lg:text-lg text-sm font-bold py-2 md:py-3 w-3/4 border border-gray-200 rounded-br-sm">
               <a href="{cart}" className="flex flex-row items-center justify-evenly md:px-2 lg:px-4">
                 <i className="fa fa-shopping-cart" aria-hidden="true"></i>
                 <p>ADD TO CART</p>  
