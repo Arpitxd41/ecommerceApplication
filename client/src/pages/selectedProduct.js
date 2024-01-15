@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import ProductCard from '../components/productCard';
+import CounterButtons from '../components/counter';
 
 const ProductPage = () => {
   const { id } = useParams();
@@ -12,6 +13,7 @@ const ProductPage = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   useEffect(() => {
+    // GETTING PRODUCT
     const fetchProduct = async () => {
       try {
         const response = await axios.get(`https://dummyjson.com/products/${id}`);
@@ -27,6 +29,7 @@ const ProductPage = () => {
     fetchProduct();
   }, [id]);
 
+  // GETTING SIMILAR PRODUCTS
   useEffect(() => {
     const fetchSimilarProducts = async () => {
       try {
@@ -58,7 +61,7 @@ const ProductPage = () => {
       {/* PRODUCT */}
       {(loadingProduct || loadingSimilarProducts) && <p>Loading...</p>}
       {product && (
-        <div className='bg-gradient-to-t from-pink-800 to-fuchsia-800 p-8'>
+        <div className='bg-gradient-to-t from-pink-800 to-fuchsia-800 px-8 pt-8'>
           {/* IMAGE SLIDERS */}
           <div className='flex flex-row bg-gray-50 py-6 rounded-xl drop-shadow-2xl shadow-inner shadow-black p-8 overflow-x-scroll'>
             {/* sliders */}
@@ -68,7 +71,7 @@ const ProductPage = () => {
                 src={product.images[currentImageIndex]}
                 alt={`productImage-${currentImageIndex}`}
               />
-              <div className="image-navigation shadow-md shadow-black flex flex-row text-black font-bold justify-evenly bg-yellow-400 rounded-full w-4/5">
+              <div className="image-navigation shadow-sm shadow-black flex flex-row text-black font-bold justify-evenly bg-yellow-400 rounded-full w-4/5">
                 {product.images.map((_, index) => (
                   <button
                     key={index}
@@ -95,7 +98,7 @@ const ProductPage = () => {
                   </p>
                   <p className='text-black'>
                     <i class="fa fa-certificate text-yellow-400 mr-2" aria-hidden="true"></i>
-                    Official <a href='somelink' className='text-gray-400 font-bold'>{product.brand}</a> Product
+                    Authentic <a href='somelink' className='text-gray-400 font-bold'>{product.brand}</a> Product
                   </p>
                   <p className='text-black text-4xl'>${product.price} /-</p>
                   <p className='text-black'>
@@ -108,13 +111,8 @@ const ProductPage = () => {
                   <img src={product.thumbnail} alt='thumbnail' className='h-auto' />
                 </div>
               </div>
-              <div className='flex flex-row text-black text-md font-semibold justify-between w-fit mt-5'>
-                <button className='bg-yellow-400 px-12 py-3 rounded-sm shadow-sm shadow-black'>
-                  <a>ADD TO CART</a>
-                </button>
-                <button className='bg-orange-500 px-12 py-3 rounded-sm shadow-sm shadow-black'>
-                  <a>BUY NOW</a>
-                </button>
+              <div>
+                <CounterButtons />
               </div>
             </div>
           </div>
@@ -125,7 +123,9 @@ const ProductPage = () => {
       {/* SIMILAR PRODUCTS */}
       {similarProducts.length > 0 && (
         <div className='bg-gradient-to-b from-pink-800 to-fuchsia-800 p-8 text-center'>
-          <h2 className='quicksand my-8 text-4xl'>SIMILAR PRODUCTS</h2>
+          <div className='bg-black font-semibold'>
+            <h2 className='animate-characters my-2 text-3xl'>SIMILAR PRODUCTS</h2>
+          </div>
           <div className="bg-gray-300 rounded-xl drop-shadow-2xl shadow-inner shadow-black object-contain overflow-x-scroll justify-around mt-5 py-8 px-6">
             <div className='flex flex-row object-contain space-x-6 w-fit'>
               {similarProducts.map((similarProduct) => (
