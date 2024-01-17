@@ -1,11 +1,11 @@
 const mongoose = require('mongoose');
 
 const productSchema = new mongoose.Schema({
-  name: {
-    type: String,
-    required: true,
+  id: {
+    type: number,
+    required: true
   },
-  description: {
+  title: {
     type: String,
     required: true,
   },
@@ -17,7 +17,10 @@ const productSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  // Add more fields as needed
+  discountPercentage: {
+    type: number,
+    required: true
+  },
 });
 
 module.exports = mongoose.model('Product', productSchema);

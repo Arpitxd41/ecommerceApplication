@@ -107,4 +107,5 @@ const login = async (req, res) => {
     }
 };
 
+
 module.exports = { generateToken, register, login };

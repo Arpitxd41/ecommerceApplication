@@ -10,8 +10,7 @@ const cartItemSchema = new mongoose.Schema({
     type: Number,
     required: true,
     default: 1,
-  },
-  // You may add more fields specific to cart items
+  }
 });
 
 const userCartSchema = new mongoose.Schema({
@@ -20,8 +19,7 @@ const userCartSchema = new mongoose.Schema({
     ref: 'User',
     required: true,
   },
-  cartItems: [cartItemSchema],
-  // Add more fields as needed
+  cartItems: [cartItemSchema]
 });
 
 const UserCart = mongoose.model('UserCart', userCartSchema);
