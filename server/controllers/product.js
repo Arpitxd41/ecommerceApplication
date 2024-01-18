@@ -1,4 +1,25 @@
 const productModel = require('../models/productModel');
+const cartModel = require('../models/cartModel');
+const mongoose = require('mongoose');
+
+const getAllProducts = async(req, res) => {
+      try {
+            let apiUrl = 'https://dummyjson.com/products';
+
+            if (req.query.category) {
+              apiUrl = `https://dummyjson.com/products/category/${req.query.category}`;
+            }
+      
+            const response = await axios.get(apiUrl);
+            res.json(response.data);
+      } catch (error) {
+            console.error(error);
+            res.status(500).json({
+              error: 'Internal Server Error',
+              message: error.message
+            });
+      }
+};
 
 const getProductsById = async(req, res) => {
       try {
@@ -15,8 +36,6 @@ const getProductsById = async(req, res) => {
             res.status(500).json({ message: 'Internal server error' });
       }
 };
-
-const cartModel = require('../models/cartModel');
 
 const getUserCart = async (req, res) => {
       try {
@@ -48,7 +67,7 @@ const addToCart = async (req, res) => {
                         $push: {
                               cartItems: {
                                     product: productId,
-                                    quantity: quantity || 1,
+                                    quantity: productQuantity || 1,
                               },
                         },
                   },
@@ -61,5 +80,48 @@ const addToCart = async (req, res) => {
             res.status(500).json({ message: 'Internal Server Error'});
       };
 }
-
-module.exports = { getProductsById, getUserCart, addToCart };
+const removeFromCart = async (req, res) => {
+      try {
+        const userId = req.params.userId;
+        const productId = req.params.productId;
+    
+        // Your logic to remove the specified product from the user's cart
+        const userCart = await cartModel.findOneAndUpdate(
+          { user: userId },
+          { $pull: { cartItems: { product: productId } } },
+          { new: true }
+        ).populate('cartItems.product');
+    
+        res.status(200).json(userCart);
+      } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Internal Server Error' });
+      }
+};
+    
+const removeAllFromCart = async (req, res) => {
+      try {
+        const userId = req.params.userId;
+    
+        // Your logic to remove all products from the user's cart
+        const userCart = await cartModel.findOneAndUpdate(
+          { user: userId },
+          { $set: { cartItems: [] } },
+          { new: true }
+        ).populate('cartItems.product');
+    
+        res.status(200).json(userCart);
+      } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Internal Server Error' });
+      }
+};
+    
+module.exports = {
+      getAllProducts,
+      getProductsById,
+      getUserCart,
+      addToCart,
+      removeFromCart,
+      removeAllFromCart,
+};

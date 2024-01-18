@@ -12,7 +12,10 @@ const {
 const { 
     getProductsById,
     getUserCart,
-    addToCart
+    addToCart,
+    getAllProducts,
+    removeFromCart,
+    removeAllFromCart
 } = require('../controllers/product')
 
 const router = express.Router();
@@ -23,9 +26,12 @@ router.post("/register", register);
 router.post("/login", login);
 
 // READ ROUTES:
+router.get('/products', getAllProducts);
 router.get('/products/product:id', getProductsById);
-router.get('/cart', getUserCart);
-router.post('/addToCart', addToCart);
+router.get('/cart:userId', getUserCart);
+router.post('/cart/:userId/add', addToCart);
+router.delete('/cart/:userId/remove/:productId', removeFromCart);
+router.delete('/cart/:userId/remove', removeAllFromCart)
 
 
 module.exports = router;

@@ -24,11 +24,6 @@ const NavbarOne = ({ onSearch, isLoggedIn }) => {
     }
   };
 
-// stroke-linecap
-// stroke-linejoin
-// stroke-width
-// class
-// for
   const handleLogoClick = () => {
     // Handle navigation to home when the logo is clicked
     navigate('/');
@@ -66,7 +61,7 @@ const NavbarOne = ({ onSearch, isLoggedIn }) => {
 
               <li className='rounded-sm px-5 py-2
               hover:shadow-black hover:shadow-md'>
-                <Link className='flex flex-row items-center' to="/cart">
+                <Link className='flex flex-row items-center' to={`/cart`}>
                   <i className="fa fa-shopping-cart" aria-hidden="true"> </i> 
                   <p className='hidden lg:flex ml-2 text-sm'>CART</p> 
                 </Link>

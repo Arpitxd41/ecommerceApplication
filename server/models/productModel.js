@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const productSchema = new mongoose.Schema({
   id: {
-    type: number,
+    type: Number,
     required: true
   },
   title: {
@@ -18,7 +18,7 @@ const productSchema = new mongoose.Schema({
     required: true,
   },
   discountPercentage: {
-    type: number,
+    type: Number,
     required: true
   },
 });
