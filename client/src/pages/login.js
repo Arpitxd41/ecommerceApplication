@@ -20,8 +20,9 @@ const Login = () => {
         .post("https://localhost:4000/login", { mail, password })
         .then((result) => {
             if (result.data.success) {
-                localStorage.setItem('authToken', result.data.token);
-                navigate('/');
+                const { token, user } = result.data;
+                localStorage.setItem('authToken', token);
+                navigate('/', { state: { successMessage: `Welcome back, ${user.firstName}!` } });
             } else {
                 const errorMessage = result.data.message || "Login Failed !";
                 navigate('/', { state: { errorMessage }});
@@ -34,9 +35,9 @@ const Login = () => {
 
     return (
         <div>
-            {state && state.successMessage && (
+            <h2 className='absolute z-50'>{state && state.successMessage && (
               <div className="success-message bg-green-600 px-8 text-white">{state.successMessage}</div>
-            )}
+            )}</h2>
             <div className="flex flex-col lg:flex-row p-8 bg-black">
                 <div className="lg:w-3/5 lg:float-left text-gray-300 bg-gradient-to-r from-black to-fuchsia-700 py-18 px-8 md:px-16 shadow-xl">
                     <form

@@ -1,10 +1,11 @@
 // Navbar.js
 import React, {useState} from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 // import './navbar.css'
 import logo from '../images/logo512.png';
 
 const NavbarOne = ({ onSearch, isLoggedIn }) => {
+  const { id } = useParams();
   const [ searchQuery, setSearchQuery ] = useState('');
   const navigate = useNavigate();
   const handleSearch = () => {
@@ -61,7 +62,7 @@ const NavbarOne = ({ onSearch, isLoggedIn }) => {
 
               <li className='rounded-sm px-5 py-2
               hover:shadow-black hover:shadow-md'>
-                <Link className='flex flex-row items-center' to={`/cart`}>
+                <Link className='flex flex-row items-center' to={`/cart/${id}`}>
                   <i className="fa fa-shopping-cart" aria-hidden="true"> </i> 
                   <p className='hidden lg:flex ml-2 text-sm'>CART</p> 
                 </Link>
