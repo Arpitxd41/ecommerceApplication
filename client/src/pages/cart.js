@@ -31,7 +31,7 @@ const Cart = () => {
 
     fetchCart();
     fetchProducts();
-  }, [id]);
+  }, [id, user]);
 
   const handleAddToCart = async (productId) => {
     try {
@@ -71,7 +71,7 @@ const Cart = () => {
 
   return (
     <div>
-      {user && <h2>{user.name}'s Cart</h2>}
+      {user && <h2>{user.firstName}'s Cart</h2>}
       <ul>
         {cart.map((cartItem) => (
           <li key={cartItem.product._id}>

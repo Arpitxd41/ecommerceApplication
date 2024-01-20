@@ -40,7 +40,7 @@ const getProductsById = async(req, res) => {
 const getUserCart = async (req, res) => {
       try {
             const userId = req.params.userId;
-            const userCart = await cartModel.finOne({ user: userId }).populate('cartItems.product');
+            const userCart = await cartModel.findOne({ user: userId }).populate('cartItems.product');
 
             if (!userCart) {
               return res.status(404).json({ message: 'User cart not found!' });

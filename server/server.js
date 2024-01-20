@@ -2,7 +2,7 @@ const app = require('./app');
 const https = require('https');
 const fs = require('fs');
 
-const PORT = process.env.PORT || 4000; 
+const PORT = process.env.PORT || 5000; 
 
 const sslConfig = {
     key:fs.readFileSync(process.env.SSL_KEY_PATH),

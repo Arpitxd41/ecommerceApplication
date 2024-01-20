@@ -26,7 +26,7 @@ const Signup = () => {
         }
 
         try {
-            const response = await axios.post("https://localhost:4000/register", {
+            const response = await axios.post("https://localhost:5000/register", {
               firstName,
               lastName,
               dob,

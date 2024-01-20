@@ -17,11 +17,12 @@ const Login = () => {
     const handleSubmit = (e) => {
     e.preventDefault();
     axios
-        .post("https://localhost:4000/login", { mail, password })
+        .post("https://localhost:5000/login", { mail, password })
         .then((result) => {
             if (result.data.success) {
                 const { token, user } = result.data;
                 localStorage.setItem('authToken', token);
+                console.log(user);
                 navigate('/', { state: { successMessage: `Welcome back, ${user.firstName}!` } });
             } else {
                 const errorMessage = result.data.message || "Login Failed !";

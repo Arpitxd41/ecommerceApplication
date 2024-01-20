@@ -5,7 +5,8 @@ const jwtToken = require('jsonwebtoken');
 
 const generateToken = (user) => {
     // GENERATING TOKEN
-    return jwtToken.sign({ userId: user._id, email: user.mail }, 'your-secret-key', { expiresIn: '1h' });
+    const secretKey = process.env.JWT_SECRET || 'default-secret-key';
+    return jwtToken.sign({ userId: user._id, email: user.mail }, secretKey, { expiresIn: '1h' });
 };
 
 const register = async (req, res) => {
@@ -24,8 +25,8 @@ const register = async (req, res) => {
             });
         }
         // Validate date entry for DOB
-        function isValidDate(dob) {
-            return moment(dob, 'DDMMYYYY', true).isValid();
+        async function isValidDate(dob) {
+            return await moment(dob, 'DDMMYYYY', true).isValid();
         }
         if (!isValidDate(dob)) {
             throw new Error("Invalid date entered");
