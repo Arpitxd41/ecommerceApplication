@@ -34,7 +34,11 @@ const HomePage = () => {
  
   useEffect(() => {
     const authToken = localStorage.getItem('authToken');
-
+    const successMessage = localStorage.getItem('successMessage');
+    if (successMessage) {
+        console.log(successMessage); // Log or use the success message as needed
+        localStorage.removeItem('successMessage'); // Clear the success message
+    }
     if (!authToken) {
       // No token found, navigate to the login page
       navigate('/login');

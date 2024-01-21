@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { useLocation } from 'react-router-dom';
 import { useNavigate} from 'react-router-dom';
 import axios from 'axios';
 import unregProfile from '../images/profile_Reg.png';
@@ -7,16 +6,16 @@ import regProfile from '../images/profile_Unreg.png';
 import frame from '../images/frame.png';
 
 const Login = () => {
-    const [mail, setMail] = useState("");
-    const [password, setPassword] = useState("");
+    const [mail, setMail] = useState('');
+    const [password, setPassword] = useState('');
+    const [successMessage, setSuccessMessage] = useState("");
+    const [errorMessage, setErrorMessage] = useState("");
 
-    const location = useLocation();
     const navigate = useNavigate();
-    const { state } = location;
 
     const handleSubmit = (e) => {
-    e.preventDefault();
-    axios
+      e.preventDefault();
+      axios
         .post("https://localhost:5000/login", { mail, password })
         .then((result) => {
             if (result.data.success) {
@@ -25,20 +24,29 @@ const Login = () => {
                 console.log(user);
                 navigate('/', { state: { successMessage: `Welcome back, ${user.firstName}!` } });
             } else {
-                const errorMessage = result.data.message || "Login Failed !";
-                navigate('/', { state: { errorMessage }});
+                setErrorMessage("");
             }
         }).catch((error) => {
-            const errorMessage = "Login Failed. Please try again..";
-            navigate('/', { state: { errorMessage }});
-        });
+          if (error.response) {
+            setErrorMessage(error.response.data.message);
+          } else {
+            setErrorMessage("Login failed. Please try again.");
+          }
+      });
     }
+    // console.log("Success Message:", successMessage);
+    // console.log("Error Message:", errorMessage);
 
     return (
         <div>
-            <h2 className='absolute z-50'>{state && state.successMessage && (
-              <div className="success-message bg-green-600 px-8 text-white">{state.successMessage}</div>
-            )}</h2>
+            <h2 className='absolute z-50'>
+            {successMessage && (
+              <div className="success-message bg-green-600 px-8 text-white">{successMessage}</div>
+            )}
+            {errorMessage && (
+              <div className="error-message bg-red-600 px-8 text-white">{errorMessage}</div>
+            )}
+            </h2>
             <div className="flex flex-col lg:flex-row p-8 bg-black">
                 <div className="lg:w-3/5 lg:float-left text-gray-300 bg-gradient-to-r from-black to-fuchsia-700 py-18 px-8 md:px-16 shadow-xl">
                     <form
