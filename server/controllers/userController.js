@@ -10,6 +10,7 @@ const generateToken = (user) => {
     const secretKey = process.env.JWT_SECRET || 'default-secret-key';
     return jwtToken.sign({ userId: user._id, email: user.mail }, secretKey, { expiresIn: '1h' });
 };
+
 // REGISTER
 const register = async (req, res) => {
     try {
@@ -46,7 +47,7 @@ const register = async (req, res) => {
 
         // Hashing Password
         const hashedPassword = await bcrypt.hash(password, 10);
-        
+
         // Create a new user
         const newUser = new userModel({
             firstName,
@@ -74,6 +75,7 @@ const register = async (req, res) => {
             success: true,
             message: 'User creation successful',
             token,
+            user: newUser, // Include user details in the response
         });
 
         console.log(`User: ${firstName} Created Successfully`);
@@ -86,6 +88,7 @@ const register = async (req, res) => {
         });
     }
 };
+
 // USER LOGIN :-
 const login = async (req, res) => {
     try {
@@ -115,9 +118,13 @@ const login = async (req, res) => {
             success: true,
             message: 'Login Successful',
             token,
+            user: {
+                firstName: user.firstName,
+                lastName: user.lastName,
+            }
         });
-        // Return a response for successful login        
-        console.log(`User: ${user.firstName} Login Successful`);
+        // Response for successful login
+        console.log(`User: ${user.firstName} Login Successful ***`);
     } catch (error) {
         console.error('Error:', error.message);
         console.log('Error ! Login Failed');
@@ -127,6 +134,7 @@ const login = async (req, res) => {
         });
     }
 };
+
 // TO GET USER BY ID:
 const getUser = async (req, res) => {
     try {
@@ -156,6 +164,7 @@ const getUser = async (req, res) => {
         });
     }
 };
+
 // TO GET ALL USERS:
 const getAllUsers = async (req, res) => {
     try {
@@ -177,6 +186,7 @@ const getAllUsers = async (req, res) => {
         });
     }
 };
+
 // FORGOT PASSWORD:
 const forgotPassword = async (req, res) => {
     try {
@@ -218,6 +228,7 @@ const forgotPassword = async (req, res) => {
         });
     }
 };
+
 // EDIT USER:
 const editUser = async (req, res) => {
     try {
@@ -274,6 +285,7 @@ const editUser = async (req, res) => {
         });
     }
 };
+
 // TO DELETE USER:
 const deleteUser = async (req, res) => {
     try {

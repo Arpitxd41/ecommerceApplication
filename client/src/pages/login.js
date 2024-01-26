@@ -8,44 +8,43 @@ import frame from '../images/frame.png';
 const Login = () => {
     const [mail, setMail] = useState('');
     const [password, setPassword] = useState('');
-    const [successMessage, setSuccessMessage] = useState("");
     const [errorMessage, setErrorMessage] = useState("");
 
     const navigate = useNavigate();
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
       e.preventDefault();
-      axios
-        .post("https://localhost:5000/login", { mail, password })
-        .then((result) => {
-            if (result.data.success) {
-                const { token, user } = result.data;
-                localStorage.setItem('authToken', token);
-                console.log(user);
-                navigate('/', { state: { successMessage: `Welcome back, ${user.firstName}!` } });
-            } else {
-                setErrorMessage("");
-            }
-        }).catch((error) => {
+      console.log('before axios.post');      
+      try {
+        const result = await axios.post("https://localhost:5000/login", { mail, password })
+        console.log('after axios.post');
+        console.log(result.data.success);        
+          if (result.data.success) {
+              const { token, user } = result.data;
+              console.log("User:", user);
+              localStorage.setItem('authToken', token);
+              localStorage.setItem('userDetails', JSON.stringify(user));
+              console.log(user.firstName);
+              navigate('/');
+          } else {
+            setErrorMessage(result.data.message || "Login Failed!");
+          }
+        } catch (error) {
+          console.error("Error:", error);
           if (error.response) {
             setErrorMessage(error.response.data.message);
           } else {
-            setErrorMessage("Login failed. Please try again.");
+            setErrorMessage("Login failed. Please try after sometime.");
           }
-      });
-    }
-    // console.log("Success Message:", successMessage);
-    // console.log("Error Message:", errorMessage);
+      };
+    };
 
     return (
         <div>
             <h2 className='absolute z-50'>
-            {successMessage && (
-              <div className="success-message bg-green-600 px-8 text-white">{successMessage}</div>
-            )}
-            {errorMessage && (
+              {errorMessage && (
               <div className="error-message bg-red-600 px-8 text-white">{errorMessage}</div>
-            )}
+              )}
             </h2>
             <div className="flex flex-col lg:flex-row p-8 bg-black">
                 <div className="lg:w-3/5 lg:float-left text-gray-300 bg-gradient-to-r from-black to-fuchsia-700 py-18 px-8 md:px-16 shadow-xl">
