@@ -16,12 +16,15 @@ const {
 
 const { 
     getProductsById,
+    getAllProducts,
+} = require('../controllers/productController')
+
+const {
     getUserCart,
     addToCart,
-    getAllProducts,
     removeFromCart,
     removeAllFromCart
-} = require('../controllers/productController')
+} = require('../controllers/cartController');
 
 const router = express.Router();
 
@@ -39,10 +42,10 @@ router.delete('/deleteUser/:id', deleteUser);
 router.get('/products', getAllProducts);
 router.get('/product/:id', getProductsById);
 
-router.get('/cart/:id', getUserCart);
-router.post('/cart/add/product/:id', addToCart);
-router.delete('/cart/remove/product/:id', removeFromCart);
-router.delete('/cart/empty', removeAllFromCart)
+router.get('/user/:id/cart', getUserCart);
+router.post('/user/:userId/cart/add/:productId', addToCart);
+router.delete('/user/:userId/cart/remove/:productId', removeFromCart);
+router.delete('/user/:userId/cart/remove', removeAllFromCart)
 
 
 module.exports = router;

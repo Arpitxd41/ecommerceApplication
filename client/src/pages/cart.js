@@ -5,12 +5,22 @@ import { useAuth } from '../context/authContext';
 
 const Cart = () => {
   const { id } = useParams();
-  const { user } = useAuth();
+  const { user, setUser } = useAuth();
   const [cart, setCart] = useState([]);
   const [products, setProducts] = useState([]);
   const [quantity, setQuantity] = useState(1);
 
   useEffect(() => {
+    const fetchUserDetails = async() => {
+      try {
+        const response = await axios.get(`/getUser/${id}`);
+        const userDetails = response.data;
+        setUser(userDetails);
+      } catch (error) {
+        console.error('Error fetching user data from the server', error);
+      }
+    };
+
     const fetchCart = async () => {
       try {
         const response = await axios.get(`/cart/${id}`);
@@ -29,9 +39,10 @@ const Cart = () => {
       }
     };
 
+    fetchUserDetails();
     fetchCart();
     fetchProducts();
-  }, [id, user]);
+  }, [id, setUser]);
 
   const handleAddToCart = async (productId) => {
     try {

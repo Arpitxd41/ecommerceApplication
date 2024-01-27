@@ -1,32 +1,44 @@
-// Navbar.js
-import React, {useState} from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
-// import './navbar.css'
+import axios from 'axios'; // Import axios for making HTTP requests
 import logo from '../images/logo512.png';
 
 const NavbarOne = ({ onSearch, isLoggedIn }) => {
   const { id } = useParams();
-  const [ searchQuery, setSearchQuery ] = useState('');
+  const [searchQuery, setSearchQuery] = useState('');
+  const [userCart, setUserCart] = useState(null);
   const navigate = useNavigate();
+
+  // Function to fetch user's cart data
+  const fetchUserCart = useCallback( async () => {
+    try {
+      const response = await axios.get(`/user/${id}/cart`);
+      setUserCart(response.data);
+    } catch (error) {
+      console.error('Error fetching user cart:', error);
+    }
+  }, [id]);
+
+  useEffect(() => {
+    // Fetch user's cart data when the component mounts
+    if (isLoggedIn) {
+      fetchUserCart();
+    }
+  }, [fetchUserCart, isLoggedIn]);
+
+
+  // SEARCH SECTION
   const handleSearch = () => {
-    // Call the callback function passed from the parent component
     onSearch(searchQuery);
   };
 
   const handleKeyPress = (e) => {
     if (e.key === 'Enter') {
-      // Trigger search on Enter key press
-      const handleSearch = (searchQuery) => {
-        // You can implement search logic here or call an API to search
-        console.log('Searching for:', searchQuery);
-      };
-    
       handleSearch();
     }
   };
 
   const handleLogoClick = () => {
-    // Handle navigation to home when the logo is clicked
     navigate('/');
   };
   return (
@@ -60,13 +72,13 @@ const NavbarOne = ({ onSearch, isLoggedIn }) => {
             <ul className="nav-links flex-row justify-evenly w-1/12 items-center hidden
              lg:flex lg:w-2/5"> 
 
-              <li className='rounded-sm px-5 py-2
-              hover:shadow-black hover:shadow-md'>
-                <Link className='flex flex-row items-center' to={`/cart/${id}`}>
-                  <i className="fa fa-shopping-cart" aria-hidden="true"> </i> 
-                  <p className='hidden lg:flex ml-2 text-sm'>CART</p> 
-                </Link>
-              </li>
+            <li className='rounded-sm px-5 py-2 hover:shadow-black hover:shadow-md'>
+              <Link className='flex flex-row items-center' to={`/cart/${id}`}>
+                <i className="fa fa-shopping-cart" aria-hidden="true"></i>
+                <p className='hidden lg:flex ml-2 text-sm'>CART</p>
+                {userCart && <span className="ml-1 text-xs">{userCart.cartItems.length}</span>}
+              </Link>
+            </li>
 
               <li className='rounded-sm px-5 py-2
                hover:shadow-black hover:shadow-md'>

@@ -8,17 +8,16 @@ const jwtToken = require('jsonwebtoken');
 const generateToken = (user) => {
     // GENERATING TOKEN
     const secretKey = process.env.JWT_SECRET || 'default-secret-key';
-    return jwtToken.sign({ userId: user._id, email: user.mail }, secretKey, { expiresIn: '1h' });
+    return jwtToken.sign({ userId: user._id, email: user.mail }, secretKey, { expiresIn: '20m' });
 };
 
-// REGISTER
+// REGISTER A NEW USER
 const register = async (req, res) => {
     try {
         console.log("Request to create a user received");
-        // collect data
+
         const { firstName, lastName, dob, mail, password } = req.body;
 
-        // Check if the user already exists in Database
         const userExists = await userModel.findOne({ mail });
         if (userExists) {
             console.log('User already exists');
@@ -28,9 +27,9 @@ const register = async (req, res) => {
             });
         }
 
-        // Validate date entry for DOB
-        async function isValidDate(dob) {
-            return await moment(dob, 'DDMMYYYY', true).isValid();
+        // Validate DATE OF BIRTH :
+        function isValidDate(dob) {
+            return moment(dob, 'DDMMYYYY', true).isValid();
         }
         if (!isValidDate(dob)) {
             throw new Error("Invalid date entered");
@@ -89,7 +88,7 @@ const register = async (req, res) => {
     }
 };
 
-// USER LOGIN :-
+// LOGIN USER TO APPLICATION :-
 const login = async (req, res) => {
     try {
         console.log("User login request received...");
@@ -135,7 +134,7 @@ const login = async (req, res) => {
     }
 };
 
-// TO GET USER BY ID:
+// GRAB THE USER BY USER'S ID :-
 const getUser = async (req, res) => {
     try {
         const userId = req.params.userId; // Assuming you get the user ID from the request parameters
@@ -165,7 +164,7 @@ const getUser = async (req, res) => {
     }
 };
 
-// TO GET ALL USERS:
+// TO GRAB ALL USERS REGISTERED IN THE APPLICATION :-
 const getAllUsers = async (req, res) => {
     try {
         const users = await userModel.find();
@@ -229,7 +228,7 @@ const forgotPassword = async (req, res) => {
     }
 };
 
-// EDIT USER:
+// EDIT USER DETAILS FOR A SPECIFIC USER :-
 const editUser = async (req, res) => {
     try {
         const userId = req.params.userId; // Assuming you get the user ID from the request parameters
@@ -286,12 +285,11 @@ const editUser = async (req, res) => {
     }
 };
 
-// TO DELETE USER:
+// TO DELETE AN EXISTING USER :-
 const deleteUser = async (req, res) => {
     try {
-        const userId = req.params.userId; // Assuming you get the user ID from the request parameters
-
-        // Delete the user from the database
+        const userId = req.params.userId;
+        await userCart.findOneAndDelete({user: userId});
         await userModel.findByIdAndDelete(userId);
 
         res.status(200).json({
@@ -299,7 +297,7 @@ const deleteUser = async (req, res) => {
             message: 'User deleted successfully',
         });
 
-        console.log(`User deleted: ${userId}`);
+        console.log(`User deleted: ${user.firstName}`); 
     } catch (error) {
         console.error('Error:', error.message);
         res.status(500).json({
