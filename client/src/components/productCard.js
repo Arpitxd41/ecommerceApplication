@@ -1,21 +1,17 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import CounterButtons from '../utils/counter';
 
 const ProductCard = ({ product }) => {
-  // Check if product is undefined or null
   if (!product) {
-    return <div>Loading...</div>; // or any other handling for undefined product
+    return <div>Loading...</div>;
   }
-
-  // Destructure product object
   const { id, images, title, discountPercentage, price, rating } = product;
-
-  // Check which api is being used
   
     return (
       <div className="bg-white border-white text-black rounded-sm border-2 
-      hover:border-black hover:shadow-2xl lg:w-72">
-        <div className="rounded-sm object-cover h-70 block items-center p-2">
+      hover:shadow-black hover:shadow-md lg:w-72">
+        <div className="rounded-sm object-cover h-70 flex items-center p-2 justify-center">
           <img
             src={images[0]}
             alt={title}
@@ -33,17 +29,12 @@ const ProductCard = ({ product }) => {
             <p className="text-gray-50 md:font-bold text-lg bg-red-500 md:rounded-full px-2 md:px-4 py-1 w-fit md:w-44">{discountPercentage}% OFF</p>
           </div>
           <div className="flex flex-row w-9/10 justify-between">
-            <button className="bg-black text-white font-bold md:px-5 md:py-2 w-1/4 lg:text-lg text-sm border-gray-200 border rounded-bl-sm">
+            <button className="bg-green-600 text-white font-bold md:px-5 md:py-2 w-1/4 lg:text-lg text-sm rounded-sm shadow-sm shadow-black">
               <Link to={`/product/${id}`} className="text-white hover:underline">
                 <i className="fa fa-external-link" aria-hidden="true"></i>
               </Link>
             </button>
-            <button className="bg-gradient-to-r from-pink-600 to-violet-900 text-white lg:text-lg text-sm font-bold py-2 md:py-3 w-3/4 border border-gray-200 rounded-br-sm">
-              <a href="{cart}" className="flex flex-row items-center justify-evenly md:px-2 lg:px-4">
-                <i className="fa fa-shopping-cart" aria-hidden="true"></i>
-                <p>ADD TO CART</p>  
-              </a>
-            </button>
+            <CounterButtons productId={id} />
           </div>
         </div>
       </div>

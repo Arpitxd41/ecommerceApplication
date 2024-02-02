@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import ProductCard from '../components/productCard';
-import CounterButtons from '../components/counter';
+import CounterButtons from '../utils/counter';
 
 const ProductPage = () => {
   const { id } = useParams();
@@ -13,7 +13,6 @@ const ProductPage = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   useEffect(() => {
-    // GETTING PRODUCT
     const fetchProduct = async () => {
       try {
         const response = await axios.get(`https://dummyjson.com/products/${id}`);
@@ -29,7 +28,6 @@ const ProductPage = () => {
     fetchProduct();
   }, [id]);
 
-  // GETTING SIMILAR PRODUCTS
   useEffect(() => {
     const fetchSimilarProducts = async () => {
       try {
@@ -92,9 +90,9 @@ const ProductPage = () => {
               </h5>
               <div className='flex flex-row'>
                 <div className='float-left w-3/5 px-5 space-y-2'>
-                  <p className='text-black'>
-                    <i class="fa fa-star text-yellow-400 mr-2" aria-hidden="true"></i>
-                    {product.rating}
+                  <p className='flex flex-row items-center'>
+                    <i className="fa fa-star text-yellow-400 mr-2" aria-hidden="true"></i>
+                    <p className='text-green-600 font-bold text-xl'>{product.rating}</p>
                   </p>
                   <p className='text-black'>
                     <i class="fa fa-certificate text-yellow-400 mr-2" aria-hidden="true"></i>
@@ -111,8 +109,11 @@ const ProductPage = () => {
                   <img src={product.thumbnail} alt='thumbnail' className='h-auto' />
                 </div>
               </div>
-              <div>
+              <div className='flex flex-row text-black text-md font-semibold justify-between space-x-2 w-fit h-12 mt-6'>
                 <CounterButtons />
+                <button className='bg-orange-500 px-12 py-2 rounded-sm shadow-sm shadow-black'>
+                  <a href='linkToCheckOut'>BUY NOW</a>
+                </button>
               </div>
             </div>
           </div>

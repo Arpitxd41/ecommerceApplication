@@ -11,14 +11,13 @@ const ProductList = () => {
   const [matchedProducts, setMatchedProducts] = useState([]);
 
   useEffect(() => {
-    // FETCH PRODUCTS BASED ON THE SELECTED CATEGORY :
     const fetchProducts = async () => {
       try {
         const response = await axios.get(`https://dummyjson.com/products${selectedCategory ? `/category/${selectedCategory}` : ''}`);
         const { products } = response.data;
       
         if (sortingType === 'none') {
-          setMatchedProducts(products);  // Updated line
+          setMatchedProducts(products);
         } else {
           const values = sortingType === 'rating'
             ? products.map(product => product.rating)
@@ -41,7 +40,7 @@ const ProductList = () => {
         
           console.log(`Sorted ${sortingType === 'rating' ? 'Ratings' : 'Prices'}:`, sortedValues);
         
-          // Map over the sorted values to find the corresponding product for each value
+          // Mapping over the sorted values to find the corresponding product for each value
           const sortedProducts = sortedValues.map(value => {
             return products.find(product => (sortingType === 'rating' ? product.rating : product.price) === value);
           });

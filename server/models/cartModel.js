@@ -4,7 +4,7 @@ const UserModel = require('./userModel');
 
 const cartItemSchema = new mongoose.Schema({
   productId: {
-    type: mongoose.Schema.Types.ObjectId,
+    type: Number,
     ref: 'ProductModel',
     required: true,
   },

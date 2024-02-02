@@ -1,112 +1,63 @@
-import { useState, useEffect } from 'react';
-import axios from 'axios';
-import { useParams } from 'react-router-dom';
-import { useAuth } from '../context/authContext';
+import React, { useState, useEffect} from 'react';
+import {useNavigate} from 'react-router-dom';
+import { validateToken } from '../utils/filter';
 
 const Cart = () => {
-  const { id } = useParams();
-  const { user, setUser } = useAuth();
-  const [cart, setCart] = useState([]);
-  const [products, setProducts] = useState([]);
-  const [quantity, setQuantity] = useState(1);
+  const [userDetails, setUserDetails] = useState({});
+  const [cartProducts, setCartProducts] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
-    const fetchUserDetails = async() => {
-      try {
-        const response = await axios.get(`/getUser/${id}`);
-        const userDetails = response.data;
-        setUser(userDetails);
-      } catch (error) {
-        console.error('Error fetching user data from the server', error);
-      }
-    };
+    const authToken = localStorage.getItem('authToken');
+    const userDetails = JSON.parse(localStorage.getItem('userDetails'));
+    if (!authToken) {
+      navigate('/login');
+      return;
+    }
+    console.log(userDetails.firstName);
+    setUserDetails(userDetails);
 
-    const fetchCart = async () => {
-      try {
-        const response = await axios.get(`/cart/${id}`);
-        setCart(response.data.cartItems);
-      } catch (error) {
-        console.error('Error fetching user cart:', error);
-      }
-    };
+    const cartProducts = [];
+    setCartProducts(cartProducts);
 
-    const fetchProducts = async () => {
-      try {
-        const response = await axios.get('/products');
-        setProducts(response.data);
-      } catch (error) {
-        console.error('Error fetching products:', error);
-      }
-    };
+    fetchUserCart(userDetails._id, authToken);
+    
+    const isTokenValid = validateToken(authToken);
+    if (!isTokenValid) {
+      navigate('/login');
+    }
+  }, [navigate]);
 
-    fetchUserDetails();
-    fetchCart();
-    fetchProducts();
-  }, [id, setUser]);
-
-  const handleAddToCart = async (productId) => {
+  const fetchUserCart = async (userId, authToken) => {
     try {
-      await axios.post(`/cart/${id}/add`, {
-        productId,
-        productQuantity: quantity,
+      const response = await fetch(`/cart/${userId}`, {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${authToken}`
+        }
       });
-
-      const response = await axios.get(`/cart/${id}`);
-      setCart(response.data.cartItems);
-
-      setQuantity(1);
+      if (response.ok) {
+        const cartData = await response.json();
+        setCartProducts(cartData.cartItems);
+      } else {
+        console.error('Failed to fetch User cart l.no.42');
+      }
     } catch (error) {
-      console.error('Error adding to cart:', error);
+      console.error('Error fetching user data :', error);
     }
   };
-
-  const handleRemove = async (productId) => {
-    try {
-      await axios.delete(`/cart/${id}/remove/${productId}`);
-      const response = await axios.get(`/cart/${id}`);
-      setCart(response.data.cartItems);
-    } catch (error) {
-      console.error('Error removing from cart:', error);
-    }
-  };
-
-  const handleRemoveAll = async () => {
-    try {
-      await axios.delete(`/cart/${id}/removeAll`);
-      const response = await axios.get(`/cart/${id}`);
-      setCart(response.data.cartItems);
-    } catch (error) {
-      console.error('Error removing all products from the cart', error);
-    }
-  };
-
   return (
-    <div>
-      {user && <h2>{user.firstName}'s Cart</h2>}
-      <ul>
-        {cart.map((cartItem) => (
-          <li key={cartItem.product._id}>
-            {cartItem.product.name} - Quantity: {cartItem.quantity}
-            <button onClick={() => handleRemove(cartItem.product._id)}>
-              Remove
-            </button>
-          </li>
-        ))}
-      </ul>
-      <hr />
-      <h2>Available Products</h2>
-      <ul>
-        {products.map((product) => (
-          <li key={product._id}>
-            {product.name} - Price: ${product.price}
-            <button onClick={() => handleAddToCart(product._id)}>Add to Cart</button>
-          </li>
-        ))}
-      </ul>
-      <hr />
-      <button onClick={handleRemoveAll}>Remove All From Cart</button>
+    <div className='border border-black'>
+      <div className=''>
+        <h2>{userDetails.firstName}'s Product List</h2>
+        <ul>
+          {cartProducts.map((item) => (
+            <li key={item.product._id}>{item.product.name} - Quantity: {item.quantity}</li>
+          ))}
+        </ul>
+      </div>
     </div>
-  );
-};
+  )
+}
 
 export default Cart;

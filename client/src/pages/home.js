@@ -1,25 +1,10 @@
-// HomePage.js
+// "HOMEPAGE"
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import NavbarOne from '../components/navbarOne';
 import Corousel from '../components/corousel';
 import ProductList from '../components/productList';
-
-const validateToken = (token) => {
-  try {
-    const tokenParts = token.split('.');
-    const payload = JSON.parse(atob(tokenParts[1]));
-    const currentTime = Math.floor(Date.now() / 1000);
-    // checking the token for expiration
-    if (payload.exp && payload.exp < currentTime) {
-      return false;
-    }
-    return true;
-  } catch (error) {
-    console.error('Error decoding token:', error);
-    return false;
-  }
-};
+import { validateToken } from '../utils/filter';
 
 const HomePage = () => {
   const [products, setProducts] = useState([]);
@@ -31,22 +16,19 @@ const HomePage = () => {
     const userDetails = JSON.parse(localStorage.getItem('userDetails'));
     const successMessage = localStorage.getItem('successMessage');
     if (successMessage) {
-        console.log(successMessage); // Log or use the success message as needed
-        localStorage.removeItem('successMessage'); // Clear the success message
+        localStorage.removeItem('successMessage');
     }
     if (!authToken) {
-      // No token found, navigate to the login page
       navigate('/login');
       return;
     }
-    // Fetch or set your products here
-    console.log(userDetails.firstName);
+
+    
     setUserDetails(userDetails);
     
-    const fetchedProducts = []; // replace with actual product fetching logic
+    const fetchedProducts = [];
     setProducts(fetchedProducts);
-
-    const isTokenValid = validateToken(authToken); // Implement the token validation function
+    const isTokenValid = validateToken(authToken);
     if (!isTokenValid) {
       navigate('/login');
     }
