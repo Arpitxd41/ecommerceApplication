@@ -1,10 +1,12 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios'; // Import axios for making HTTP requests
 import logo from '../images/logo512.png';
 
 const NavbarOne = ({ onSearch, isLoggedIn }) => {
-  const { id } = useParams();
+  // const { userId } = useParams();
+  const userDetails = JSON.parse(localStorage.getItem('userDetails'));
+  const userId = userDetails._id;
   const [searchQuery, setSearchQuery] = useState('');
   const [userCart, setUserCart] = useState(null);
   const navigate = useNavigate();
@@ -12,15 +14,14 @@ const NavbarOne = ({ onSearch, isLoggedIn }) => {
   // Function to fetch user's cart data
   const fetchUserCart = useCallback( async () => {
     try {
-      const response = await axios.get(`/user/${id}/cart`);
+      const response = await axios.get(`https://localhost:5000/user/${userId}/cart`);
       setUserCart(response.data);
     } catch (error) {
       console.error('Error fetching user cart:', error);
     }
-  }, [id]);
+  }, [userId]);
 
   useEffect(() => {
-    // Fetch user's cart data when the component mounts
     if (isLoggedIn) {
       fetchUserCart();
     }
@@ -73,7 +74,7 @@ const NavbarOne = ({ onSearch, isLoggedIn }) => {
              lg:flex lg:w-2/5"> 
 
             <li className='rounded-sm px-5 py-2 hover:shadow-black hover:shadow-md'>
-              <Link className='flex flex-row items-center' to={`/cart/${id}`}>
+              <Link className='flex flex-row items-center' to={`/cart/${userId}`}>
                 <i className="fa fa-shopping-cart" aria-hidden="true"></i>
                 <p className='hidden lg:flex ml-2 text-sm'>CART</p>
                 {userCart && <span className="ml-1 text-xs">{userCart.cartItems.length}</span>}

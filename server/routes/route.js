@@ -22,6 +22,7 @@ const {
 const {
     getUserCart,
     addToCart,
+    updateCartItemQuantity,
     removeFromCart,
     removeAllFromCart
 } = require('../controllers/cartController');
@@ -42,8 +43,9 @@ router.delete('/deleteUser/:id', deleteUser);
 router.get('/products', getAllProducts);
 router.get('/product/:id', getProductsById);
 
-router.get('/user/:id/cart', getUserCart);
-router.post('/user/:userId/cart/add/:productId', addToCart);
+router.get('/user/:userId/cart', getUserCart);
+router.post('/user/:userId/cart/add/:productNumber', addToCart);
+router.put('/user/:userId/cart/update/:productId', updateCartItemQuantity);
 router.delete('/user/:userId/cart/remove/:productId', removeFromCart);
 router.delete('/user/:userId/cart/remove', removeAllFromCart)
 

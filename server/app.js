@@ -9,9 +9,10 @@ const app = express();
 
 const corsOptions = {
     origin: 'https://localhost:3000',
-    methods: 'GET,PUT,POST,DELETE',
+    methods: 'GET,PUT,POST,DELETE,PATCH',
     credentials: true,
     optionsSuccessStatus: 204,
+    allowHeaders: '*',
 };
 
 // middleware  

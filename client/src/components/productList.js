@@ -3,7 +3,7 @@ import axios from 'axios';
 import ProductCard from './productCard';
 import ProductFilter from './productFilter';
 
-const ProductList = () => {
+const ProductList = ({ userDetails }) => {
   const [selectedCategory, setSelectedCategory] = useState('');
   const [sortingOrder, setSortingOrder] = useState('default');
   const [sortingType, setSortingType] = useState('none');
@@ -15,7 +15,6 @@ const ProductList = () => {
       try {
         const response = await axios.get(`https://dummyjson.com/products${selectedCategory ? `/category/${selectedCategory}` : ''}`);
         const { products } = response.data;
-      
         if (sortingType === 'none') {
           setMatchedProducts(products);
         } else {
@@ -40,12 +39,11 @@ const ProductList = () => {
         
           console.log(`Sorted ${sortingType === 'rating' ? 'Ratings' : 'Prices'}:`, sortedValues);
         
-          // Mapping over the sorted values to find the corresponding product for each value
           const sortedProducts = sortedValues.map(value => {
             return products.find(product => (sortingType === 'rating' ? product.rating : product.price) === value);
           });
         
-          setMatchedProducts(sortedProducts);  // Updated line
+          setMatchedProducts(sortedProducts);
           console.log("Sorted Products:", sortedProducts);
         }
       } catch (error) {
@@ -73,15 +71,14 @@ const ProductList = () => {
     <div className="w-full flex flex-col-reverse bg-black relative z-20 rounded-sm shadow-md justify-center py-5 lg:px-12 
     md:px-1 lg:flex-row">
       <div className="float-none grid grid-cols-2 gap-1 mt-5
-        md:grid-cols-4
-        lg:gap-6 lg:grid-cols-3 lg:w-3/4 lg:float-left">
+        lg:gap-6 md:grid-cols-3 lg:w-3/4 lg:float-left">
         {sortedValues.length > 0 ? (
           sortedValues.map(value => (
-          <ProductCard key={value.id} product={value} />
+          <ProductCard key={value.id} product={value} userDetails={userDetails} />
             ))
           ) : (
             matchedProducts.length > 0 && matchedProducts.map(product => (
-          <ProductCard key={product.id} product={product} />
+          <ProductCard key={product.id} product={product} userDetails={userDetails} />
            ))
         )}
       </div>

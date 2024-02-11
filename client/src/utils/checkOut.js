@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-const CounterButtons = ({ product }) => {
+const CartButtons = ({ product }) => {
   const [quantity, setQuantity] = useState(0);
   const [error, setError] = useState(null);
   const [inCart, setInCart] = useState(false); // New state to track if the product is in the cart
@@ -60,11 +60,11 @@ const CounterButtons = ({ product }) => {
           onClick={handleAddToCart}
           className="bg-yellow-400 w-52 px-5 py-2 border-2 border-yellow-400 rounded-sm shadow-sm shadow-black"
         >
-          ADD TO CART
+          CHECKOUT
         </button>
       )}
     </div>
   );
 };
 
-export default CounterButtons;
+export default CartButtons;

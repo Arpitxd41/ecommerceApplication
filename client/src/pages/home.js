@@ -23,7 +23,6 @@ const HomePage = () => {
       return;
     }
 
-    
     setUserDetails(userDetails);
     
     const fetchedProducts = [];
@@ -38,7 +37,6 @@ const HomePage = () => {
     <div className='shadow-inner shadow-black bg-gradient-to-l from-black to-fuchsia-900 text-white'>
       <div className='flex justify-center'>
         <NavbarOne />
-        {/* <NavbarTwo /> */}
       </div>
 
       <Corousel />
@@ -49,7 +47,7 @@ const HomePage = () => {
         </div>
       </div>
       <div className='flex justify-center bg-black w-full'>
-        <ProductList products={products} />
+        <ProductList products={products} userDetails={userDetails} />
       </div>
       <div className='p-2 object-contain h-fit'>
         <hr className='border-gray-950 my-12 relative z-40'/>

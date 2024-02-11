@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate} from 'react-router-dom';
 import axios from 'axios';
 import unregProfile from '../images/profile_Reg.png';
@@ -9,22 +9,25 @@ const Login = () => {
     const [mail, setMail] = useState('');
     const [password, setPassword] = useState('');
     const [errorMessage, setErrorMessage] = useState("");
-
     const navigate = useNavigate();
 
+    useEffect(() => {
+      window.scrollTo(0, 0);
+    }, []);
+
     const handleSubmit = async (e) => {
-      e.preventDefault();
-      console.log('before axios.post');      
+      e.preventDefault();    
       try {
         const result = await axios.post("https://localhost:5000/login", { mail, password })
-        console.log('after axios.post');
-        console.log(result.data.success);        
+        console.log('Credentials = ', result.data.success);
           if (result.data.success) {
               const { token, user } = result.data;
+
               console.log("User:", user);
+              
               localStorage.setItem('authToken', token);
               localStorage.setItem('userDetails', JSON.stringify(user));
-              console.log(user.firstName);
+
               navigate('/');
           } else {
             setErrorMessage(result.data.message || "Login Failed!");

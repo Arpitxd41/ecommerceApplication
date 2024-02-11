@@ -2,6 +2,30 @@ const productModel = require('../models/productModel');
 const mongoose = require('mongoose');
 const axios = require('axios');
 
+
+
+// const fetchProducts = async () => {
+//   try {
+//     const apiUrl = 'https://dummyjson.com/products';
+//     const response = await axios.get(apiUrl);
+//     const products = response.data;
+
+//     for (const product of products) {
+//       await productModel.create({
+//         productNumber: product.id,
+//         title: product.title,
+//         description: product.description,
+//         brand: product.brand,
+//         price: product.price,
+//         thumbnail: product.thumbnail,
+//       });
+//     }
+
+//     console.log('Products inserted into MongoDB!');
+//   } catch (error) {
+//     console.error('Error inserting products into MongoDB:', error.message);
+//   }
+// };
 const getAllProducts = async (req, res) => {
   try {
     let apiUrl = 'https://dummyjson.com/products';
@@ -9,7 +33,7 @@ const getAllProducts = async (req, res) => {
     if (req.query.category) {
       apiUrl = `https://dummyjson.com/products/category/${req.query.category}`;
     }
-
+    // await insertProductsIntoDatabase();
     const response = await axios.get(apiUrl);
     res.json(response.data);
   } catch (error) {
@@ -23,8 +47,8 @@ const getAllProducts = async (req, res) => {
 
 const getProductsById = async (req, res) => {
   try {
-    const productId = req.params.productId;
-    const product = await productModel.findById(productId);
+    const productNumber = req.params.id;
+    const product = await productModel.findById(productNumber);
 
     if (!product) {
       return res.status(404).json({ message: 'Product not found' });
@@ -41,5 +65,5 @@ const getProductsById = async (req, res) => {
 module.exports = {
   getAllProducts,
   getProductsById,
-  
+  // fetchProducts,
 };

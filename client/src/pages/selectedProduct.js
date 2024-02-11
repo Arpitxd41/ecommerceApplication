@@ -86,21 +86,21 @@ const ProductPage = () => {
               <h2 className='quicksand text-black text-5xl font-bold'>{product.title}</h2>
               <h5 className='text-white bg-red-600 rounded-full w-fit px-5 py-1 my-5'>
                 {product.discountPercentage} % OFF
-                <i class="fa fa-tag ml-2" aria-hidden="true"></i>
+                <i className="fa fa-tag ml-2" aria-hidden="true"></i>
               </h5>
               <div className='flex flex-row'>
                 <div className='float-left w-3/5 px-5 space-y-2'>
                   <p className='flex flex-row items-center'>
                     <i className="fa fa-star text-yellow-400 mr-2" aria-hidden="true"></i>
-                    <p className='text-green-600 font-bold text-xl'>{product.rating}</p>
+                    <a className='text-green-600 font-bold text-xl'>{product.rating}</a>
                   </p>
                   <p className='text-black'>
-                    <i class="fa fa-certificate text-yellow-400 mr-2" aria-hidden="true"></i>
+                    <i className="fa fa-certificate text-yellow-400 mr-2" aria-hidden="true"></i>
                     Authentic <a href='somelink' className='text-gray-400 font-bold'>{product.brand}</a> Product
                   </p>
                   <p className='text-black text-4xl'>${product.price} /-</p>
                   <p className='text-black'>
-                    <i class="fa fa-cart-plus text-blue-700 mr-2" aria-hidden="true"></i>
+                    <i className="fa fa-cart-plus text-blue-700 mr-2" aria-hidden="true"></i>
                     {product.stock} Units available
                   </p>
                   <h2 className='text-black'>{product.description}</h2>

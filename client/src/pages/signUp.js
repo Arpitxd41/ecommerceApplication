@@ -133,7 +133,6 @@ const Signup = () => {
                 <div className="flex flex-col space-y-6">
                     <button
                         type="submit"
-                        onSubmit={handleSubmit}
                         className="rounded-md bg-red-600 border-2 border-red-600 text-gray-200 px-3 font-semibold py-1
                                   hover:bg-red-700 hover:border-red-700">
                         {" "}
