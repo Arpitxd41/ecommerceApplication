@@ -4,15 +4,11 @@ import axios from 'axios';
 const CounterButtons = ({ product }) => {
   const [quantity, setQuantity] = useState(0);
   const [error, setError] = useState(null);
-  const [inCart, setInCart] = useState(false); // New state to track if the product is in the cart
+  const [inCart, setInCart] = useState(false);
 
   useEffect(() => {
-    // Check if the product is already in the cart
     const fetchCartItem = async () => {
       try {
-        // Your code to fetch cart item from the server
-        // Set inCart to true if the product is in the cart
-        // Set the quantity from the fetched cart item
       } catch (error) {
         console.error("Error fetching cart item", error);
       }
@@ -23,8 +19,6 @@ const CounterButtons = ({ product }) => {
 
   const handleAddToCart = async () => {
     try {
-      // Your code to add product to the cart
-      // Set inCart to true and set the quantity to 1
       setInCart(true);
       setQuantity(1);
     } catch (error) {
@@ -44,6 +38,9 @@ const CounterButtons = ({ product }) => {
   const handleIncrement = () => {
     setQuantity(quantity + 1);
   };
+  const updateQuantity = () => {
+    console.log(quantity);
+  }
 
   return (
     <div className="h-12 flex flex-row text-black text-md font-semibold justify-between space-x-2 w-fit">
@@ -63,6 +60,11 @@ const CounterButtons = ({ product }) => {
           ADD TO CART
         </button>
       )}
+
+        <button 
+          className='bg-orange-500 px-12 py-2 rounded-sm shadow-sm shadow-black'>
+          <a href='linkToCheckOut'>BUY NOW</a>
+        </button>
     </div>
   );
 };

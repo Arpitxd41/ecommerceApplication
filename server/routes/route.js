@@ -45,7 +45,7 @@ router.get('/product/:id', getProductsById);
 
 router.get('/user/:userId/cart', getUserCart);
 router.post('/user/:userId/cart/add/:productNumber', addToCart);
-router.put('/user/:userId/cart/update/:productId', updateCartItemQuantity);
+router.put('/user/:userId/cart/update/:productNumber', updateCartItemQuantity);
 router.delete('/user/:userId/cart/remove/:productId', removeFromCart);
 router.delete('/user/:userId/cart/remove', removeAllFromCart)
 

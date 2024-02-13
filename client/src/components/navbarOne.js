@@ -44,11 +44,11 @@ const NavbarOne = ({ onSearch, isLoggedIn }) => {
   };
   return (
     <nav className='relative z-40 w-full'>
-        <div className='flex flex-row py-2 px-4 justify-between bg-black  text-yellow-400 shadow-md shadow-black items-center
+        <div className='flex flex-row py-2 px-4 justify-between bg-black text-yellow-400 items-center
         lg:justify-evenly'>
 
             <div className="logo w-1/12 h-12" onClick={handleLogoClick}>
-              <a href={'somelink'} >
+              <a href={'/'} >
                   <img src={logo} className='md:h-12 h-10 rounded-full' alt='appLogo' />
               </a>
             </div>

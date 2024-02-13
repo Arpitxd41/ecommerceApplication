@@ -2,10 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import ProductCard from '../components/productCard';
+import NavbarOne from '../components/navbarOne';
 import CounterButtons from '../utils/counter';
 
 const ProductPage = () => {
-  const { id } = useParams();
+  const { productNumber } = useParams();
+  console.log(productNumber);
   const [product, setProduct] = useState();
   const [similarProducts, setSimilarProducts] = useState([]);
   const [loadingProduct, setLoadingProduct] = useState(true);
@@ -15,7 +17,7 @@ const ProductPage = () => {
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const response = await axios.get(`https://dummyjson.com/products/${id}`);
+        const response = await axios.get(`https://dummyjson.com/products/${productNumber}`);
         console.log('Product Response:', response.data);
         setProduct(response.data);
       } catch (error) {
@@ -26,7 +28,7 @@ const ProductPage = () => {
     };
 
     fetchProduct();
-  }, [id]);
+  }, [productNumber]);
 
   useEffect(() => {
     const fetchSimilarProducts = async () => {
@@ -47,7 +49,7 @@ const ProductPage = () => {
     if (product) {
       fetchSimilarProducts();
     }
-  }, [id, product]);
+  }, [productNumber, product]);
 
   const handleImageChange = (index) => {
     setCurrentImageIndex(index);
@@ -55,7 +57,9 @@ const ProductPage = () => {
 
   return (
     <div className='bg-black text-white'>
-
+      <div className='flex justify-center'>
+        <NavbarOne />
+      </div>
       {/* PRODUCT */}
       {(loadingProduct || loadingSimilarProducts) && <p>Loading...</p>}
       {product && (
@@ -111,9 +115,6 @@ const ProductPage = () => {
               </div>
               <div className='flex flex-row text-black text-md font-semibold justify-between space-x-2 w-fit h-12 mt-6'>
                 <CounterButtons />
-                <button className='bg-orange-500 px-12 py-2 rounded-sm shadow-sm shadow-black'>
-                  <a href='linkToCheckOut'>BUY NOW</a>
-                </button>
               </div>
             </div>
           </div>

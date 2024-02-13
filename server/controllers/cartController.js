@@ -79,35 +79,22 @@ const updateCartItemQuantity = async (req, res) => {
   try {
     const userId = req.params.userId;
     const productNumber = req.params.productNumber;
-    console.log('Product ID received:', productNumber);
+    const newQuantity = req.body.quantity;
+    console.log('Product ID received =>', productNumber);
+    console.log('User ID received =>', userId);
 
-    const { newQuantity } = req.body;
-
+    const { quantity } = req.body;
+    console.log(quantity);
     if (!userId || !productNumber) {
       return res.status(400).json({ message: 'Invalid User or Product Id format' });
     }
 
-    const updatedCart = await cartModel.findOneAndUpdate(
-      {
-        user: new mongoose.Types.ObjectId(userId),
-        'cartItems.productNumber': productNumber 
-      },
-      { $set: 
-        { 
-          'cartItems.$.quantity': newQuantity
-        } 
-      },
-      {
-        new: true
-      }
-    );
-
-    console.log('Product ID received:', productNumber);
-
-    if (!updatedCart) {
+    const userCart = await cartModel.findOneAndUpdate({user: userId});
+    if (!userCart) {
       return res.status(404).json({ message: 'Cart or product not found' });
+    } else {
+      
     }
-    console.log('Product ID received:', productNumber);
 
     res.status(200).json(updatedCart);
   } catch (error) {
