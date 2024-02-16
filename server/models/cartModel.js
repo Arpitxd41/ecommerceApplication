@@ -4,11 +4,6 @@ const UserModel = require('./userModel');
 
 
 const cartItemSchema = new mongoose.Schema({
-  product: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'ProductModel',
-    required: true,
-  },
   productNumber: {
     type: Number,
     required: true,
@@ -19,6 +14,11 @@ const cartItemSchema = new mongoose.Schema({
     type: Number,
     required: true,
     default: 1,
+  },
+  checked: {
+    type: Boolean,
+    required: true,
+    default: false
   }
 });
 

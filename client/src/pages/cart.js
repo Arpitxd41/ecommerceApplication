@@ -68,6 +68,7 @@ const Cart = () => {
       }
     });
   };
+
   return (
     <div className='border border-black'>
       <div className=''>
@@ -94,7 +95,7 @@ const Cart = () => {
           </ul>
         )}
       </div>
-      <StickyFooter cartProducts={cartProducts} selectedProducts={selectedProducts} />
+      <StickyFooter cartProducts={cartProducts} setCartProducts={setCartProducts} userDetails={userDetails} />
     </div>
   );
 };
