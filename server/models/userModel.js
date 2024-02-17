@@ -1,5 +1,25 @@
 const mongoose = require('mongoose');
 
+// ADDRESS SCHEMA
+const addressSchema = new mongoose.Schema({
+    street: {
+      type: String,
+      required: true
+    },
+    city: {
+      type: String,
+      required: true
+    },
+    postalCode: {
+      type: String,
+      required: true
+    },
+    phoneNumber: {
+      type: String,
+      required: true
+    }
+  });
+
 // USER SCHEMA
 const userSchema = new mongoose.Schema({
     firstName:{
@@ -29,7 +49,8 @@ const userSchema = new mongoose.Schema({
         required: [true, "Password field cannot be empty"],
         minlength: [8, "Password must be 8 characters long"],
         trim: true
-    }
+    },
+    address: [addressSchema],
 });
 
 module.exports = mongoose.model("User", userSchema);

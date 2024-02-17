@@ -1,12 +1,16 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const StickyFooter = ({ cartProducts, setCartProducts, userDetails }) => {
-  const [totalPrice, setTotalPrice] = useState(0); // Include totalPrice state
-  const [selectAllChecked, setSelectAllChecked] = useState(false);
+  const [totalPrice, setTotalPrice] = useState(0);
+  const [selectAllChecked, setSelectAllChecked] = useState(
+    localStorage.getItem('selectAllChecked') === 'true'
+  );
+  const userId = userDetails._id;
+  const navigate = useNavigate();
 
   useEffect(() => {
     let price = 0;
-
     const selectedProducts = cartProducts.filter(product => product.checked);
 
     Promise.all(selectedProducts.map(async (product) => {
@@ -20,10 +24,11 @@ const StickyFooter = ({ cartProducts, setCartProducts, userDetails }) => {
     })).then(() => {
       setTotalPrice(price);
     });
-    if (selectAllChecked) {
-      window.location.reload();
-    }
-  }, [cartProducts, selectAllChecked]);
+  }, [cartProducts]);
+
+  useEffect(() => {
+    localStorage.setItem('selectAllChecked', selectAllChecked.toString());
+  }, [selectAllChecked]);
 
   const handleCheckboxChange = (productNumber, checked) => {
     const updatedCartProducts = cartProducts.map(product =>
@@ -34,34 +39,51 @@ const StickyFooter = ({ cartProducts, setCartProducts, userDetails }) => {
   };
 
   const handleSelectAll = () => {
-    setSelectAllChecked(!selectAllChecked);
-    const updatedCartProducts = cartProducts.map(product =>
-      ({ ...product, checked: !selectAllChecked })
-    );
+    const newSelectAllChecked = !selectAllChecked;
+    setSelectAllChecked(newSelectAllChecked);
+
+    const updatedCartProducts = cartProducts.map(product => ({
+      ...product,
+      checked: newSelectAllChecked
+    }));
 
     setCartProducts(updatedCartProducts);
-    fetch(`https://localhost:5000/user/${userDetails._id}/cart/selectAll`, {
+
+    // If "Select All" is being unchecked, uncheck individual product checkboxes
+    if (!newSelectAllChecked) {
+      const updatedCartProductsUncheckAll = updatedCartProducts.map(product => ({
+        ...product,
+        checked: false
+      }));
+      setCartProducts(updatedCartProductsUncheckAll);
+      updatedCartProductsUncheckAll.forEach(product => {
+        handleCheckboxChange(product.productNumber, false);
+      });
+    }
+
+    // Send updated cart data to the server
+    fetch(`https://localhost:5000/user/${userId}/cart/selectAll`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(updatedCartProducts)
+      body: JSON.stringify({ selectAll: newSelectAllChecked }) // Send the opposite value of selectAllChecked
     })
-    .then(response => {
-      if (!response.ok) {
-        throw new Error('Failed to update cart data');
-      }
-      // Optionally, perform any actions after successful update
-    })
-    .catch(error => {
-      console.error('Error updating cart data:', error);
-    });
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Failed to update cart data');
+        }
+        // Optionally, perform any actions after successful update
+        window.location.reload(); // Reload the page after updating
+      })
+      .catch(error => {
+        console.error('Error updating cart data:', error);
+      });
   };
 
   const handleCheckout = () => {
-    // Handle checkout button click event
-  };
-
+    navigate(`/checkout/${userId}`);
+  }
 
   return (
     <div className="sticky bottom-0 left-0 right-0 bg-green-600 shadow-md shadow-black py-4 px-8 flex justify-between items-center text-white text-lg font-semibold">

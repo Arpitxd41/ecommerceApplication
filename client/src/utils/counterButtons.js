@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const CartButtons = ({ productNumber, userId, handleCheckboxChange }) => {
   const [quantity, setQuantity] = useState(1);
   const [isChecked, setIsChecked] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchCartItem = async () => {
@@ -52,6 +54,10 @@ const CartButtons = ({ productNumber, userId, handleCheckboxChange }) => {
     updateCartItem(quantity, checked);
   };
 
+  const handleCheckoutClick = () => {
+    navigate(`/checkout/${userId}`);
+  };
+
   return (
     <div className="h-12 flex flex-row text-md font-semibold justify-between space-x-2 w-fit px-8 items-center">
       <div className="items-center text-xl flex flex-row justify-evenly w-52 bg-yellow-400 text-black px-2 py-2 rounded-sm shadow-xs shadow-black">
@@ -70,6 +76,7 @@ const CartButtons = ({ productNumber, userId, handleCheckboxChange }) => {
           !isChecked ? 'cursor-not-allowed opacity-50' : ''
         }`}
         disabled={!isChecked}
+        onClick={handleCheckoutClick}
       >
         CHECKOUT
       </button>

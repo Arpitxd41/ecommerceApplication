@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import CounterButtons from '../utils/counterButtons';
-import StickyFooter from './checkOut';
 
 const CartItem = ({ productNumber, userId, cartProducts, setCartProducts }) => {
   const [product, setProduct] = useState(null);

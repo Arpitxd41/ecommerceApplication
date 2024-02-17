@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { validateToken } from '../utils/filter';
 import CartItem from '../components/cartItem';
 import NavbarOne from '../components/navbarOne';
-import StickyFooter from '../components/checkOut';
+import StickyFooter from '../components/cartFooter';
 
 const Cart = () => {
   const [userDetails, setUserDetails] = useState({});
@@ -76,7 +76,7 @@ const Cart = () => {
           <NavbarOne />
         </div>
         <div className='flex flex-row h-12 px-8 text-center bg-yellow-400 justify-between shadow-md shadow-black'>
-          <h2 className='text-xl font-semibold py-2'>Hey {userDetails.firstName} ! Here's your cart..</h2>
+          <h2 className='text-xl font-semibold py-2'>Hurry {userDetails.firstName} ! Checkout your products now before they're gone..</h2>
           <p className='text-md font-semibold py-2'>PROFILE ID : {userDetails._id}</p>
         </div>
         {loading ? (
