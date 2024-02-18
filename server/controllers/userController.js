@@ -53,7 +53,7 @@ const register = async (req, res) => {
             lastName,
             dob,
             mail,
-            password: hashedPassword,
+            password: hashedPassword,            
         });
 
         // Save the new user
@@ -164,7 +164,24 @@ const getUser = async (req, res) => {
         });
     }
 };
+const addAddress = async (req, res) => {
+    try {
+        const userId = req.params.userId;
+        const { street, city, postalCode, phoneNuber } = req.body;
 
+        const user = await userModel.findById(userId);
+        if (!user) {
+            return res.status(404).json({message: 'user not found'});
+        }
+        const newAddress = { street, city, postalCode, phoneNumber };
+        user.address.push(newAddress);
+        await user.save();
+        res.status(201).json({message: 'Address successfully added', user});
+    } catch {
+        console.error('Error while adding a new address', error);
+        res.status(500).json({ message: 'internal server error'});
+    }
+};
 // TO GRAB ALL USERS REGISTERED IN THE APPLICATION :-
 const getAllUsers = async (req, res) => {
     try {
@@ -308,4 +325,4 @@ const deleteUser = async (req, res) => {
     }
 };
 
-module.exports = { generateToken, register, login, getUser, getAllUsers, editUser, forgotPassword, deleteUser };
+module.exports = { generateToken, register, login, getUser, addAddress, getAllUsers, editUser, forgotPassword, deleteUser };
