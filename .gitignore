@@ -2,6 +2,7 @@
 node_modules/
 certificate/
 .env
+.csv
 ./server/.env
 
 # testing
