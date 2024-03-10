@@ -1,6 +1,7 @@
-const app = require('./app');
+const app = require('./app.js');
 const https = require('https');
 const fs = require('fs');
+const Razorpay = require('razorpay');
 
 const PORT = process.env.PORT || 5000; 
 

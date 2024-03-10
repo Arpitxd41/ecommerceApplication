@@ -20,7 +20,6 @@ const Cart = () => {
       navigate('/login');
       return;
     }
-
     if (!storedUserDetails) {
       console.error('User details not found in localStorage.');
       return;
@@ -62,6 +61,7 @@ const Cart = () => {
   const handleCheckboxChange = (productNumber, checked) => {
     setSelectedProducts(prevState => {
       if (checked) {
+        console.log('selected products :', selectedProducts);
         return [...prevState, productNumber];
       } else {
         return prevState.filter(item => item !== productNumber);

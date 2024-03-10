@@ -138,23 +138,19 @@ const login = async (req, res) => {
 // GRAB THE USER BY USER'S ID :-
 const getUser = async (req, res) => {
     try {
-        const userId = req.params.userId; // Assuming you get the user ID from the request parameters
+        const userId = req.params.id;
         const user = await userModel.findById(userId);
-
         if (!user) {
             return res.status(404).json({
                 success: false,
                 message: 'User not found',
             });
         }
-
-        // Return the user details
         res.status(200).json({
             success: true,
             message: 'User retrieved successfully',
             user,
         });
-
         console.log(`User retrieved: ${user.firstName}`);
     } catch (error) {
         console.error('Error:', error.message);
@@ -166,8 +162,8 @@ const getUser = async (req, res) => {
 };
 const addAddress = async (req, res) => {
     try {
-        const userId = req.params.userId;
-        const { street, city, postalCode, phoneNuber } = req.body;
+        const userId = req.params.id;
+        const { street, city, postalCode, phoneNumber } = req.body;
 
         const user = await userModel.findById(userId);
         if (!user) {
@@ -178,11 +174,11 @@ const addAddress = async (req, res) => {
         await user.save();
         res.status(201).json({message: 'Address successfully added', user});
     } catch {
-        console.error('Error while adding a new address', error);
+        console.error('Error while adding a new address');
         res.status(500).json({ message: 'internal server error'});
     }
 };
-// TO GRAB ALL USERS REGISTERED IN THE APPLICATION :-
+
 const getAllUsers = async (req, res) => {
     try {
         const users = await userModel.find();

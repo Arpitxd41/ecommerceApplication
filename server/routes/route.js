@@ -13,12 +13,12 @@ const {
     editUser,
     forgotPassword,
     deleteUser
-} = require('../controllers/userController'); // IMPORTING CONTROLLERS
+} = require('../controllers/userController.js');
 
 const { 
     getProductsById,
     getAllProducts,
-} = require('../controllers/productController')
+} = require('../controllers/productController.js')
 
 const {
     getUserCart,
@@ -28,11 +28,16 @@ const {
     getCartProductDetails,
     removeFromCart,
     removeAllFromCart
-} = require('../controllers/cartController');
+} = require('../controllers/cartController.js');
+
+const {
+    order,
+    verify
+} = require('../controllers/orderController.js');
 
 const router = express.Router();
 
-// ACTUAL ROUTES:
+// APP ROUTES:
 router.get('/' , generateToken);
 router.post('/register', register);
 router.post('/login', login);
@@ -47,6 +52,7 @@ router.delete('/deleteUser/:id', deleteUser);
 router.get('/products', getAllProducts);
 router.get('/product/:id', getProductsById);
 
+// USER ROUTES:
 router.get('/user/:userId/cart', getUserCart);
 router.post('/user/:userId/cart/add/:productNumber', addToCart);
 router.put('/user/:userId/cart/update/:productNumber', updateCartItemQuantity);
@@ -54,6 +60,10 @@ router.put('/user/:userId/cart/selectAll', selectAllCartItems);
 router.get('/user/:userId/cart/:productNumber', getCartProductDetails);
 router.delete('/user/:userId/cart/remove/:productId', removeFromCart);
 router.delete('/user/:userId/cart/remove', removeAllFromCart)
+
+// PAYMENT ROUTES :
+router.post('/user/:id/order', order);
+router.post('/verify', verify);
 
 
 module.exports = router;

@@ -59,10 +59,10 @@ In the frontend of the project I added a catalog where the user can see the prod
 - [x]  **REST API** : API handeling and data management in the frontend and backend
 - [x]  **AUTHORIZATION & AUTHENTICATION** : User and Admin routes, User Management, using `JWT` and `bryptJS`, hashing and encryption used
 - [x]  **USER & PRODUCT MANAGEMENT** : Cart Management, Orders Management, Product Handeling
-- [ ]  **PAYEMENT GATEWAY** : RazorPay Gateway for the payement.
-- [ ]  **HOSTING** :
-- [ ]  **SERVER DEPLOYMENT** :
-- [ ]  **TESTING, CODE FORMATTING** :
+- [x]  **PAYEMENT GATEWAY** : RazorPay Gateway for the payement.
+- [x]  **HOSTING** :
+- [x]  **SERVER DEPLOYMENT** :
+- [x]  **TESTING, CODE FORMATTING** :
 - [ ]  **VERSION CONTROL, CODE MANAGEMENT & CONTINUOUS INTEGRATION** :
 
 ### Stage Two: Further Improvising
