@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { validateToken } from '../utils/filter';
-import axios from 'axios';
+// import axios from 'axios';
 import PayButton from '../components/paymentButton.js';
 
 const CheckOut = () => {
@@ -35,7 +35,6 @@ const CheckOut = () => {
 
       const userDetails = JSON.parse(storedUserDetails);
       setUserDetails(userDetails);
-      console.log('userDetails', userDetails);
       await fetchUserCart(userDetails._id, authToken);
 
       const isTokenValid = validateToken(authToken);
@@ -60,7 +59,7 @@ const CheckOut = () => {
         })
       );
       setProductDetails(productDetails);
-      console.log('productDetails', productDetails);
+      // console.log('productDetails', productDetails);
     };
 
     if (selectedProducts.length > 0) {
@@ -161,44 +160,19 @@ const CheckOut = () => {
       if (response.ok) {
         const userData = await response.json();
         setUserDetails(userData);
-        console.log('userData', userData);
       }
     } catch (error) {
       console.error('Error adding address', error);
     }
   };
 
-
-  // const handlePayment = async () => {
-  //   try {
-  //     const order = {
-  //       // userId: userDetails._id,
-  //       // name: userDetails.firstName + userDetails.lastName,
-  //       // address: selectedAddress,
-  //       // products: productDetails,
-  //       amount: totalAmount,
-  //       currency: 'INR',
-  //     };
-  //     // Display a prompt alert if any parameter is missing
-  //     const missingData = Object.keys(order).find(key => !order[key]);
-  //     if (missingData) {
-  //       alert(`Missing some details for ${missingData}`);
-  //       return;
-  //     }
-  //     const authToken = localStorage.getItem('authToken');
-  //     console.log('order-------------', order);
-  //     const response = await axios.post(`https://localhost:5000/user/${userDetails._id}/order`, order);
-  //     console.log('Order placed successfully:', response.data);
-  //   } catch (error) {
-  //     console.error('Error placing order:', error);
-  //   }
-  // };
-
   return (
-    <div className='px-4 py-6 shadow-xl shadow-black bg-gray-100'>
-      <div className='flex flex-row justify-between bg-gradient-to-br from-cyan-500 to-black p-5'>
-        <button className='bg-yellow-400 rounded-sm px-5 py-2 shadow-md font-semibold'>CANCEL</button>
-        <PayButton totalAmount={totalAmount}/>
+    <div className='px-4 py-6 shadow-xl shadow-black bg-gray-50'>
+      <div className='flex flex-row justify-between bg-slate-900 p-5'>
+        <Link className='bg-yellow-400 rounded-sm px-5 py-2 shadow-md font-semibold' to={`/cart/${userId}`}>
+        <i className="fa fa-caret-left" aria-hidden="true"></i> BACK
+        </Link>
+        <PayButton userId={userId} totalAmount={totalAmount} selectedProducts={selectedProducts} selectedAddress={selectedAddress} />
       </div>
       {loading ? (
         <p>Loading...</p>
@@ -215,12 +189,12 @@ const CheckOut = () => {
             {productDetails.map(product => (
               <div key={product.id}>
                 <div className='border-black border-b w-full'>
-                  <div className='grid grid-cols-4 justify-between p-2'>
+                  <div className='grid grid-cols-4 justify-evenly p-2 pl-5'>
                     <div className='space-x-4 pl-4 flex flex-row'>
                       <img className='w-16' src={product.thumbnail} alt={product.title} />
                       <div>
                         <a href='#'>{product.title}</a>
-                        <p className='text-gray-400'>{product.brand}</p>
+                        <p className='text-orange-500'>{product.brand}</p>
                       </div>
                     </div>
                     <div className='pl-4'>{product.quantity}</div>
@@ -247,7 +221,7 @@ const CheckOut = () => {
           </div>
         </div>
       )}
-      <div className='bg-gradient-to-tr from-cyan-500 to-black p-5'>
+      <div className='bg-gradient-to-tr from-gray-700 to-black p-5'>
         <h4 className='text-xl font-semibold text-white'>Confirm Address: Save the address to the address array in the user info</h4>
         <div className='flex flex-row'>
           <div className='w-2/3 float-left space-y-12'>

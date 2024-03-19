@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import CounterButtons from '../utils/counterButtons';
+import CounterButtons from '../utils/cartButtons';
 
 const CartItem = ({ productNumber, userId, cartProducts, setCartProducts }) => {
   const [product, setProduct] = useState(null);
@@ -31,23 +31,23 @@ const CartItem = ({ productNumber, userId, cartProducts, setCartProducts }) => {
 
   return (
     <div>
-      <li className='px-8 bg-gradient-to-r from-fuchsia-500 to-black'>
+      <li className='px-8 bg-gradient-to-r from-cyan-500 to-black'>
         {loading ? (
           <p>Loading product...</p>
         ) : product ? (
           <div className='w-full flex flex-row h-40 items-center justify-between'>
-            <div className='w-2/5 rounded-xl px-2 py-2 bg-white flex flex-row h-36 justify-between space-x-2'>
-              <div className='items-center py-4 px-8 w-3/4 rounded-s-lg overflow-y-hidden'>
+            <div className='w-2/5 rounded-xl px-2 py-2 bg-white drop-shadow-2xl shadow-inner shadow-black flex flex-row h-36 justify-between space-x-1'>
+              <div className='items-center py-4 px-4 w-3/4 rounded-s-lg overflow-y-hidden'>
                 <h3 className='text-2xl font-bold'>{product.title}</h3>
                 <p className='text-red-500 font-bold'>{product.discountPercentage} % OFF</p>
                 <p className=''>only {product.stock} left in cart</p>
-                <p className=''>${product.price}</p>
+                <p className=''>₹ {product.price}</p>
               </div>
               <img className='w-32 object-cover bg-white rounded-full' src={product.thumbnail} alt={product.title} />
             </div>
             <div className='text-2xl font-bold text-gray-200 flex flex-row'>
               <i className="fa fa-tag mr-2 text-yellow-500 mt-2" aria-hidden="true"></i>
-              <p>Price: ${product.price}</p>
+              <p>Price: ₹ {product.price}</p>
             </div>
             <CounterButtons productNumber={productNumber} userId={userId} handleCheckboxChange={handleLocalCheckboxChange} />
           </div>

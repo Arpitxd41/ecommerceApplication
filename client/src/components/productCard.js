@@ -18,8 +18,9 @@ const ProductCard = ({ product }) => {
   const navigate = useNavigate();
   const fetchUserCart = useCallback(async () => {
     try {
-      const response = await axios.get(`https://localhost:5000/user/${userId}/cart`);
-      setUserCart(response.data);
+      const userCart = await axios.get(`https://localhost:5000/user/${userId}/cart`);
+      console.log('userCart of fetchUserCart:', userCart.data)
+      setUserCart(userCart.data);
     } catch (error) {
       console.error('Error fetching user cart:', error);
     }
@@ -32,12 +33,12 @@ const ProductCard = ({ product }) => {
   }, [userId, fetchUserCart]);
 
   const { id, images, title, discountPercentage, price, rating } = product;
-  const productNumber = product.id;
+  const productNumber = id;
+  console.log(images[0]);
   const handleAddToCart = async () => {
     try {
-      console.log(productNumber);
-      await axios.post(`https://localhost:5000/user/${userId}/cart/add/${productNumber}`);
-      fetchUserCart();
+      // const quantity = 1;
+      await axios.post(`https://localhost:5000/user/${userId}/cart/add/${productNumber}`, {quantity: 1});
       navigate(`/cart/${userId}`); 
     } catch (error) {
       console.error('Error adding product to cart:', error);
@@ -64,7 +65,7 @@ const ProductCard = ({ product }) => {
         </h4>
         <div className="md:space-y-2 items-center flex flex-col pb-2 p-2 w-fit text-center lg:mx-8">
           <h3 className="md:text-xl h-6 font-semibold overflow-hidden"> {title} </h3>
-          <p className="text-gray-950 md:font-semibold text-2xl">${price} /-</p>
+          <p className="text-gray-950 md:font-semibold text-2xl">₹ {price} /-</p>
           <p className="text-gray-50 md:font-bold text-lg bg-red-500 md:rounded-full px-2 md:px-4 py-1 w-fit md:w-44">{discountPercentage}% OFF</p>
         </div>
         <div className="flex flex-row w-9/10 justify-between">
@@ -74,7 +75,7 @@ const ProductCard = ({ product }) => {
             </Link>
           </button>
           {userDetails && (
-            <button onClick={handleAddToCart} className="bg-yellow-400 text-black w-52 px-5 py-2 border-2 border-yellow-400 rounded-sm shadow-sm shadow-black">
+            <button onClick={handleAddToCart} className="bg-black text-gray-100 w-52 px-5 py-2 border-2 border-black rounded-sm shadow-sm shadow-black">
               <span className="font-semibold hover:underline">
                 ADD TO CART
               </span>

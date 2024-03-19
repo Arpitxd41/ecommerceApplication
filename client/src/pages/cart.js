@@ -61,7 +61,6 @@ const Cart = () => {
   const handleCheckboxChange = (productNumber, checked) => {
     setSelectedProducts(prevState => {
       if (checked) {
-        console.log('selected products :', selectedProducts);
         return [...prevState, productNumber];
       } else {
         return prevState.filter(item => item !== productNumber);
@@ -75,9 +74,9 @@ const Cart = () => {
         <div className='flex justify-center'>
           <NavbarOne />
         </div>
-        <div className='flex flex-row h-12 px-8 text-center bg-yellow-400 justify-between shadow-md shadow-black'>
-          <h2 className='text-xl font-semibold py-2'>Hurry {userDetails.firstName} ! Checkout your products now before they're gone..</h2>
-          <p className='text-md font-semibold py-2'>PROFILE ID : {userDetails._id}</p>
+        <div className='flex flex-row h-12 px-8 text-center bg-black text-md text-gray-100 justify-between shadow-md shadow-black'>
+          <h2 className='text-md font-semibold py-2'>Hurry {userDetails.firstName} ! Checkout your products now before they're gone..</h2>
+          
         </div>
         {loading ? (
           <p>Loading...</p>

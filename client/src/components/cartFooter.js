@@ -67,14 +67,13 @@ const StickyFooter = ({ cartProducts, setCartProducts, userDetails }) => {
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ selectAll: newSelectAllChecked }) // Send the opposite value of selectAllChecked
+      body: JSON.stringify({ selectAll: newSelectAllChecked })
     })
       .then(response => {
         if (!response.ok) {
           throw new Error('Failed to update cart data');
         }
-        // Optionally, perform any actions after successful update
-        window.location.reload(); // Reload the page after updating
+        window.location.reload();
       })
       .catch(error => {
         console.error('Error updating cart data:', error);
@@ -86,9 +85,9 @@ const StickyFooter = ({ cartProducts, setCartProducts, userDetails }) => {
   }
 
   return (
-    <div className="sticky bottom-0 left-0 right-0 bg-green-600 shadow-md shadow-black py-4 px-8 flex justify-between items-center text-white text-lg font-semibold">
+    <div className="sticky bottom-0 left-0 right-0 bg-slate-950 shadow-md shadow-black py-4 px-8 flex justify-between items-center text-white text-lg font-semibold">
       <div className="flex items-center">
-        <span>Total Price: ${totalPrice.toFixed(2)}</span>
+        <span>Total Price: ₹ {totalPrice.toFixed(2)}</span>
       </div>
       <div className="mr-2 flex flex-row items-center w-1/5">
         <div className="mr-2">
@@ -102,10 +101,18 @@ const StickyFooter = ({ cartProducts, setCartProducts, userDetails }) => {
         </div>
       </div>
       <button
+        className="text-md text-black bg-red-600 px-5 py-2 border-2 font-semibold border-red-600 rounded-sm shadow-sm shadow-black"
+      >
+        <i className="fa fa-trash mr-2" aria-hidden="true"></i>
+        CLEAR ALL
+      </button>
+      <button
         onClick={handleCheckout}
         className="text-md text-black bg-yellow-400 px-5 py-2 border-2 border-yellow-400 rounded-sm shadow-sm shadow-black"
       >
         CHECKOUT
+        <i className="fa fa-caret-right" aria-hidden="true"></i>
+
       </button>
     </div>
   );

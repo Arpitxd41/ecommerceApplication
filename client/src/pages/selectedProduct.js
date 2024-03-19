@@ -5,9 +5,19 @@ import ProductCard from '../components/productCard';
 import NavbarOne from '../components/navbarOne';
 import CounterButtons from '../utils/counter';
 
+const useUserAuthentication = () => {
+  const [userDetails, setUserDetails] = useState({});
+  useEffect(() => {
+    const storedUserDetails = JSON.parse(localStorage.getItem("userDetails"));
+    setUserDetails(storedUserDetails);
+  }, []);
+  return userDetails;
+};
+
 const ProductPage = () => {
   const { productNumber } = useParams();
-  console.log(productNumber);
+  const userDetails = useUserAuthentication();
+  const userId = userDetails._id;
   const [product, setProduct] = useState();
   const [similarProducts, setSimilarProducts] = useState([]);
   const [loadingProduct, setLoadingProduct] = useState(true);
@@ -114,7 +124,7 @@ const ProductPage = () => {
                 </div>
               </div>
               <div className='flex flex-row text-black text-md font-semibold justify-between space-x-2 w-fit h-12 mt-6'>
-                <CounterButtons />
+                <CounterButtons userId={userId} product={product} />
               </div>
             </div>
           </div>

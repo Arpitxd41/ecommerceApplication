@@ -34,7 +34,7 @@ const HomePage = () => {
   }, [ navigate ]);
 
   return (
-    <div className='shadow-inner shadow-black bg-gradient-to-l from-black to-fuchsia-900 text-white'>
+    <div className='shadow-inner shadow-black bg-gradient-to-l from-black to-slate-900 text-white'>
       <div className='flex justify-center'>
         <NavbarOne />
       </div>

@@ -12,7 +12,6 @@ const CartButtons = ({ productNumber, userId, handleCheckboxChange }) => {
       try {
         const response = await axios.get(`https://localhost:5000/user/${userId}/cart/${productNumber}`);
         const cartItem = response.data;
-        console.log('cartItem receivered =>', cartItem);
         const { quantity: fetchedQuantity, checked } = response.data;
         setQuantity(fetchedQuantity);
         setIsChecked(checked);
@@ -27,7 +26,7 @@ const CartButtons = ({ productNumber, userId, handleCheckboxChange }) => {
   const updateCartItem = async (newQuantity, checked) => {
     try {
       await axios.put(`https://localhost:5000/user/${userId}/cart/update/${productNumber}`, { quantity: newQuantity, checked });
-      window.location.reload();
+      // window.location.reload();
     } catch (error) {
       console.error("Error updating product quantity in cart", error);
     }

@@ -2,8 +2,6 @@ const productModel = require('../models/productModel');
 const mongoose = require('mongoose');
 const axios = require('axios');
 
-
-
 // const fetchProducts = async () => {
 //   try {
 //     const apiUrl = 'https://dummyjson.com/products';

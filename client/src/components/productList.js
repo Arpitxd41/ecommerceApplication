@@ -7,7 +7,6 @@ const ProductList = ({ userDetails }) => {
   const [selectedCategory, setSelectedCategory] = useState('');
   const [sortingOrder, setSortingOrder] = useState('default');
   const [sortingType, setSortingType] = useState('none');
-  const [sortedValues, setSortedValues] = useState([]);
   const [matchedProducts, setMatchedProducts] = useState([]);
 
   useEffect(() => {
@@ -18,39 +17,17 @@ const ProductList = ({ userDetails }) => {
         if (sortingType === 'none') {
           setMatchedProducts(products);
         } else {
-          const values = sortingType === 'rating'
-            ? products.map(product => product.rating)
-            : sortingType === 'price'
-            ? products.map(product => product.price)
-            : [];
-        
-          console.log(`All ${sortingType === 'rating' ? 'Ratings' : 'Prices'}:`, values);
-        
-          let sortedValues = [...values];
-        
-          // SORTED VALUES BASED ON THEIR ORDER OF SORTING :
-          if (sortingOrder === 'ascending') {
-            sortedValues = sortedValues.sort((a, b) => a - b);
-          } else if (sortingOrder === 'descending') {
-            sortedValues = sortedValues.sort((a, b) => b - a);
-          }
-        
-          setSortedValues(sortedValues);
-        
-          console.log(`Sorted ${sortingType === 'rating' ? 'Ratings' : 'Prices'}:`, sortedValues);
-        
-          const sortedProducts = sortedValues.map(value => {
-            return products.find(product => (sortingType === 'rating' ? product.rating : product.price) === value);
+          const sortedProducts = products.slice().sort((a, b) => {
+            const valueA = sortingType === 'rating' ? a.rating : a.price;
+            const valueB = sortingType === 'rating' ? b.rating : b.price;
+            return sortingOrder === 'ascending' ? valueA - valueB : valueB - valueA;
           });
-        
           setMatchedProducts(sortedProducts);
-          console.log("Sorted Products:", sortedProducts);
         }
       } catch (error) {
         console.error("Error fetching products:", error);
       }
     };
-
 
     fetchProducts();
   }, [selectedCategory, sortingOrder, sortingType]);
@@ -68,33 +45,23 @@ const ProductList = ({ userDetails }) => {
   };
 
   return (
-    <div className="w-full flex flex-col-reverse bg-black relative z-20 rounded-sm shadow-md justify-center py-5 lg:px-12 
-    md:px-1 lg:flex-row">
-      <div className="float-none grid grid-cols-2 gap-1 mt-5
-        lg:gap-6 md:grid-cols-3 lg:w-3/4 lg:float-left">
-        {sortedValues.length > 0 ? (
-          sortedValues.map(value => (
-          <ProductCard key={value.id} product={value} userDetails={userDetails} />
-            ))
-          ) : (
-            matchedProducts.length > 0 && matchedProducts.map(product => (
+    <div className="w-full flex flex-col-reverse bg-gradient-to-r from-violet-600 via-cyan-500 to-fuchsia-500 relative z-20 rounded-sm justify-center shadow-inner-black">
+      <div className="float-none mx-14 grid grid-cols-2 gap-1 my-10 bg-gray-300 p-10 drop-shadow-2xl rounded-sm shadow-inner shadow-black border 
+      lg:gap-6 lg:w-11/12 lg:float-left 
+      md:grid-cols-4">
+        {matchedProducts.map(product => (
           <ProductCard key={product.id} product={product} userDetails={userDetails} />
-           ))
-        )}
+        ))}
       </div>
-
-      <div className='flex justify-center float-none text-center align-top
-      lg:w-80 lg:float-right lg:mt-5 lg:ml-5'>
+      <div className='flex justify-center float-none text-center align-top '>
         <ProductFilter 
           onCategoryChange={handleCategoryChange}
           onSortingTypeChange={handleSortingTypeChange}
           onSortingChange={handleSortingChange}
         />
       </div>
-
     </div>
-
-  )
+  );
 }
 
 export default ProductList;

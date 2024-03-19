@@ -32,7 +32,8 @@ const {
 
 const {
     order,
-    verify
+    verify,
+    getOrder
 } = require('../controllers/orderController.js');
 
 const router = express.Router();
@@ -59,10 +60,11 @@ router.put('/user/:userId/cart/update/:productNumber', updateCartItemQuantity);
 router.put('/user/:userId/cart/selectAll', selectAllCartItems);
 router.get('/user/:userId/cart/:productNumber', getCartProductDetails);
 router.delete('/user/:userId/cart/remove/:productId', removeFromCart);
-router.delete('/user/:userId/cart/remove', removeAllFromCart)
+router.delete('/user/:userId/cart/remove', removeAllFromCart);
+router.get('/user/:userId/getOrder', getOrder);
 
 // PAYMENT ROUTES :
-router.post('/user/:id/order', order);
+router.post('/user/:userId/order', order);
 router.post('/verify', verify);
 
 

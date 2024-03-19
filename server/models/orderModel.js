@@ -1,59 +1,64 @@
 const mongoose = require('mongoose');
 
-const addressSchema = new mongoose.Schema({
-  street: {
-    type: String,
-    required: true
-  },
-  city: {
-    type: String,
-    required: true
-  },
-  postalCode: {
-    type: String,
-    required: true
-  },
-  phoneNumber: {
-    type: String,
-    required: true
-  }
-});
-
 const orderSchema = new mongoose.Schema({
   userId: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',
     required: true
   },
-  firstName: {
+  orderId: {
     type: String,
     required: true
   },
-  lastName: {
-    type: String,
-    required: true
-  },
-  address: addressSchema,
-  products: [
-    {
-      productNumber: {
-        type: Number,
-        required: true
-      },
-      title: {
-        type: String,
-        required: true
-      },
-      quantity: {
-        type: Number,
-        required: true
-      },
-      price: {
-        type: Number,
-        required: true
-      }
+  selectedProducts: [{
+    productNumber: {
+      type: Number,
+      required: true
+    },
+    quantity: {
+      type: Number,
+      required: true
+    },
+    _id: {
+      type: mongoose.Schema.Types.ObjectId,
+      required: true
+    },
+    checked: {
+      type: Boolean,
+      default: true
     }
-  ]
+  }],
+  selectedAddress: {
+    street: {
+      type: String,
+      required: true
+    },
+    city: {
+      type: String,
+      required: true
+    },
+    postalCode: {
+      type: Number,
+      required: true
+    },
+    phoneNumber: {
+      type: Number,
+      required: true
+    },
+    _id: {
+      type: mongoose.Schema.Types.ObjectId,
+      required: true
+    }
+  },
+  totalAmount: {
+    type: Number,
+    required: true
+  },
+  orderDetails: [{
+    type: Object
+  }],
+  paymentDetails: [{
+    type: Object
+  }]
 });
 
 const Order = mongoose.model('Order', orderSchema);
