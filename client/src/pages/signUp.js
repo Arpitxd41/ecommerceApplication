@@ -49,122 +49,113 @@ const Signup = () => {
     };
 
   return (
-    <div className="flex flex-col lg:flex-row bg-cover bg-center bg-no-repeat p-8 justify-center"
+    <div className="flex flex-row bg-cover bg-center bg-no-repeat px-8 justify-center"
     style={{ backgroundImage: `url(${image2})`}}>
-        <div className="lg:w-3/5 lg:float-left text-gray-50 bg-black bg-opacity-60 py-18 px-8 md:px-16 drop-shadow-xl shadow-black shadow-inner">
+        <div className="text-gray-50 bg-black bg-opacity-90 py-10 px-12 drop-shadow-xl shadow-black shadow-inner">
+            <div className="flex flex-col h-8 space-x-2 items-center">
+                <h2 className="animate-characters text-2xl font-bold">SIGN UP :</h2>
+            </div>
             <form
-                className="space-y-6 py-5"
+                className=""
                 onSubmit={handleSubmit}>
-                <div className="flex flex-row h-20 space-x-2 items-center">
-                    <img
-                        className="h-12 p-1 border-green-500 border-2 rounded-full"
-                        alt="Unregistered-profile"
-                        src={unregProfile}
-                    />
-                    <h2 className="text-2xl font-bold text-green-500">REGISTER :</h2>
-                </div>
-                <div className="bg-white text-gray-950 shadow-lg px-4 md:px-12 py-8 flex flex-col space-y-4 rounded-sm text-center items-center md:text-left md:items-start">
-                    <div className="">
-                        <h4 className="font-semibold text-md w-fit">NAME :</h4>
-                        <div className="flex-col md:flex-row justify-between flex md:space-y-0 space-y-4 md:space-x-4">
+                
+                <div className="form-container text-gray-50 shadow-lg px-6 justify-center py-8 flex flex-col space-y-8 rounded-sm items-center">
+                    <div className="px-2 space-y-5">
+                        <div className="grid-box">
                             <input
+                                type="text" name="firstname" id="firstname" required autocomplete="off" 
                                 onChange={(e) => setFirstName(e.target.value)}
-                                className="bg-transparent rounded-sm pl-3 text-gray-950 md:w-1/2
-                                border-x-0 border-t-0"
+                                className="question"
                                 maxLength={20}
                                 minLength={4}
-                                type="text"
-                                name="firstName"
-                                placeholder="First Name"
                             />
+                            <label for='firstname' className=""><span>FIRSTNAME</span></label>
+                        </div>                        
+                        <div className="grid-box">
                             <input
                                 onChange={(e) => setLastName(e.target.value)}
-                                className="bg-transparent rounded-sm pl-3 text-gray-950 md:w-1/2
-                                                                border-x-0 border-t-0"
+                                className="question"
                                 maxLength={20}
                                 minLength={4}
                                 type="text"
                                 name="lastName"
-                                placeholder="Last Name"
+                                id="lastname" required autocomplete="off"
+                            />
+                            <label for='lastname' className=""><span>LASTNAME</span></label>
+                        </div>
+                        <div className="hidden">
+                            <label className="font-semibold text-md">D.O.B.</label>
+                            <input
+                                onChange={(e) => setDob(e.target.value)}
+                                type="number"
+                                className="bg-transparent rounded-sm pl-3 text-gray-950
+                                border-x-0 border-t-0"
+                                name="email"
+                                placeholder="DDMMYYYY"
+                                maxLength={8}
+                                minLength={8}
                             />
                         </div>
-                    </div>
-                    <div className="">
-                        <h4 className="font-semibold text-md">D.O.B. :</h4>
-                        <input
-                            onChange={(e) => setDob(e.target.value)}
-                            type="number"
-                            className="bg-transparent rounded-sm pl-3 text-gray-950
-                            border-x-0 border-t-0"
-                            name="email"
-                            placeholder="DDMMYYYY"
-                            maxLength={8}
-                            minLength={8}
-                        />
-                    </div>
-                    <div className="flex-col justify-between flex md:space-y-0 space-y-4 w-10/12">
-                        <h4 className="font-semibold text-md w-fit">EMAIL :</h4>
-                        <input
-                            onChange={(e) => setMail(e.target.value)}
-                            type="email"
-                            className="bg-transparent rounded-sm pl-3 text-gray-950
-                            border-x-0 border-t-0"
-                            name="email"
-                            placeholder="Enter your email here"
-                        />
-                    </div>
-                    <div className="flex-col md:flex-row justify-between flex md:space-y-0 space-y-4 md:space-x-4">
-                        <div>
-                            <h4 className="font-semibold text-md w-fit">PASSWORD :</h4>
+                        <div className="grid-box col-span-2 block relative">
+                            <input
+                                onChange={(e) => setMail(e.target.value)}
+                                type="email"
+                                className="question"
+                                name="email"
+                                id="email"
+                                required autocomplete="off"
+                            />
+                            <label for='email' className=""><span>EMAIL</span></label>
+                        </div>
+                        <div className="grid-box">
                             <input
                                 onChange={(e) => setPassword(e.target.value)}
                                 type="password"
-                                className="bg-transparent rounded-sm pl-3 text-gray-950
-                                border-x-0 border-t-0"
-                                id=""
-                                placeholder="Enter password"
+                                className="question"
+                                name="password"
+                                id="password"
+                                required autocomplete="off"
                             />
+                            <label for="password" className=""><span>PASSWORD</span></label>
                         </div>
-                        <div>
-                            <h4 className="font-semibold text-md w-fit">CONFIRM PASSWORD :</h4>
+                        <div className="grid-box">
                             <input
                                 onChange={(e) => setConfirmPassword(e.target.value)}
                                 type="password"
-                                className="bg-transparent rounded-sm pl-3 text-gray-950
-                                border-x-0 border-t-0"
-                                id=""
-                                placeholder="Confirm password"
+                                className="question"
+                                name="password"
+                                id="confirmation"
+                                required autocomplete="off"
                             />
+                            <label for="confirmation" className=""><span>CONFIRM PASSWORD</span></label>
                         </div>
+                        <div className="flex justify-end">
+                            <button
+                                type="submit"
+                                className="w-full text-md mt-2 rounded-sm bg-blue-600 border-2 border-blue-600 text-gray-50 px-3 font-semibold py-1 hover:bg-blue-700 hover:border-blue-700">
+                                {" "}
+                                REGISTER{" "}
+                            </button>{" "}
+                                {error && <div className="text-blue-600 text-sm">{error}</div>}
+
+                         </div>
                     </div>
-                </div>
-                <div className="flex flex-col space-y-6">
-                    <button
-                        type="submit"
-                        className="rounded-md bg-blue-600 border-2 border-blue-600 text-gray-50 px-3 font-semibold py-1
-                                  hover:bg-blue-700 hover:border-blue-700">
-                        {" "}
-                        SUBMIT{" "}
-                    </button>{" "}
-                        {error && <div className="text-blue-600 text-sm">{error}</div>}
-                    
-                </div>
-            </form>
-            <div className="flex flex-row space-x-2 h-20 items-center">
-                <img
-                    className="h-12 p-1 border-red-600 border-2 rounded-full"
-                    src={regProfile}
-                    alt="registered-profile"
-                />
-                <h6> already have an account : </h6>
-                <a href="/login">
-                    <button
-                      type="submit"
-                      className="rounded-sm bg-green-600 border-2 border-green-600 text-gray-50 px-5 py-1 font-semibold">
-                      LOGIN
-                    </button>
-                </a>
-            </div>
+                    <div className="flex flex-row space-x-2 h-20 items-center text-gray-50">
+                        <img
+                            className="h-12 p-1 border-lime-600 border-2 rounded-full"
+                            alt="Unregistered-profile"
+                            src={unregProfile}
+                        />
+                        <h6 className="">Already have an account</h6>
+                        <a href="/login">
+                            <p
+                                className="rounded-sm bg-lime-600 border-2 border-lime-600 text-gray-50 px-5 py-1 font-semibold">
+                                LOGIN
+                            </p>
+                        </a>
+                    </div>
+                </div>                
+            </form>            
         </div>
 
         {/* <div className="lg:w-1/2 lg:float-right px-10 bg-transparent">

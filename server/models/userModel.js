@@ -46,6 +46,11 @@ const userSchema = new mongoose.Schema({
         minlength: [8, "Password must be 8 characters long"],
         trim: true
     },
+    role: {
+      type: String,
+      enum: ['User', 'Admin', 'Seller'],
+      default: 'User'
+  },
     address: [addressSchema],
 });
 

@@ -1,6 +1,6 @@
 const userModel = require('../models/userModel');
 const cartModel = require('../models/cartModel');
-const moment = require('moment');
+// const moment = require('moment');
 const bcrypt = require('bcrypt');
 const jwtToken = require('jsonwebtoken');
 
@@ -27,13 +27,13 @@ const register = async (req, res) => {
             });
         }
 
-        // Validate DATE OF BIRTH :
-        function isValidDate(dob) {
-            return moment(dob, 'DDMMYYYY', true).isValid();
-        }
-        if (!isValidDate(dob)) {
-            throw new Error("Invalid date entered");
-        }
+        // // Validate DATE OF BIRTH :
+        // function isValidDate(dob) {
+        //     return moment(dob, 'DDMMYYYY', true).isValid();
+        // }
+        // if (!isValidDate(dob)) {
+        //     throw new Error("Invalid date entered");
+        // }
 
         // Check if input fields are empty
         if (!firstName || !mail || !password) {
@@ -62,7 +62,6 @@ const register = async (req, res) => {
         // Create a cart for the new user
         const newCart = new cartModel({
             user: newUser._id,
-            cartItems: [],  // You can initialize cart items if needed
         });
 
         // Save the new cart
@@ -74,7 +73,7 @@ const register = async (req, res) => {
             success: true,
             message: 'User creation successful',
             token,
-            user: newUser, // Include user details in the response
+            user: newUser,
         });
 
         console.log(`User: ${firstName} Created Successfully`);
@@ -121,10 +120,11 @@ const login = async (req, res) => {
                 _id: user._id,
                 firstName: user.firstName,
                 lastName: user.lastName,
+                role: user.role
             }
         });
         // Response for successful login
-        console.log(`User: ${user.firstName} Login Successful ***`);
+        console.log(`${user.role}: ${user.firstName} Login Successful ;)`);
     } catch (error) {
         console.error('Error:', error.message);
         console.log('Error ! Login Failed');
@@ -225,7 +225,7 @@ const forgotPassword = async (req, res) => {
         // Update the user's password in the database
         await userModel.findByIdAndUpdate(user._id, { password: hashedPassword });
 
-        // Send the temporary password to the user (You may implement email sending logic here)
+        // Sends the temporary password to the user (You may implement email sending logic here)
 
         res.status(200).json({
             success: true,
@@ -321,4 +321,14 @@ const deleteUser = async (req, res) => {
     }
 };
 
-module.exports = { generateToken, register, login, getUser, addAddress, getAllUsers, editUser, forgotPassword, deleteUser };
+module.exports = {
+    generateToken, 
+    register, 
+    login, 
+    getUser, 
+    addAddress, 
+    getAllUsers, 
+    editUser, 
+    forgotPassword, 
+    deleteUser
+};

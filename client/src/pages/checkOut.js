@@ -32,7 +32,11 @@ const CheckOut = () => {
         navigate('/login');
         return;
       }
-
+      if (!storedUserDetails) {
+        console.error('User details not found in localStorage.');
+        return;
+      }
+  
       const userDetails = JSON.parse(storedUserDetails);
       setUserDetails(userDetails);
       await fetchUserCart(userDetails._id, authToken);
@@ -180,20 +184,20 @@ const CheckOut = () => {
         <div className='p-5'>
           <h4 className='text-xl font-semibold'>Products checking out:</h4>
           <div className='font-semibold'>
-            <div className='border border-black grid grid-cols-4 p-2 text-xl'>
+            <div className='bg-blue-600 text-white rounded-sm grid grid-cols-4 p-2 text-md md:font-semibold font-bold md:text-xl gap-4'>
               <h3 className=''>Product</h3>
               <h3 className=''>Quantity</h3>
               <h3 className=''>Price/unit</h3>
-              <h3 className=''>Total Price</h3>
+              <h3 className=''>Price</h3>
             </div>
             {productDetails.map(product => (
               <div key={product.id}>
                 <div className='border-black border-b w-full'>
-                  <div className='grid grid-cols-4 justify-evenly p-2 pl-5'>
-                    <div className='space-x-4 pl-4 flex flex-row'>
-                      <img className='w-16' src={product.thumbnail} alt={product.title} />
+                  <div className='grid grid-cols-4 justify-between md:justify-evenly p-2 md:pl-5'>
+                    <div className='md:space-x-4 md:pl-4 flex md:flex-row'>
+                      <img className='md:flex hidden md:w-16' src={product.thumbnail} alt={product.title} />
                       <div>
-                        <a href='#'>{product.title}</a>
+                        <h4>{product.title}</h4>
                         <p className='text-orange-500'>{product.brand}</p>
                       </div>
                     </div>
@@ -222,9 +226,9 @@ const CheckOut = () => {
         </div>
       )}
       <div className='bg-gradient-to-tr from-gray-700 to-black p-5'>
-        <h4 className='text-xl font-semibold text-white'>Confirm Address: Save the address to the address array in the user info</h4>
-        <div className='flex flex-row'>
-          <div className='w-2/3 float-left space-y-12'>
+        <h4 className='text-xl font-semibold text-white'>Select Address or Add a New Address</h4>
+        <div className='flex flex-col-reverse md:flex-row'>
+          <div className='md:w-2/3 md:float-left space-y-12'>
             <form className='grid grid-cols-2 gap-2 py-5' onSubmit={handleSubmit}>
               <input
                 className='border-white rounded-sm shadow-sm shadow-black'
@@ -257,7 +261,7 @@ const CheckOut = () => {
               <button className='col-span-2 bg-yellow-400 rounded-sm px-5 py-2 font-semibold shadow-sm shadow-black' type='submit'>SAVE</button>
             </form>
           </div>
-          <div className='p-5 w-1/3 float-right items-center flex flex-col justify-center space-y-2'>
+          <div className='p-5 md:w-1/3 md:float-right items-center flex flex-col justify-center space-y-2'>
             <div className='w-full overflow-y-scroll h-40 bg-green-500 border border-black rounded-sm p-5 space-y-4'>{addressesList}</div>
             <div className='w-full h-40 bg-white p-5 rounded-sm'>{selectedAddress && (
               <div>

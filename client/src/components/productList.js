@@ -46,14 +46,18 @@ const ProductList = ({ userDetails }) => {
 
   return (
     <div className="w-full flex flex-col-reverse bg-gradient-to-r from-violet-600 via-cyan-500 to-fuchsia-500 relative z-20 rounded-sm justify-center shadow-inner-black">
-      <div className="float-none mx-14 grid grid-cols-2 gap-1 my-10 bg-gray-300 p-10 drop-shadow-2xl rounded-sm shadow-inner shadow-black border 
-      lg:gap-6 lg:w-11/12 lg:float-left 
-      md:grid-cols-4">
+
+      {/* PRODUCT LIST */}
+      <div className="grid grid-cols-2 gap-1 bg-gray-300 drop-shadow-2xl rounded-sm shadow-inner shadow-black border my-10 mx-0  
+      lg:grid-cols-4 lg:gap-8 lg:w-11/12 lg:float-left lg:mx-14 lg:p-10
+      md:grid-cols-3 md:gap-4 md:mx-8 md:p-6">
         {matchedProducts.map(product => (
           <ProductCard key={product.id} product={product} userDetails={userDetails} />
         ))}
       </div>
-      <div className='flex justify-center float-none text-center align-top '>
+
+      {/* PRODUCT FILTER */}
+      <div className='flex justify-center text-center align-top '>
         <ProductFilter 
           onCategoryChange={handleCategoryChange}
           onSortingTypeChange={handleSortingTypeChange}

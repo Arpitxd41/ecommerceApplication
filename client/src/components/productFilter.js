@@ -40,24 +40,23 @@ const ProductFilter = ({ onCategoryChange, onSortingTypeChange, onSortingChange 
   };
 
   return (
-    <div className='bg-black flex flex-row px-12 h-fit rounded-sm w-full justify-evenly pt-3'>
+    <div className='bg-black flex flex-col md:flex-row px-2 md:px-12 h-fit rounded-sm w-full justify-evenly'>
       
-      <div className='text-center w-1/5'>
+      <div className='w-1/5 items-center justify-start hidden md:flex'>
         <img src={filterIcon} className='h-12'/>
       </div>
-      <div className='flex flex-row justify-evenly w-4/5 py-5' >
+      <div className='flex flex-col md:flex-row justify-center md:justify-evenly w-full md:w-4/5 py-5' >
         {/* Category Selection */}      
-        <div className=''>
+        <div className='relative'>
           <label htmlFor="category" className='md:font-semibold'>
             <select
               id="category"
               onChange={handleCategoryChange}
               value={selectedCategory}
-              className='rounded-sm bg-black border-x-0 border-t-0 text-white w-72 mx-1
-              md:w-60 lg:w-56'>
-              <option value="">Category:</option>
+              className='appearance-none rounded-sm bg-black border-x-0 border-t-0 text-white mx-1 md:w-56 w-full'>
+              <option className='' value="">Category:</option>
               {categories.map(category => (
-                <option key={category} value={category}>
+                <option className='' key={category} value={category}>
                   {category}
                 </option>
               ))}
@@ -66,13 +65,12 @@ const ProductFilter = ({ onCategoryChange, onSortingTypeChange, onSortingChange 
         </div>
 
         {/* Sorting Type */}
-        <div className=''>
+        <div className='relative'>
           <label htmlFor='sortbyDropdown' className='md:font-semibold'>
             <select
               id='sortbyDropdown'
               onChange={(e) => handleSortingTypeChange(e.target.value)}
-              className='rounded-sm bg-black border-x-0 border-t-0 text-white w-72 mx-1
-              md:w-60 lg:w-56' >
+              className='appearance-none rounded-sm bg-black border-x-0 border-t-0 text-white mx-1 md:w-56 w-full' >
               <option value="none">Sort by:</option>
               <option value="rating">By Rating</option>
               <option value="price">By Price</option>
@@ -81,13 +79,12 @@ const ProductFilter = ({ onCategoryChange, onSortingTypeChange, onSortingChange 
         </div>
 
         {/* Order dropdown */}
-          <div className=''>
+          <div className='relative'>
             <label htmlFor='orderDropdown' className='md:font-semibold'>
               <select
                 id='orderDropdown'
                 onChange={(e) => handleSortingChange(e.target.value)}
-                className='rounded-sm bg-black border-x-0 border-t-0 text-white w-72 mx-1
-                md:w-60 lg:w-56' >
+                className='appearance-none rounded-sm bg-black border-x-0 border-t-0 text-white mx-1 md:w-56 w-full' >
                 <option value="default">Order:</option>
                 <option value="descending">High to Low</option>
                 <option value="ascending">Low to High</option>

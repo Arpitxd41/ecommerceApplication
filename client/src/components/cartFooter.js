@@ -7,6 +7,7 @@ const StickyFooter = ({ cartProducts, setCartProducts, userDetails }) => {
     localStorage.getItem('selectAllChecked') === 'true'
   );
   const userId = userDetails._id;
+  console.log(userId);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -80,39 +81,55 @@ const StickyFooter = ({ cartProducts, setCartProducts, userDetails }) => {
       });
   };
 
+  const handleClearAll = () => {
+    fetch(`https://localhost:5000/user/${userId}/cart/remove`, {
+      method: 'DELETE'
+    })
+      .then(response => {
+        if (response.ok) {
+          setCartProducts([]); // Clear the cartProducts state
+          console.log('All products removed from the cart');
+        } else {
+          console.error('Failed to remove products from the cart');
+        }
+      })
+      .catch(error => {
+        console.error('Error removing products from the cart:', error);
+      });
+  };
+
+
   const handleCheckout = () => {
     navigate(`/checkout/${userId}`);
   }
 
   return (
-    <div className="sticky bottom-0 left-0 right-0 bg-slate-950 shadow-md shadow-black py-4 px-8 flex justify-between items-center text-white text-lg font-semibold">
-      <div className="flex items-center">
-        <span>Total Price: ₹ {totalPrice.toFixed(2)}</span>
+    <div className="text-sm md:text-lg sticky bottom-0 left-0 right-0 bg-slate-950 shadow-md shadow-black py-2 px-2 md:px-8 flex justify-between items-center text-white font-semibold">
+      <div className="w-1/4 md:w-1/5 flex items-center">
+        <span className='text-lg'>₹{totalPrice.toFixed(2)}</span>
       </div>
-      <div className="mr-2 flex flex-row items-center w-1/5">
-        <div className="mr-2">
+      <div className="w-1/5 hidden md:flex flex-row items-center">
+        <div className="flex flex-row items-center">
           <input
             type="checkbox"
             checked={selectAllChecked}
             onChange={handleSelectAll}
-            className="mr-2 h-5 w-5 border-2 rounded-sm bg-gray-100 appearance-none select-none"
+            className="h-5 w-5 border-2 rounded-sm bg-gray-100 appearance-none select-none"
           />
-          <span className="ml-1">Select All</span>
+          <span className="text-sm md:text-lg">Select All</span>
         </div>
       </div>
       <button
-        className="text-md text-black bg-red-600 px-5 py-2 border-2 font-semibold border-red-600 rounded-sm shadow-sm shadow-black"
+        onClick={handleClearAll}
+        className="w-1/3 md:w-1/5 text-black bg-red-600 px-2 md:px-5 py-2 border-2 font-semibold border-red-600 rounded-sm shadow-sm shadow-black"
       >
         <i className="fa fa-trash mr-2" aria-hidden="true"></i>
         CLEAR ALL
       </button>
-      <button
-        onClick={handleCheckout}
-        className="text-md text-black bg-yellow-400 px-5 py-2 border-2 border-yellow-400 rounded-sm shadow-sm shadow-black"
-      >
+      <button onClick={handleCheckout}
+        className="w-1/3 md:w-1/5 text-black bg-yellow-400 px-2 md:px-5 py-2 border-2 font-semibold border-yellow-400 rounded-sm shadow-sm shadow-black">
         CHECKOUT
         <i className="fa fa-caret-right" aria-hidden="true"></i>
-
       </button>
     </div>
   );

@@ -50,7 +50,7 @@ const ProductCard = ({ product }) => {
   }
 
   return (
-    <div className="bg-white border-white text-black rounded-sm border-2 hover:shadow-black hover:shadow-md lg:w-72">
+    <div className="bg-white border-white text-black rounded-sm border-2 hover:shadow-black hover:shadow-md md:w-72">
       <div className="rounded-sm object-cover h-70 flex items-center p-2 justify-center">
         <img
           src={images[0]}
@@ -59,23 +59,23 @@ const ProductCard = ({ product }) => {
         />
       </div>
       <hr className='w-4/5 mx-7 border border-black' />
-      <div className="flex flex-col md:space-y-2 mt-2">
+      <div className="flex flex-col space-y-2 mt-2">
         <h4 className="text-green-600 font-semibold px-2">
           <i className="fa-solid fa-star text-yellow-400 shadow-sm mr-2"></i>{rating}
         </h4>
-        <div className="md:space-y-2 items-center flex flex-col pb-2 p-2 w-fit text-center lg:mx-8">
-          <h3 className="md:text-xl h-6 font-semibold overflow-hidden"> {title} </h3>
-          <p className="text-gray-950 md:font-semibold text-2xl">₹ {price} /-</p>
-          <p className="text-gray-50 md:font-bold text-lg bg-red-500 md:rounded-full px-2 md:px-4 py-1 w-fit md:w-44">{discountPercentage}% OFF</p>
+        <div className="w-fit flex flex-col space-y-2 items-center pb-2 text-center mx-10">
+          <h3 className="text-xl h-6 font-semibold overflow-hidden"> {title} </h3>
+          <p className="text-gray-950 font-semibold text-2xl">₹ {price} /-</p>
+          <p className="text-gray-50 font-bold text-md bg-red-600 rounded-full px-4 py-1 w-32 md:w-44">{discountPercentage}% OFF</p>
         </div>
-        <div className="flex flex-row w-9/10 justify-between">
-          <button className="bg-green-600 text-white font-bold md:px-5 md:py-2 w-1/4 lg:text-lg text-sm rounded-sm shadow-sm shadow-black">
-            <Link to={`/product/${productNumber}`} className="text-white hover:underline">
+        <div className="flex flex-row w-9/10 justify-between text-white text-xl font-bold">
+          <button className="w-1/4 bg-lime-600 border border-lime-600 rounded-sm shadow-sm shadow-black">
+            <Link to={`/product/${productNumber}`} className="hover:underline">
               <i className="fa fa-external-link" aria-hidden="true"></i>
             </Link>
           </button>
           {userDetails && (
-            <button onClick={handleAddToCart} className="bg-black text-gray-100 w-52 px-5 py-2 border-2 border-black rounded-sm shadow-sm shadow-black">
+            <button onClick={handleAddToCart} className="w-52 bg-black border border-black rounded-sm shadow-sm shadow-black">
               <span className="font-semibold hover:underline">
                 ADD TO CART
               </span>

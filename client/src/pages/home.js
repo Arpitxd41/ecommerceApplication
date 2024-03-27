@@ -41,9 +41,9 @@ const HomePage = () => {
 
       <Corousel />
       <div className='z-40 relative flex flex-col justify-center md:flex-row items-center px-12 mt-64 mb-24 md:my-64 lg:my-16'>
-        <div className='quicksand bg-black shadow-xl shadow-black md:px-12 items-center justify-center flex-col py-8 text-center my-8 md:my-20 lg:my-40 rounded-sm md:rounded-full align-middle lg:space-x-4'>
-          <h4 className='animate-characters text-2xl md:text-4xl lg:text-4xl font-bold'>WELCOME !</h4>
-          <h1 className='animate-characters text-lg lg:text-4xl font-bold'>{userDetails.firstName}</h1>
+        <div className='quicksand bg-black shadow-xl shadow-black px-12 items-center justify-center flex-col py-8 text-center my-8 md:my-20 lg:my-40 rounded-full align-middle md:space-x-4 text-2xl md:text-4xl font-bold'>
+          <h4 className='animate-characters'>WELCOME !</h4>
+          <h1 className='animate-characters'>{userDetails.firstName}</h1>
         </div>
       </div>
       <div className='flex justify-center bg-black w-full'>

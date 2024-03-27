@@ -59,7 +59,7 @@ router.post('/user/:userId/cart/add/:productNumber', addToCart);
 router.put('/user/:userId/cart/update/:productNumber', updateCartItemQuantity);
 router.put('/user/:userId/cart/selectAll', selectAllCartItems);
 router.get('/user/:userId/cart/:productNumber', getCartProductDetails);
-router.delete('/user/:userId/cart/remove/:productId', removeFromCart);
+router.delete('/user/:userId/cart/remove/:productNumber', removeFromCart);
 router.delete('/user/:userId/cart/remove', removeAllFromCart);
 router.get('/user/:userId/getOrder', getOrder);
 

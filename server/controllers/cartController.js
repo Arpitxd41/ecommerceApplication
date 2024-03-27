@@ -5,7 +5,7 @@ const ObjectId = mongoose.Types.ObjectId;
 const getUserCart = async (req, res) => {
   try {
     const userId = req.params.userId;
-    const userCart = await cartModel.findOne({ user: userId });
+    let userCart = await cartModel.findOne({ user: userId });
     if (!userCart) {
       userCart = new cartModel({
         user: userId,
@@ -102,7 +102,7 @@ const updateCartItemQuantity = async (req, res) => {
 const selectAllCartItems = async (req, res) => {
   try {
     const userId = req.params.userId;
-    const selectAll = req.body.selectAll; // Boolean value indicating whether to select all or deselect all
+    const selectAll = req.body.selectAll;
 
 
     if (!userId) {
@@ -114,7 +114,6 @@ const selectAllCartItems = async (req, res) => {
       return res.status(404).json({ message: 'Cart not found' });
     }
 
-    // Update the checked status of all cart items
     userCart.cartItems.forEach(item => {
       item.checked = selectAll;
     });
@@ -160,24 +159,27 @@ const removeFromCart = async (req, res) => {
     const userId = req.params.userId;
     const productNumber = req.params.productNumber;
 
-    // Your logic to remove the specified product from the user's cart
-    const updatedCart = await cartModel.findOneAndUpdate(
-      {
-        user: userId
-      },
-      { $pull: 
-        { cartItems: 
-          { 
-            productNumber: productNumber
-          } 
-        } 
-      },
-      {
-        new: true
-      }
-    );
+    const userCart = await cartModel.findOne({ user: userId });
 
-    res.status(200).json(updatedCart);
+    if (!userCart) {
+      return res.status(404).json({ message: 'Cart not found' });
+    }
+
+    // Find the index of the cart item to remove
+    const indexToRemove = userCart.cartItems.findIndex(item => item.productNumber === productNumber);
+
+    // If the cart item is not found, return 404
+    if (!indexToRemove) {
+      return res.status(500).json({ message: 'Product not found in the cart' });
+    }
+
+    // Remove the cart item from the cartItems array
+    userCart.cartItems.splice(indexToRemove, 1);
+
+    // Save the updated userCart
+    await userCart.save();
+
+    res.status(200).json(userCart);
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: 'Internal Server Error' });
@@ -188,7 +190,6 @@ const removeAllFromCart = async (req, res) => {
   try {
     const userId = req.params.userId;
 
-    // Your logic to remove all products from the user's cart
     const updatedCart = await cartModel.findOneAndUpdate(
       {
         user: userId

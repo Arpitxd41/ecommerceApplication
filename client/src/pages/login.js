@@ -29,7 +29,11 @@ const Login = () => {
               localStorage.setItem('authToken', token);
               localStorage.setItem('userDetails', JSON.stringify(user));
 
-              navigate('/');
+              if (user.role === 'Admin') {
+                navigate('/dashboard');
+              } else {
+                navigate('/');
+              }
           } else {
             setErrorMessage(result.data.message || "Login Failed!");
           }
@@ -50,68 +54,66 @@ const Login = () => {
               <div className="error-message bg-red-600 px-8 text-white">{errorMessage}</div>
               )}
             </h2>
-            <div className="flex flex-col lg:flex-row p-16 bg-cover bg-center bg-no-repeat justify-center"
+            <div className="flex flex-row bg-cover bg-center bg-no-repeat px-8 justify-center"
             style={{ backgroundImage: `url(${image3})`}}>
-                <div className="text-gray-50 bg-black bg-opacity-60 drop-shadow-xl shadow-black py-4 px-4 md:px-16 rounded-l-sm w-3/5">
+                <div className="text-gray-50 bg-black bg-opacity-90 py-12 px-12 drop-shadow-xl shadow-black shadow-inner">
+
+                    <div className="flex h-8 space-x-2 items-center justify-center">
+                      <h2 className="animate-characters text-2xl font-bold">LOGIN :</h2>
+                    </div>
                     <form
                         className="space-y-6"
                         onSubmit={handleSubmit}>
-                        <div className="flex flex-row h-20 space-x-2 items-center">
-                            <img
-                              className="h-12 p-1 border-green-600 border-2 rounded-full shadow-xl"
-                              alt="Unregistered-profile"
-                              src={unregProfile}
-                            />
-                            <h2 className="text-2xl font-bold text-green-400">LOGIN :</h2>
-                        </div>
-                        <div className="justify-center bg-white text-slate-900 font-semibold shadow-xl px-4 md:px-12 py-12 flex flex-col space-y-8 rounded-sm text-center items-center md:text-left">
-                            <div className="w-full flex flex-row justify-between items-center">
-                                <h4 className="text-md w-1/5">EMAIL ID:</h4>
+                        <div className="form-container text-gray-50 shadow-lg px-6 justify-center py-4 flex flex-col space-y-8 rounded-sm items-center">
+                          <div className="px-2 space-y-5">
+                            <div className="grid-box col-span-2 block relative">
                                 <input
                                   onChange={(e) => setMail(e.target.value)}
                                   type="email"
-                                  className="bg-transparent rounded-sm pl-3 w-4/5 border-x-0 border-t-0"
+                                  className="question"
                                   name="email"
-                                  placeholder="Enter your email here"
+                                  id='emailid'
+                                  required autocomplete="off"
                                 />
+                                <label for='emailid' className=""><span>EMAIL ID</span></label>
                             </div>
-                            <div className="w-full flex flex-row justify-between items-center">
-                                <h4 className="text-md w-1/5">PASSWORD:</h4>
+                            <div className="grid-box">
                                 <input
                                    onChange={(e) => setPassword(e.target.value)}
                                    type="password"
-                                   className="bg-transparent rounded-sm pl-3 w-4/5 border-x-0 border-t-0"
-                                   id=""
-                                   placeholder="Enter password"
+                                   className="question"
+                                   name='userPassword'
+                                   id="userPassword"
+                                   required autocomplete="off"
                                 />
-                           </div>
+                                <label for='userPassword' className=""><span>PASSWORD</span></label>
+                            </div>
+                            <div className="flex flex-col space-y-6">
+                              <button
+                                type="submit"
+                                className="rounded-sm shadow-xl bg-blue-600 border-2 border-blue-600 text-gray-50 px-3 font-semibold py-1
+                                hover:bg-blue-700 hover:border-blue-700">
+                                SUBMIT
+                              </button>
+                            </div>
                         </div>
-                        <div>
+                        <div className="flex flex-row space-x-2 h-20 items-center opacity-100">
+                          <img
+                            className="h-12 p-1 border-lime-600 border-2 rounded-full"
+                            alt="Unregistered-profile"
+                            src={unregProfile}
+                          />
+                          <h6> not a registered user ? : </h6>
+                          <a href="/register">
+                            <p
+                                className="rounded-sm bg-lime-600 border-2 border-lime-600 text-gray-50 px-5 py-1 font-semibold">
+                                REGISTER
+                            </p>
+                          </a>
                         </div>
-                        <div className="flex flex-col space-y-6">
-                            <button
-                              type="submit"
-                              className="rounded-sm shadow-xl bg-blue-600 border-2 border-blue-600 text-gray-50 px-3 font-semibold py-1
-                              hover:bg-blue-700 hover:border-blue-700">
-                              SUBMIT
-                            </button>
                         </div>
                     </form>
-                    <div className="flex flex-row space-x-2 h-20 items-center opacity-100">
-                        <img
-                          className="h-12 p-1 border-red-500 border-2 rounded-full shadow-xl opacity-100"
-                          src={regProfile}
-                          alt="registered-profile"
-                        />
-                        <h6> not a registered user ? : </h6>
-                        <a href="/register">
-                            <button
-                              type="submit"
-                              className="rounded-sm bg-green-700 border-2 border-green-700 text-gray-50 px-5 py-1 font-semibold">
-                              Sign Up
-                            </button>
-                        </a>
-                    </div>
+                    
                     {/* <div>
                       <img src={image3} alt='bgim' className='' />
                     </div> */}

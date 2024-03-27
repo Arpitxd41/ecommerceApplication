@@ -29,7 +29,7 @@ const OrderedBundle = ({ order }) => {
   }, [order.selectedProducts]);
 
   return (
-    <div className='w-full overflow-x-auto flex flex-nowrap object-contain h-36'>
+    <div className='w-full overflow-x-auto flex flex-nowrap object-contain h-32'>
       <div className='bg-whitepx-12 h-36'>
       {loading ? (
         <p>Loading...</p>
