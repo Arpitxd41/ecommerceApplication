@@ -29,7 +29,7 @@ const Login = () => {
               localStorage.setItem('authToken', token);
               localStorage.setItem('userDetails', JSON.stringify(user));
 
-              if (user.role === 'Admin') {
+              if (user.role === 'ADMIN') {
                 navigate('/dashboard');
               } else {
                 navigate('/');

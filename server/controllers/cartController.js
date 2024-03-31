@@ -33,13 +33,9 @@ const addToCart = async (req, res) => {
     }
 
     if (existingCart) {
-      console.log('existing Cart:', existingCart);
-      console.log('existing cart items array:', existingCart.cartItems);
-      const existingProduct = existingCart.cartItems.find(item => item.productNumber === productNumber);      
-      console.log('existing cart product:', existingProduct);
+      const existingProduct = existingCart.cartItems.find(item => item.productNumber === productNumber);
 
       if (existingProduct) {
-        console.log('existing product\'s quantity', existingProduct.quantity);
         existingProduct.quantity += quantity;
       } else {
         existingCart.cartItems.unshift({
@@ -49,10 +45,8 @@ const addToCart = async (req, res) => {
         });
       };
       const updatedCart = await existingCart.save();
-      console.log('updated cart', updatedCart);
       res.status(200).json(updatedCart);
     } else {
-      // Case: Cart items are empty or cart doesn't exist
       const newCart = await cartModel.create({
         user: userId,
         cartItems: [{

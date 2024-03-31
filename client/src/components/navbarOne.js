@@ -28,7 +28,7 @@ const NavbarOne = ({ isLoggedIn }) => {
   // }, [fetchUserCart, isLoggedIn]);
 
   const handleLogoClick = () => {
-    if (userDetails.role === 'Admin') {
+    if (userDetails.role === 'ADMIN') {
       navigate('/dashboard');
     } else {
       navigate('/');

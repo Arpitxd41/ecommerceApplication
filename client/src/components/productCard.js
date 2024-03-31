@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+// import { confetti } from '@tsparticles/confetti';
 
 const useUserAuthentication = () => {
   const [userDetails, setUserDetails] = useState({});
@@ -15,6 +16,7 @@ const ProductCard = ({ product }) => {
   const userDetails = useUserAuthentication();
   const userId = userDetails._id;
   const [userCart, setUserCart] = useState(null);
+  const [message, setMessage] = useState('');
   const navigate = useNavigate();
   const fetchUserCart = useCallback(async () => {
     try {
@@ -34,12 +36,15 @@ const ProductCard = ({ product }) => {
 
   const { id, images, title, discountPercentage, price, rating } = product;
   const productNumber = id;
-  console.log(images[0]);
-  const handleAddToCart = async () => {
+
+  const handleAddToCart = async (e) => {
     try {
-      // const quantity = 1;
       await axios.post(`https://localhost:5000/user/${userId}/cart/add/${productNumber}`, {quantity: 1});
-      navigate(`/cart/${userId}`); 
+      setMessage(`${title} added to cart`);
+      setTimeout(() => {
+        setMessage('');
+      }, 3000);
+      
     } catch (error) {
       console.error('Error adding product to cart:', error);
     }
@@ -50,7 +55,7 @@ const ProductCard = ({ product }) => {
   }
 
   return (
-    <div className="bg-white border-white text-black rounded-sm border-2 hover:shadow-black hover:shadow-md md:w-72">
+    <div id='message-section' className="bg-white border-white text-black rounded-sm border-2 hover:shadow-black hover:shadow-md md:w-72">
       <div className="rounded-sm object-cover h-70 flex items-center p-2 justify-center">
         <img
           src={images[0]}
@@ -63,6 +68,7 @@ const ProductCard = ({ product }) => {
         <h4 className="text-green-600 font-semibold px-2">
           <i className="fa-solid fa-star text-yellow-400 shadow-sm mr-2"></i>{rating}
         </h4>
+          {message && <div className='left-0 w-full absolute bg-black text-white font-bold px-6 py-4 text-2xl text-center'>{message}</div>}
         <div className="w-fit flex flex-col space-y-2 items-center pb-2 text-center mx-10">
           <h3 className="text-xl h-6 font-semibold overflow-hidden"> {title} </h3>
           <p className="text-gray-950 font-semibold text-2xl">₹ {price} /-</p>

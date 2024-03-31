@@ -57,6 +57,7 @@ const CheckOut = () => {
           const response = await fetch(`https://dummyjson.com/products/${product.productNumber}`);
           if (response.ok) {
             const productData = await response.json();
+            console.log('new product data in checkout page', productData)
             return { ...productData, quantity: product.quantity };
           }
           return null;
@@ -80,7 +81,7 @@ const CheckOut = () => {
     const fetchAddresses = async () => {
       try {
         const authToken = localStorage.getItem('authToken');
-        const response = await fetch(`https://localhost:5000/getUser/${userDetails._id}`, {
+        const response = await fetch(`https://localhost:5000/getUser/${userId}`, {
           method: 'GET',
           headers: {
             Authorization: `Bearer ${authToken}`
@@ -91,7 +92,7 @@ const CheckOut = () => {
           const user = userData.user;
           if (user.address && user.address.length > 0) {
             const addressesList = user.address.map((address, index) => (
-              <div className='bg-gray-100 border w-full flex flex-row py-2 rounded-sm px-4 shadow-inner items-center space-x-4' key={index} onClick={() => setSelectedAddress(address)}>
+              <div className='bg-gray-100 w-full flex flex-row py-2 rounded-sm px-2 drop-shadow-md shadow-black shadow-inner items-center font-semibold' key={index} onClick={() => setSelectedAddress(address)}>
                 <button className='hidden' type='checkbox'></button>
                 <div className=''>
                   <p className='block'>{address.street},</p>
@@ -129,7 +130,17 @@ const CheckOut = () => {
       if (response.ok) {
         const cartData = await response.json();
         const products = cartData.cartItems;
-        const selectedProducts = products.filter(item => item.checked);
+
+        const updatedProducts = await Promise.all(products.map(async (product) => {
+          const productResponse = await fetch(`https://dummyjson.com/products/${product.productNumber}`);
+          if (productResponse.ok) {
+            const productData = await productResponse.json();
+            return { ...product, category: productData.category, brand: productData.brand };
+          }
+          return null;
+        }));
+        
+        const selectedProducts = updatedProducts.filter(item => item.checked);
         setCartProducts(selectedProducts);
         setSelectedProducts(selectedProducts);
         setLoading(false);
@@ -146,7 +157,7 @@ const CheckOut = () => {
       [e.target.name]: e.target.value
     });
   };
-
+// TO ADD NEW ADDRESS
   const handleSubmit = async (e) => {
     e.preventDefault();
     const authToken = localStorage.getItem('authToken');
@@ -164,6 +175,7 @@ const CheckOut = () => {
       if (response.ok) {
         const userData = await response.json();
         setUserDetails(userData);
+        window.location.reload();
       }
     } catch (error) {
       console.error('Error adding address', error);
@@ -229,7 +241,7 @@ const CheckOut = () => {
         <h4 className='text-xl font-semibold text-white'>Select Address or Add a New Address</h4>
         <div className='flex flex-col-reverse md:flex-row'>
           <div className='md:w-2/3 md:float-left space-y-12'>
-            <form className='grid grid-cols-2 gap-2 py-5' onSubmit={handleSubmit}>
+            <form className='flex justify-center flex-col md:grid grid-cols-2 gap-2 py-5' onSubmit={handleSubmit}>
               <input
                 className='border-white rounded-sm shadow-sm shadow-black'
                 type='text'
@@ -258,22 +270,26 @@ const CheckOut = () => {
                 placeholder='Enter Contact Number'
                 onChange={handleInputChange}
               />
-              <button className='col-span-2 bg-yellow-400 rounded-sm px-5 py-2 font-semibold shadow-sm shadow-black' type='submit'>SAVE</button>
+              <div className='col-span-2 flex justify-center'>
+                <button className='w-2/5 md:w-1/5 bg-yellow-400 rounded-sm px-5 py-2 font-semibold shadow-sm shadow-black' type='submit'>SAVE</button>
+              </div>
             </form>
           </div>
           <div className='p-5 md:w-1/3 md:float-right items-center flex flex-col justify-center space-y-2'>
-            <div className='w-full overflow-y-scroll h-40 bg-green-500 border border-black rounded-sm p-5 space-y-4'>{addressesList}</div>
-            <div className='w-full h-40 bg-white p-5 rounded-sm'>{selectedAddress && (
-              <div>
+            <div className='w-full overflow-y-scroll h-44 bg-red-500 border border-black rounded-sm px-5 py-5 space-y-4 my-2'>
+              {addressesList}
+            </div>
+        </div>
+        </div>
+        <h5 className='text-white font-bold text-lg'>Selected Address :</h5>
+        <div className='w-full h-auto bg-white drop-shadow-lg shadow-inner shadow-black p-5 rounded-sm text-black font-semibold'>{selectedAddress && (
+              <div className='flex flex-col md:flex-row md:space-x-4'>
                 <p>{selectedAddress.street},</p>
-                <p>{selectedAddress.city}</p>
-                <p>{selectedAddress.postalCode}</p>
-                <p>{selectedAddress.phoneNumber}</p>
+                <p>{selectedAddress.city} ({selectedAddress.postalCode})</p>
+                <p>Contact : {selectedAddress.phoneNumber}</p>
               </div>
             )}</div>
-          </div>
         </div>
-      </div>
     </div>
   );
 };

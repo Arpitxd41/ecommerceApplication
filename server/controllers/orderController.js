@@ -79,7 +79,7 @@ const verify = async (req, res) => {
               amountPaid: order.entity.amount_paid,
               receiptNumber: order.entity.receipt,
               orderStatus: order.entity.status,
-              createdAt: order.entity.created_at,
+              Date: new Date(order.entity.created_at * 1000),
             };
 
             const existingOrder = await orderModel.findOne({ orderId: orderDetails.orderId });

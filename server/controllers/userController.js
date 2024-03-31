@@ -16,7 +16,7 @@ const register = async (req, res) => {
     try {
         console.log("Request to create a user received");
 
-        const { firstName, lastName, dob, mail, password } = req.body;
+        const { firstName, lastName, mail, password } = req.body;
 
         const userExists = await userModel.findOne({ mail });
         if (userExists) {
@@ -51,7 +51,6 @@ const register = async (req, res) => {
         const newUser = new userModel({
             firstName,
             lastName,
-            dob,
             mail,
             password: hashedPassword,            
         });
@@ -245,14 +244,8 @@ const forgotPassword = async (req, res) => {
 // EDIT USER DETAILS FOR A SPECIFIC USER :-
 const editUser = async (req, res) => {
     try {
-        const userId = req.params.userId; // Assuming you get the user ID from the request parameters
-        const { firstName, lastName, dob, newPassword } = req.body;
-
-        // Validate date entry for DOB
-        const isValidDate = await moment(dob, 'DDMMYYYY', true).isValid();
-        if (!isValidDate) {
-            throw new Error('Invalid date entered');
-        }
+        const adminId = req.params.id;
+        const { role, userId  } = req.body;
 
         // Check if the user exists
         const user = await userModel.findById(userId);
@@ -263,33 +256,17 @@ const editUser = async (req, res) => {
             });
         }
 
-        // Verify the current password before allowing edits
-        const { currentPassword } = req.body;
-        const passwordMatch = await bcrypt.compare(currentPassword, user.password);
-        if (!passwordMatch) {
-            return res.status(401).json({
-                success: false,
-                message: 'Unauthorized',
-            });
-        }
-
-        // Hash the new password
-        const hashedPassword = await bcrypt.hash(newPassword, 10);
-
-        // Update user details in the database
+        // Update user role in the database
         await userModel.findByIdAndUpdate(userId, {
-            firstName,
-            lastName,
-            dob,
-            password: hashedPassword,
+            role,
         });
 
         res.status(200).json({
             success: true,
-            message: 'User details updated successfully',
+            message: 'User role updated successfully',
         });
 
-        console.log(`User details updated: ${userId}`);
+        console.log(`User role updated: ${userId}`);
     } catch (error) {
         console.error('Error:', error.message);
         res.status(500).json({
@@ -298,6 +275,7 @@ const editUser = async (req, res) => {
         });
     }
 };
+
 
 // TO DELETE AN EXISTING USER :-
 const deleteUser = async (req, res) => {

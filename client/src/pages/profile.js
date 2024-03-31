@@ -87,10 +87,10 @@ const ProfilePage = () => {
                     <div className='flex flex-col py-2 w-full'>
                       <h3 className='font-semibold text-md md:text-lg md:w-1/3'>Saved Addresses :</h3>
                       {userData.user.address.length > 0 ? (
-                        <div className='w-full drop-shadow-sm shadow-inner bg-blue-400 p-2 flex flex-row rounded-sm'>
+                        <div className='w-full drop-shadow-sm shadow-inner bg-slate-700 p-2 flex flex-row rounded-sm'>
                           <ul className='shadow-sm rounded-sm bg-gray-50 h-40 overflow-y-scroll space-y-4 px-4 w-11/12'>
                             {userData.user.address.map((address, index) => (
-                            <li key={address._id} className='border-b-2 py-2 text-lg'>
+                            <li key={address._id} className='border-b-2 py-2 text-md font-bold'>
                               <p className='flex items-center h-7'>STREET: <span>{address.street}</span></p>
                               <p className='flex items-center h-7'>CITY: <span>{address.city}</span></p>
                               <p className='flex items-center h-7'>POSTAL CODE: <span>{address.postalCode}</span></p>

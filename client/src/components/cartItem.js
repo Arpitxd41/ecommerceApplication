@@ -12,6 +12,7 @@ const CartItem = ({ productNumber, userId, cartProducts, setCartProducts }) => {
         const response = await fetch(`https://dummyjson.com/products/${productNumber}`);
         if (response.ok) {
           const productData = await response.json();
+          console.log('productData', productData)
           setProduct(productData);
         } else {
           console.error(`Failed to fetch product with productNumber ${productNumber}`);
@@ -32,7 +33,7 @@ const CartItem = ({ productNumber, userId, cartProducts, setCartProducts }) => {
   return (
     <div>
       <li className='bg-gradient-to-r from-cyan-500 to-black p-5 md:px-5
-      lg:px-8'>
+      lg:px-8 border-t'>
         {loading ? (
           <p>Loading product...</p>
         ) : product ? (
@@ -55,7 +56,6 @@ const CartItem = ({ productNumber, userId, cartProducts, setCartProducts }) => {
         ) : (
           <p>Error fetching product.</p>
         )}
-        <hr className='border-white md:mt-1 mt-4'/>
       </li>
     </div>
   );

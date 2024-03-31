@@ -388,3 +388,7 @@ input.question + label > span {
     }
   }
 }
+
+.camp {
+  background-color: #d4d4d8;;
+}

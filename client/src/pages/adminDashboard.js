@@ -13,6 +13,8 @@ const AdminDashboard = () => {
   const [userDetails, setUserDetails] = useState({});
   const [activeContent, setActiveContent] = useState(null);
   const navigate = useNavigate();
+  const adminId = userDetails._id;
+  console.log(adminId);
 
   useEffect(() => {
     const authToken = localStorage.getItem('authToken');
@@ -56,30 +58,22 @@ const AdminDashboard = () => {
       </div>
 
       {/* Buttons to toggle visibility of product list and other functionalities */}
-      <div className='sticky bottom-0 grid md:grid-cols-4 grid-cols-2 gap-5 p justify-center py-4 px-2 bg-slate-950 bg-opacity-100 z-50'>
-        <button
-          className='bg-blue-600 text-white font-bold py-2 px-4 rounded-sm'
-          onClick={() => handleButtonClick('products')}
-        >
-          View Products
+      <div className='sticky bottom-0 grid md:grid-cols-4 grid-cols-2 gap-5 justify-center py-4 px-2 bg-slate-950 bg-opacity-100 z-50'>
+        <button className='bg-blue-600 text-white font-bold py-2 px-4 rounded-sm space-x-2' onClick={() => handleButtonClick('products')} >
+          <i class="fa fa-list" aria-hidden="true"></i>
+          <b>View Products</b>
         </button>
-        <button
-          className='bg-green-600 text-white font-bold py-2 px-4 rounded-sm'
-          onClick={() => handleButtonClick('addProduct')}
-        >
-          Add Product
+        <button className='bg-yellow-500 text-white font-bold py-2 px-4 rounded-sm space-x-2' onClick={() => handleButtonClick('addProduct')} >
+          <i class="fa fa-plus-square" aria-hidden="true"></i>
+          <b>Add Product</b>
         </button>
-        <button 
-          className='bg-yellow-600 text-white font-bold py-2 px-4 rounded-sm'
-          onClick={() => handleButtonClick('users')}
-        >
-          View Users
+        <button className='bg-red-600 text-white font-bold py-2 px-4 rounded-sm space-x-2' onClick={() => handleButtonClick('users')} >
+          <i class="fa fa-users" aria-hidden="true"></i>
+          <b>View Users</b>
         </button>
-        <button
-          className='bg-red-600 text-white font-bold py-2 px-4 rounded-sm'
-          onClick={() => handleButtonClick('stats')}
-        >
-          Show Stats
+        <button className='bg-lime-600 text-white font-bold py-2 px-4 rounded-sm space-x-2' onClick={() => handleButtonClick('stats')} >
+          <i class="fa fa-bar-chart" aria-hidden="true"></i>
+          <b>Show Stats</b>
         </button>
       </div>
 
@@ -87,7 +81,7 @@ const AdminDashboard = () => {
       <div id='content' className='flex justify-center bg-black w-full'>
         {activeContent === 'products' && <ProductList products={products} userDetails={userDetails} />}
         {activeContent === 'addProduct' && <AddProduct />}
-        {activeContent === 'users' && <UserList />}
+        {activeContent === 'users' && <UserList adminId={adminId} />}
         {activeContent === 'stats' && <Stats />}
       </div>
 

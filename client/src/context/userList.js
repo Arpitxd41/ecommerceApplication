@@ -1,12 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import EditUserForm from '../utils/roleCall.js';
 
-const UserList = () => {
+const UserList = ({adminId}) => {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [showEditUserForm, setShowEditUserForm] = useState(false);
+  const [editButtonText, setEditButtonText] = useState('EDIT USER');
   const navigate = useNavigate();
+
+  console.log(adminId);
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -29,6 +34,16 @@ const UserList = () => {
       navigate(`/orders/{user.id}`)
   }
 
+  const toggleEditUserForm = () => {
+    setShowEditUserForm(!showEditUserForm);
+    // Update button text
+    if (showEditUserForm) {
+      setEditButtonText('Edit User');
+    } else {
+      setEditButtonText('Cancel');
+    }
+  };
+
   if (loading) {
     return <div>Loading...</div>;
   }
@@ -40,27 +55,38 @@ const UserList = () => {
   return (
     <div className='w-full bg-gradient-to-r from-cyan-500 via-blue-500 to-violet-500 p-8 md:p-16'>
       <div className='bg-gray-200 drop-shadow-xl shadow-inner shadow-black rounded-xl p-8'>
+        <div className='w-full flex justify-between mb-12 mt-5'>
+          <h4 className='bg-yellow-500 px-4 py-2 text-white rounded-sm shadow-sm shadow-black text-lg font-semibold border-yellow-500 border'>USERS</h4>
+          <button className='w-40 bg-black px-4 py-2 text-white rounded-sm shadow-sm shadow-black text-md md:text-lg font-semibold border-black border' onClick={toggleEditUserForm}>{editButtonText}</button>
+          {showEditUserForm && (
+            <div id='edit-group' className='absolute w-full top-28 bg-black bg-opacity-70 py-5 px-12'>
+              <EditUserForm adminId={adminId} />
+            </div>
+          )}
+        </div>
         <ul className='text-gray-900 space-y-5 y'>
         {users.map((user) => (
-          <li className='justify-between flex flex-row border-b border-b-slate-400' key={user.id}>
+          <li className='w-full justify-between flex flex-row border-b border-b-slate-400' key={user.id}>
             <div className='w-3/5 md:w-4/5 flex flex-col md:flex-row space-x-2 text-md md:text-lg font-semibold'>
               <div className='md:w-1/4 flex items-center space-x-2 border'>
                 <i className="fa fa-user" aria-hidden="true"></i>
                 <h4>{user.firstName} {user.lastName}</h4>
               </div>
-              <div className='w-3/4 flex flex-col md:flex-row items-center md:space-x-4'>
-                <p className='hidden md:flex md:w-1/6 bg-green-600 px-3 py-1 rounded-sm text-white text-lg font-semibold text-center'>{`${user.role}`}</p>
+              <div className='w-3/4 flex flex-col md:flex-row md:items-center md:space-x-4 justify-start md:justify-center'>
+                <p className='flex w-fit md:w-1/6 bg-green-600 px-2 md:px-3 md:py-1 rounded-sm text-white text-sm md:text-lg font-semibold justify-center text-center'>{`${user.role}`}</p>
                 <p className='md:w-5/6'>{`${user.mail}`}</p>
+                <p className='md:w-5/6'>{`${user._id}`}</p>
               </div>
             </div>
-            <div className='flex w-2/5 md:w-1/5 items-center'>
+            <div className='flex w-2/5 md:w-1/5 md:items-center justify-end'>
               <Link to={`/orders/${user._id}`}>
-                <button className='bg-blue-600 rounded-sm text-white font-semibold shadow-sm shadow-black px-5 py-2'>ORDERS</button>
+                <button className='text-sm md:text-md bg-blue-600 rounded-sm text-white font-semibold shadow-sm shadow-black px-5 py-2'>ORDERS</button>
               </Link>
             </div>
           </li>
         ))}
         </ul>
+        {/* <EditUser /> */}
       </div>
     </div>
   );

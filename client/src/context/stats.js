@@ -1,8 +1,69 @@
-const Stats = async (req, res) => {
-      try {
-            
-      } catch (error) {
-            
+import React, { useEffect, useState } from 'react';
+import ChartsEmbedSDK from '@mongodb-js/charts-embed-dom';
+
+const EmbeddedDashboard = () => {
+  const [dashboardWidth, setDashboardWidth] = useState(window.innerWidth * 0.9); // Set initial width
+  const [dashboardHeight, setDashboardHeight] = useState(window.innerHeight * 3.5); // Set initial height
+
+  useEffect(() => {
+    const sdk = new ChartsEmbedSDK({});
+    const dashboard = sdk.createDashboard({
+      baseUrl: process.env.BASE_URL_CHARTS,
+      dashboardId: process.env.DASHBOARD_ID,
+      background: '#D4D4D8',
+      height: dashboardHeight,
+      heightMode: 'fixed',
+      width: dashboardWidth,
+      widthMode: 'fixed',
+      theme: 'light',
+      renderingSpec: {
+        version: 1,
+        title: 'Customized chart title',
+        description: 'Customized chart description',
+        axes: {
+          y: {
+            logScale: true
+          },
+        },
+        channels: {
+          x: {
+            labelOverride: "New field label"
+          },
+          y: {
+            numberSuffix: "%"
+          }
+        },
+        options: {
+          labelSize: 150,
+          lineSmoothing: 'monotone'
+        }
       }
-}
-export default Stats;
+    });
+
+    const embedDashboard = document.getElementById('dashboard');
+    dashboard.render(embedDashboard);
+
+    const handleResize = () => {
+      setDashboardWidth(window.innerWidth * 0.9);
+      setDashboardHeight(window.innerHeight * 3.5);
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, [dashboardWidth, dashboardHeight]);
+
+  return (
+    <div className='w-full bg-slate-950 py-12 px-6'>
+      <div className='flex flex-row space-x-2 bg-zinc-300 drop-shadow-xl shadow-inner shadow-black justify-center py-5 px-0'>
+        <i className="fa fa-chevron-left text-black font-bold text-lg" aria-hidden="true"></i>
+        <div id="dashboard" />
+        <i className="fa fa-chevron-right text-black font-bold text-lg" aria-hidden="true"></i>
+      </div>
+    </div>
+  );
+};
+
+export default EmbeddedDashboard;

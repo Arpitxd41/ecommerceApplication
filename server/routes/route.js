@@ -43,6 +43,7 @@ router.get('/' , generateToken);
 router.post('/register', register);
 router.post('/login', login);
 router.get('/getUser/:id', getUser);
+router.put('/edittUser/:id', editUser);
 router.put('/addAddress/:id', addAddress)
 router.get('/getAllUsers', getAllUsers);
 router.put('/editUser/:id', editUser);

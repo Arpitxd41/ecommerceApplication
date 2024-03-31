@@ -17,10 +17,14 @@ const loadScript = (src) => {
 
 const PayButton = ({ userId, totalAmount, selectedProducts, selectedAddress }) => {
   const [errorMessage, setErrorMessage] = useState('');
+  
+  const handlePaymentSuccess = () => {
+    window.location.href = `/orders/${userId}`;
+  };
 
   const displayRazorpay = async () => {
     console.log('Selected Address:', selectedAddress);
-    const res = await loadScript('https://checkout.razorpay.com/v1/checkout.js')
+    const res = await loadScript(process.env.RAZORPAY_CHECKOUT_SCRIPT)
     if (!res) {
       alert('Razorpay sdk failed to load. Check IF you are offline');
       return;
@@ -31,7 +35,7 @@ const PayButton = ({ userId, totalAmount, selectedProducts, selectedAddress }) =
         window.alert("Address not selected. Please select Address !");
         return;
       }
-      const data = await fetch('https://localhost:5000/user/:id/order', {
+      const data = await fetch(`https://localhost:5000/user/${userId}/order`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -51,13 +55,21 @@ const PayButton = ({ userId, totalAmount, selectedProducts, selectedAddress }) =
         prefill: {
             name: "Arpit Tiwari",
             email: "arpitnt100@gmail.com",
-            contact: "9000090000"
+            contact: "9993140470"
         },
         notes: {
-            address: "Razorpay Corporate Office"
+            address: "Somewhere on Earth"
         },
         theme: {
             color: "#111"
+        },
+        handler: function(response) {
+          handlePaymentSuccess();
+        },
+        modal: {
+          ondismiss: function() {
+            window.location.href = `/orders/${userId}`;
+          }
         }
       };
   

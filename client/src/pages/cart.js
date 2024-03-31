@@ -4,6 +4,7 @@ import { validateToken } from '../utils/filter';
 import CartItem from '../components/cartItem';
 import NavbarOne from '../components/navbarOne';
 import StickyFooter from '../components/cartFooter';
+import emptyCart from '../images/emptyCart.png';
 
 const Cart = () => {
   const [userDetails, setUserDetails] = useState({});
@@ -81,21 +82,32 @@ const Cart = () => {
           <h2 className='text-md font-semibold py-2'>{cartProducts.length ? `Hurry ${userDetails.firstName}! Checkout your products now before they're gone..` : 'No product added to cart, Grab the products before they are gone'}</h2>          
         </div>
 
-        <div className='bg-gray-200 overflow-y-scroll'>
+        <div className='bg-gray-100 overflow-y-scroll'>
         {loading ? (
           <p>Loading...</p>
         ) : (
-          <ul className=''>
-            {cartProducts.map((item) => (
-              <CartItem
-                key={item.productNumber}
-                productNumber={item.productNumber}
-                userId={userDetails._id}
-                isChecked={selectedProducts.includes(item.productNumber)}
-                handleCheckboxChange={handleCheckboxChange}
-              />
-            ))}
-          </ul>
+          <>
+            {cartProducts.length ? (
+              <ul className=''>
+                {cartProducts.map((item) => (
+                  <CartItem
+                    key={item.productNumber}
+                    productNumber={item.productNumber}
+                    userId={userDetails._id}
+                    isChecked={selectedProducts.includes(item.productNumber)}
+                    handleCheckboxChange={handleCheckboxChange}
+                  />
+                ))}
+              </ul>
+            ) : (
+              <div className="flex justify-center items-center h-full bg-transparent flex-col md:py-16 space-y-6">
+                <h2 className='text-2xl font-bold'>Empty Cart</h2>
+                <div className='bg-yellow-500 rounded-full p-8'>
+                  <img src={emptyCart} alt="Empty Cart" className="w-40 h-40" />
+                </div>
+              </div>
+            )}
+          </>
         )}
         </div>
         <div className='p-2 object-contain h-fit bg-slate-900'>

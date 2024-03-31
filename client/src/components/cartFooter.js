@@ -7,13 +7,12 @@ const StickyFooter = ({ cartProducts, setCartProducts, userDetails }) => {
     localStorage.getItem('selectAllChecked') === 'true'
   );
   const userId = userDetails._id;
-  console.log(userId);
   const navigate = useNavigate();
 
   useEffect(() => {
     let price = 0;
     const selectedProducts = cartProducts.filter(product => product.checked);
-
+    console.log('Selected Products 1:', selectedProducts);
     Promise.all(selectedProducts.map(async (product) => {
       try {
         const response = await fetch(`https://dummyjson.com/products/${product.productNumber}`);
@@ -25,7 +24,8 @@ const StickyFooter = ({ cartProducts, setCartProducts, userDetails }) => {
     })).then(() => {
       setTotalPrice(price);
     });
-  }, [cartProducts]);
+    console.log('Selected Products 2:', selectedProducts);
+  }, [cartProducts]);  
 
   useEffect(() => {
     localStorage.setItem('selectAllChecked', selectAllChecked.toString());
