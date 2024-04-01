@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
@@ -8,18 +8,6 @@ const CounterButtons = ({ product, userId }) => {
   const [inCart, setInCart] = useState(false);
   const productNumber = product.id;
   const navigate = useNavigate();
-
-  // useEffect(() => {
-  //   const fetchCartItem = async () => {
-  //     try {
-  //       // Fetch cart item details if needed
-  //     } catch (error) {
-  //       console.error("Error fetching cart item", error);
-  //     }
-  //   };
-
-  //   fetchCartItem();
-  // }, []);
 
   const handleAddToCart = async () => {
     try {
@@ -31,8 +19,6 @@ const CounterButtons = ({ product, userId }) => {
     }
   };
 
-  console.log('productNumber-------', productNumber);
-  console.log('product', product);
   const handleBuyNow = async () => {
     try {
       // Make request to add product to cart
@@ -62,9 +48,9 @@ const CounterButtons = ({ product, userId }) => {
       {error ? (
         <p style={{ color: "red" }}>{error}</p>
       ) : inCart ? (
-        <div className="text-xl flex flex-row justify-evenly w-52 border-black border-2 bg-yellow-400 px-2 py-1 rounded-sm shadow-sm shadow-black">
+        <div className="text-xl flex flex-row justify-evenly w-52 border-black border-2 bg-yellow-400 px-2 py-1 rounded-sm shadow-sm shadow-black items-center">
           <button onClick={handleDecrement}>-</button>
-          <span className='shadow-sm shadow-black items-center text-center h-8 w-8'>{quantity}</span>
+          <span className='shadow-sm shadow-black items-center text-center h-8 text-xl w-8'>{quantity}</span>
           <button onClick={handleIncrement}>+</button>
         </div>
       ) : (
@@ -78,7 +64,7 @@ const CounterButtons = ({ product, userId }) => {
 
       <button 
         onClick={handleBuyNow}
-        className='bg-orange-500 px-12 py-2 rounded-sm shadow-sm shadow-black'>
+        className='w-44 text-md bg-orange-500 px-8 py-2 rounded-sm shadow-sm shadow-black'>
         BUY NOW
       </button>
     </div>

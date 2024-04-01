@@ -5,6 +5,7 @@ import Corousel from '../components/corousel.js';
 import ProductList from '../components/productList.js';
 import AddProduct from '../context/addProduct.js';
 import Stats from '../context/stats.js';
+import Footer from '../data/user/standardFooter.js';
 import UserList from '../context/userList.js';
 import { validateToken } from '../utils/filter.js';
 
@@ -14,7 +15,8 @@ const AdminDashboard = () => {
   const [activeContent, setActiveContent] = useState(null);
   const navigate = useNavigate();
   const adminId = userDetails._id;
-  console.log(adminId);
+  const dashboardChart = process.env.REACT_APP_DASHBOARD_CHART;
+  const dashboardChartId = process.env.REACT_APP_DASHBOARD_CHART_ID;
 
   useEffect(() => {
     const authToken = localStorage.getItem('authToken');
@@ -60,19 +62,19 @@ const AdminDashboard = () => {
       {/* Buttons to toggle visibility of product list and other functionalities */}
       <div className='sticky bottom-0 grid md:grid-cols-4 grid-cols-2 gap-5 justify-center py-4 px-2 bg-slate-950 bg-opacity-100 z-50'>
         <button className='bg-blue-600 text-white font-bold py-2 px-4 rounded-sm space-x-2' onClick={() => handleButtonClick('products')} >
-          <i class="fa fa-list" aria-hidden="true"></i>
+          <i className="fa fa-list" aria-hidden="true"></i>
           <b>View Products</b>
         </button>
         <button className='bg-yellow-500 text-white font-bold py-2 px-4 rounded-sm space-x-2' onClick={() => handleButtonClick('addProduct')} >
-          <i class="fa fa-plus-square" aria-hidden="true"></i>
+          <i className="fa fa-plus-square" aria-hidden="true"></i>
           <b>Add Product</b>
         </button>
         <button className='bg-red-600 text-white font-bold py-2 px-4 rounded-sm space-x-2' onClick={() => handleButtonClick('users')} >
-          <i class="fa fa-users" aria-hidden="true"></i>
+          <i className="fa fa-users" aria-hidden="true"></i>
           <b>View Users</b>
         </button>
         <button className='bg-lime-600 text-white font-bold py-2 px-4 rounded-sm space-x-2' onClick={() => handleButtonClick('stats')} >
-          <i class="fa fa-bar-chart" aria-hidden="true"></i>
+          <i className="fa fa-bar-chart" aria-hidden="true"></i>
           <b>Show Stats</b>
         </button>
       </div>
@@ -82,19 +84,10 @@ const AdminDashboard = () => {
         {activeContent === 'products' && <ProductList products={products} userDetails={userDetails} />}
         {activeContent === 'addProduct' && <AddProduct />}
         {activeContent === 'users' && <UserList adminId={adminId} />}
-        {activeContent === 'stats' && <Stats />}
+        {activeContent === 'stats' && <Stats dashboardChart={dashboardChart} dashboardChartId={dashboardChartId} />}
       </div>
 
-      <div className='p-2 object-contain h-fit'>
-        <hr className='border-gray-950 my-12 relative z-40'/>
-        <div className='footer w-full text-center flex justify-center h-40 relative z-40'>
-          <div className="">
-            <p className="object-contain h-12 items-center align-middle rounded-full px-8 py-2 bg-black shadow-xl shadow-black text-slate-300">
-              <a href="{somelink}" className="hover:underline mb-2"> Made with <i className="fa fa-heart animate-characters h-12 text-lg"></i> by Arpit</a>
-            </p>
-          </div>
-        </div>
-      </div>
+      <Footer />
     </div>
   );
 };

@@ -7,8 +7,8 @@ const AddProduct = () => {
         title: '',
         brand: '',
         category: '',
-        price: Number,
-        stock: Number,
+        price: 0,
+        stock: 0,
         images: [''],
         thumbnail: '',
         description: ''
@@ -30,9 +30,9 @@ const AddProduct = () => {
       setFormData({
             title: '',
             brand: '',
-            category: Number,
-            price: '',
-            stock: Number,
+            category: '',
+            price: 0,
+            stock: 0,
             images: [''],
             thumbnail: '',
             description: ''

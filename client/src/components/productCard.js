@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
-// import { confetti } from '@tsparticles/confetti';
 
 const useUserAuthentication = () => {
   const [userDetails, setUserDetails] = useState({});
@@ -17,11 +16,9 @@ const ProductCard = ({ product }) => {
   const userId = userDetails._id;
   const [userCart, setUserCart] = useState(null);
   const [message, setMessage] = useState('');
-  const navigate = useNavigate();
   const fetchUserCart = useCallback(async () => {
     try {
       const userCart = await axios.get(`https://localhost:5000/user/${userId}/cart`);
-      console.log('userCart of fetchUserCart:', userCart.data)
       setUserCart(userCart.data);
     } catch (error) {
       console.error('Error fetching user cart:', error);

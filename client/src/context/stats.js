@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import ChartsEmbedSDK from '@mongodb-js/charts-embed-dom';
 
-const EmbeddedDashboard = () => {
+const EmbeddedDashboard = ({ dashboardChart, dashboardChartId }) => {
   const [dashboardWidth, setDashboardWidth] = useState(window.innerWidth * 0.9); // Set initial width
   const [dashboardHeight, setDashboardHeight] = useState(window.innerHeight * 3.5); // Set initial height
 
   useEffect(() => {
     const sdk = new ChartsEmbedSDK({});
+    console.log("Dashboard Chart URL:", dashboardChart);
     const dashboard = sdk.createDashboard({
-      baseUrl: process.env.BASE_URL_CHARTS,
-      dashboardId: process.env.DASHBOARD_ID,
+      baseUrl: dashboardChart,
+      dashboardId: dashboardChartId,
       background: '#D4D4D8',
       height: dashboardHeight,
       heightMode: 'fixed',
@@ -56,7 +57,10 @@ const EmbeddedDashboard = () => {
   }, [dashboardWidth, dashboardHeight]);
 
   return (
-    <div className='w-full bg-slate-950 py-12 px-6'>
+    <div className='flex flex-col w-full bg-slate-950 py-12 px-6 justify-center'>
+      <div className='flex justify-center'>
+        <h4 className='text-3xl animate-characters font-bold mb-4'>INSIGHTS AND ANALYTICS</h4>
+      </div>
       <div className='flex flex-row space-x-2 bg-zinc-300 drop-shadow-xl shadow-inner shadow-black justify-center py-5 px-0'>
         <i className="fa fa-chevron-left text-black font-bold text-lg" aria-hidden="true"></i>
         <div id="dashboard" />

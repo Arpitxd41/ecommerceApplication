@@ -3,12 +3,13 @@ import { useNavigate } from 'react-router-dom';
 import { validateToken } from '../utils/filter';
 import NavbarOne from '../components/navbarOne';
 import profileImage from '../images/profile_Reg.png'
+import Footer from '../data/user/standardFooter';
 
 const ProfilePage = () => {
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
   const [userDetails, setUserDetails] = useState({});
-  const [userData, setUserData] = useState(null); // State to store fetched user data
+  const [userData, setUserData] = useState(null);
 
   useEffect(() => {
     const authToken = localStorage.getItem('authToken');
@@ -45,8 +46,7 @@ const ProfilePage = () => {
       
       if (response.ok) {
         const userData = await response.json();
-        console.log('user data', userData.user);
-        setUserData(userData); // Storing fetched user data
+        setUserData(userData);
         setLoading(false);
       } else {
         console.error('Failed to fetch user data', response);
@@ -62,7 +62,7 @@ const ProfilePage = () => {
     <div className="">
       <NavbarOne />
       <div className="flex flex-col space-y-10 justify-center px-12 py-12 bg-gradient-to-tr from-fuchsia-700 via-cyan-500 to-violet-900">
-        <div className="flex flex-col md:flex-row rounded-2xl drop-shadow-2xl shadow-inner shadow-black bg-white space-x-2 object-contain justify-between items-center">
+        <div className="flex flex-col md:flex-row rounded-md drop-shadow-2xl shadow-inner shadow-black bg-white space-x-2 object-contain justify-between items-center">
             <div className="md:float-left md:w-1/3">
                   <img src={profileImage} alt="User" className='h-64 md:h-80' />
             </div>
@@ -70,7 +70,7 @@ const ProfilePage = () => {
               {userData && (
                 <div className='py-8'>
                     <div className='flex flex-row items-center space-x-2'>
-                      <i class="fa fa-check bg-lime-500 text-white rounded-full p-1 font-bold" aria-hidden="true"></i>
+                      <i className="fa fa-check bg-lime-500 text-white rounded-full p-1 font-bold" aria-hidden="true"></i>
                       <h2 className='font-bold text-xl'>{userData.user.role} : {userData.user.firstName} {userData.user.lastName}</h2>
                     </div>
                     <hr />
@@ -99,8 +99,8 @@ const ProfilePage = () => {
                             ))}
                           </ul>
                           <div className='flex flex-col justify-between px-5 text-white'>
-                            <i class="fa fa-angle-up" aria-hidden="true"></i>
-                            <i class="fa fa-angle-down" aria-hidden="true"></i>
+                            <i className="fa fa-angle-up" aria-hidden="true"></i>
+                            <i className="fa fa-angle-down" aria-hidden="true"></i>
                           </div>
                         </div>
                       ) : (
@@ -114,14 +114,12 @@ const ProfilePage = () => {
               )}
             </div>
         </div>
-        <div className='footer w-full text-center flex justify-center h-40 relative z-40'>
-          <div className="">
-              <p className="object-contain h-12 items-center align-middle rounded-full px-8 py-2 bg-black shadow-xl shadow-black text-slate-300">
-               <a href="https://portfolio-arpit.netlify.app" className="hover:underline mb-2"> Made with <i className="fa fa-heart animate-characters h-12 text-lg"></i> by Arpit</a>
-              </p>
-          </div>
-        </div>
+        <div className='bg-white drop-shadow-xl shadow-inner shadow-black rounded-md p-5 text-bold'>
+          <h5 className='text-black'>"Greetings viewer - I present a testament to my expertise in web development. Designed and developed entirely by me, this platform combines the latest technologies to deliver a seamless user experience. From sleek CSS and Tailwind CSS designs to responsive React components, every detail is meticulously crafted to ensure user satisfaction.<br />
+                       A robust backend built on Express.js and Node.js, with authentication secured using bcrypt and JWT Tokens. Leveraging MongoDB with Mongoose, product data and user information are managed efficiently. Integrating Razorpay for payment processing, ensured smooth transactions using ngrok for local testing. With icons, illustrations and animations the frontend is adorned with interactive elements, for an engaging user interface. This project not only showcases my frontend design skills but also highlights my proficiency in backend development and integration of third-party services, making it a standout addition to my web development portfolio."</h5>
+        </div>        
       </div>
+        <Footer />
     </div>
   );
   

@@ -11,15 +11,12 @@ const UserList = ({adminId}) => {
   const [editButtonText, setEditButtonText] = useState('EDIT USER');
   const navigate = useNavigate();
 
-  console.log(adminId);
-
   useEffect(() => {
     const fetchUsers = async () => {
       try {
         const response = await axios.get('https://localhost:5000/getAllUsers');
         const userList = Object.values(response.data.users);
         setUsers(userList.reverse());
-        console.log('user list reversed', userList.reverse());
         setLoading(false);
       } catch (error) {
         setError(error.message);
@@ -36,7 +33,6 @@ const UserList = ({adminId}) => {
 
   const toggleEditUserForm = () => {
     setShowEditUserForm(!showEditUserForm);
-    // Update button text
     if (showEditUserForm) {
       setEditButtonText('Edit User');
     } else {
@@ -72,8 +68,8 @@ const UserList = ({adminId}) => {
                 <i className="fa fa-user" aria-hidden="true"></i>
                 <h4>{user.firstName} {user.lastName}</h4>
               </div>
-              <div className='w-3/4 flex flex-col md:flex-row md:items-center md:space-x-4 justify-start md:justify-center'>
-                <p className='flex w-fit md:w-1/6 bg-green-600 px-2 md:px-3 md:py-1 rounded-sm text-white text-sm md:text-lg font-semibold justify-center text-center'>{`${user.role}`}</p>
+              <div className='w-3/4 flex flex-col md:flex-row md:items-center md:space-x-4 justify-start md:justify-between'>
+                <p className='flex w-fit md:w-1/6 bg-green-600 px-2 md:px-3 md:py-1 rounded-sm text-white text-sm md:text-md lg:text-lg font-semibold justify-center text-center'>{`${user.role}`}</p>
                 <p className='md:w-5/6'>{`${user.mail}`}</p>
                 <p className='md:w-5/6'>{`${user._id}`}</p>
               </div>
@@ -86,7 +82,6 @@ const UserList = ({adminId}) => {
           </li>
         ))}
         </ul>
-        {/* <EditUser /> */}
       </div>
     </div>
   );

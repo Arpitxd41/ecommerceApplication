@@ -6,8 +6,6 @@ const EditUserForm = ({adminId}) => {
   const [isAdmin, setIsAdmin] = useState(false);
   const [isUser, setIsUser] = useState(false);
 
-  console.log(adminId);
-
   const handleApprove = async () => {
     if (!userId) {
       alert('Please enter a user ID');

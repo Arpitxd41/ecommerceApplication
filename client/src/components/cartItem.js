@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import CounterButtons from '../utils/cartButtons';
 
-const CartItem = ({ productNumber, userId, cartProducts, setCartProducts }) => {
+const CartItem = ({ productNumber, userId }) => {
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
   const [isChecked, setIsChecked] = useState(false);

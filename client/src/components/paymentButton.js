@@ -19,12 +19,13 @@ const PayButton = ({ userId, totalAmount, selectedProducts, selectedAddress }) =
   const [errorMessage, setErrorMessage] = useState('');
   
   const handlePaymentSuccess = () => {
+    // Redirect to orders page after payment success
     window.location.href = `/orders/${userId}`;
   };
 
   const displayRazorpay = async () => {
     console.log('Selected Address:', selectedAddress);
-    const res = await loadScript(process.env.RAZORPAY_CHECKOUT_SCRIPT)
+    const res = await loadScript('https://checkout.razorpay.com/v1/checkout.js')
     if (!res) {
       alert('Razorpay sdk failed to load. Check IF you are offline');
       return;
@@ -64,10 +65,12 @@ const PayButton = ({ userId, totalAmount, selectedProducts, selectedAddress }) =
             color: "#111"
         },
         handler: function(response) {
+          // Redirect to orders page after payment success
           handlePaymentSuccess();
         },
         modal: {
           ondismiss: function() {
+            // Redirect to orders page if payment window is closed
             window.location.href = `/orders/${userId}`;
           }
         }

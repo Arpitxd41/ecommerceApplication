@@ -8,7 +8,7 @@ import Cart from './pages/cart.js';
 import Orders from './pages/orders.js'
 import Profile from './pages/profile.js'
 import Checkout from './pages/checkOut.js';
-import AdminPage from './pages/adminDashboard.js';
+import AdminDashboard from './pages/adminDashboard.js';
 import ProductPage from './pages/selectedProduct.js';
 import { AuthProvider } from './context/authContext.js';
 
@@ -24,7 +24,7 @@ function App() {
           <Route path="/orders/:userId" element={<Orders />}></Route>
           <Route path="/profile/:userId" element={<Profile />}></Route>
           <Route path="/checkout/:userId" element={<Checkout />}></Route>
-          <Route path="/dashboard" element={<AdminPage />}></Route>
+          <Route path="/dashboard" element={<AdminDashboard />}></Route>
           <Route path="/product/:productNumber" element={<ProductPage />}></Route>
         </Routes>
       </AuthProvider>

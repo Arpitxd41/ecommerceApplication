@@ -4,6 +4,7 @@ import { validateToken } from '../utils/filter';
 import CartItem from '../components/cartItem';
 import NavbarOne from '../components/navbarOne';
 import StickyFooter from '../components/cartFooter';
+import Footer from '../data/user/standardFooter';
 import emptyCart from '../images/emptyCart.png';
 
 const Cart = () => {
@@ -110,16 +111,7 @@ const Cart = () => {
           </>
         )}
         </div>
-        <div className='p-2 object-contain h-fit bg-slate-900'>
-          <hr className='border-gray-950 my-12 relative z-40'/>
-          <div className='footer w-full text-center flex justify-center h-40 relative z-20'>
-            <div className="">
-                <p className="object-contain h-12 items-center align-middle rounded-full px-8 py-2 bg-black shadow-xl shadow-black text-slate-300">
-                 <a href="{somelink}" className="hover:underline mb-2"> Made with <i className="fa fa-heart animate-characters h-12 text-lg"></i> by Arpit</a>
-                </p>
-            </div>
-          </div>
-        </div>
+        <Footer />
 
       </div>
 

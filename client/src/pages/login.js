@@ -2,8 +2,6 @@ import { useState, useEffect } from 'react';
 import { useNavigate} from 'react-router-dom';
 import axios from 'axios';
 import unregProfile from '../images/profile_Reg.png';
-import regProfile from '../images/profile_Unreg.png';
-// import video1 from '../images/ShoppingOptionsByNanoAgency.mp4';
 import image3 from '../images/andreaPiacquadio.jpg';
 
 const Login = () => {
@@ -19,12 +17,9 @@ const Login = () => {
     const handleSubmit = async (e) => {
       e.preventDefault();    
       try {
-        const result = await axios.post("https://localhost:5000/login", { mail, password })
-        console.log('Credentials = ', result.data.success);
+          const result = await axios.post("https://localhost:5000/login", { mail, password });
           if (result.data.success) {
               const { token, user } = result.data;
-
-              console.log("User:", user);
               
               localStorage.setItem('authToken', token);
               localStorage.setItem('userDetails', JSON.stringify(user));
@@ -48,7 +43,7 @@ const Login = () => {
     };
 
     return (
-        <div>
+        <div className='bg-black'>
             <h2 className='absolute z-50'>
               {errorMessage && (
               <div className="error-message bg-red-600 px-8 text-white">{errorMessage}</div>
@@ -73,9 +68,9 @@ const Login = () => {
                                   className="question"
                                   name="email"
                                   id='emailid'
-                                  required autocomplete="off"
+                                  required autoComplete="off"
                                 />
-                                <label for='emailid' className=""><span>EMAIL ID</span></label>
+                                <label htmlFor='emailid' className=""><span>EMAIL ID</span></label>
                             </div>
                             <div className="grid-box">
                                 <input
@@ -84,9 +79,9 @@ const Login = () => {
                                    className="question"
                                    name='userPassword'
                                    id="userPassword"
-                                   required autocomplete="off"
+                                   required autoComplete="off"
                                 />
-                                <label for='userPassword' className=""><span>PASSWORD</span></label>
+                                <label htmlFor='userPassword' className=""><span>PASSWORD</span></label>
                             </div>
                             <div className="flex flex-col space-y-6">
                               <button
@@ -112,22 +107,8 @@ const Login = () => {
                           </a>
                         </div>
                         </div>
-                    </form>
-                    
-                    {/* <div>
-                      <img src={image3} alt='bgim' className='' />
-                    </div> */}
-                  </div>
-                {/*
-                <div className="lg:w-1/2 lg:float-right px-10 bg-transparent">
-                  <div className='float-left rounded-sm drop-shadow-xl shadow-inner shadow-black p-8 bg-gray-300 object-none'>
-                    <video src={video1} width="1000" height="500" controls="" autoplay="true"  className=''/>
-                    <div className='h-32 overflow-y-scroll bg-white px-5 pb-5'>
-                      <h4 className='animate-characters font-bold'>"Welcome to my ecommerce project - a testament to my expertise in web development. Designed and developed entirely by me, this platform combines the latest technologies to deliver a seamless user experience. From sleek CSS and Tailwind CSS designs to responsive React components, every detail is meticulously crafted to ensure user satisfaction.<br />A robust backend built on Express.js and Node.js, with authentication secured using bcrypt and JWT Tokens. Leveraging MongoDB with Mongoose, product data and user information are managed efficiently. Integrating Razorpay for payment processing, ensured smooth transactions using ngrok for local testing. With icons, illustrations and animations the frontend is adorned with interactive elements, for an engaging user interface. This project not only showcases my frontend design skills but also highlights my proficiency in backend development and integration of third-party services, making it a standout addition to my web development portfolio."</h4>
-                    </div>
-                  </div>
+                    </form>                    
                 </div>
-                */}
            </div>
       </div>
     );    

@@ -12,7 +12,6 @@ const StickyFooter = ({ cartProducts, setCartProducts, userDetails }) => {
   useEffect(() => {
     let price = 0;
     const selectedProducts = cartProducts.filter(product => product.checked);
-    console.log('Selected Products 1:', selectedProducts);
     Promise.all(selectedProducts.map(async (product) => {
       try {
         const response = await fetch(`https://dummyjson.com/products/${product.productNumber}`);
@@ -24,7 +23,6 @@ const StickyFooter = ({ cartProducts, setCartProducts, userDetails }) => {
     })).then(() => {
       setTotalPrice(price);
     });
-    console.log('Selected Products 2:', selectedProducts);
   }, [cartProducts]);  
 
   useEffect(() => {
@@ -50,7 +48,6 @@ const StickyFooter = ({ cartProducts, setCartProducts, userDetails }) => {
 
     setCartProducts(updatedCartProducts);
 
-    // If "Select All" is being unchecked, uncheck individual product checkboxes
     if (!newSelectAllChecked) {
       const updatedCartProductsUncheckAll = updatedCartProducts.map(product => ({
         ...product,
@@ -62,7 +59,6 @@ const StickyFooter = ({ cartProducts, setCartProducts, userDetails }) => {
       });
     }
 
-    // Send updated cart data to the server
     fetch(`https://localhost:5000/user/${userId}/cart/selectAll`, {
       method: 'PUT',
       headers: {

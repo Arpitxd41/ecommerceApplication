@@ -1,31 +1,13 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-// import axios from 'axios';
 import logo from '../images/logo512.png';
 import SearchBar from '../utils/searchBar';
 
 const NavbarOne = ({ isLoggedIn }) => {
   const userDetails = JSON.parse(localStorage.getItem('userDetails'));
   const userId = userDetails._id;
-  // const [userCart, setUserCart] = useState(null);
   const [showMenu, setShowMenu] = useState(false);
   const navigate = useNavigate();
-
-  // Function to fetch user's cart data
-  // const fetchUserCart = useCallback(async () => {
-  //   try {
-  //     const response = await axios.get(`https://localhost:5000/user/${userId}/cart`);
-  //     setUserCart(response.data);
-  //   } catch (error) {
-  //     console.error('Error fetching user cart:', error);
-  //   }
-  // }, [userId]);
-
-  // useEffect(() => {
-  //   if (isLoggedIn) {
-  //     fetchUserCart();
-  //   }
-  // }, [fetchUserCart, isLoggedIn]);
 
   const handleLogoClick = () => {
     if (userDetails.role === 'ADMIN') {
