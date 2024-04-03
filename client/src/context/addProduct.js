@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import addProduct from '../utils/apiServices.js';
+import addProduct from '../utils/newProduct.js';
 import NewProductCard from '../components/newProductCard.js';
 
 const AddProduct = () => {

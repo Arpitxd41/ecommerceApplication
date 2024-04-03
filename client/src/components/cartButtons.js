@@ -12,7 +12,7 @@ const CartButtons = ({ productNumber, userId, handleCheckboxChange }) => {
       try {
         const response = await axios.get(`https://localhost:5000/user/${userId}/cart/${productNumber}`);
         const cartItem = response.data;
-        const { quantity: fetchedQuantity, checked } = response.data;
+        const { quantity: fetchedQuantity, checked } = cartItem;
         setQuantity(fetchedQuantity);
         setIsChecked(checked);
       } catch (error) {

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import CounterButtons from '../utils/cartButtons';
+import CounterButtons from '../components/cartButtons';
 
 const CartItem = ({ productNumber, userId }) => {
   const [product, setProduct] = useState(null);
@@ -12,7 +12,6 @@ const CartItem = ({ productNumber, userId }) => {
         const response = await fetch(`https://dummyjson.com/products/${productNumber}`);
         if (response.ok) {
           const productData = await response.json();
-          console.log('productData', productData)
           setProduct(productData);
         } else {
           console.error(`Failed to fetch product with productNumber ${productNumber}`);
@@ -30,6 +29,9 @@ const CartItem = ({ productNumber, userId }) => {
     setIsChecked(checked);
   };
 
+  if(isChecked) {
+    console.log('true');
+  }
   return (
     <div>
       <li className='bg-gradient-to-r from-cyan-500 to-black p-5 md:px-5

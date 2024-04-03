@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { validateToken } from '../utils/filter';
-// import axios from 'axios';
 import PayButton from '../components/paymentButton.js';
 
 const CheckOut = () => {
@@ -57,14 +56,12 @@ const CheckOut = () => {
           const response = await fetch(`https://dummyjson.com/products/${product.productNumber}`);
           if (response.ok) {
             const productData = await response.json();
-            console.log('new product data in checkout page', productData)
             return { ...productData, quantity: product.quantity };
           }
           return null;
         })
       );
       setProductDetails(productDetails);
-      // console.log('productDetails', productDetails);
     };
 
     if (selectedProducts.length > 0) {
@@ -117,7 +114,7 @@ const CheckOut = () => {
     };
 
     fetchAddresses();
-  }, [userDetails._id]);
+  }, [userId]);
 
   const fetchUserCart = async (userId, authToken) => {
     try {
@@ -139,7 +136,9 @@ const CheckOut = () => {
           }
           return null;
         }));
-        
+        if (cartProducts) {
+          setLoading(false);
+        }
         const selectedProducts = updatedProducts.filter(item => item.checked);
         setCartProducts(selectedProducts);
         setSelectedProducts(selectedProducts);

@@ -18,12 +18,13 @@ const ProductCard = ({ product }) => {
   const [message, setMessage] = useState('');
   const fetchUserCart = useCallback(async () => {
     try {
-      const userCart = await axios.get(`https://localhost:5000/user/${userId}/cart`);
-      setUserCart(userCart.data);
+      // let userCart = await axios.get(`https://localhost:5000/user/${userId}/cart`);
+      
+      setUserCart(userCart);
     } catch (error) {
       console.error('Error fetching user cart:', error);
     }
-  }, [userId]);
+  }, [ userCart]);
 
   useEffect(() => {
     if (userId) {

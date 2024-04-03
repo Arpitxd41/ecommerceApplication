@@ -6,6 +6,8 @@ import NavbarOne from '../components/navbarOne';
 import StickyFooter from '../components/cartFooter';
 import Footer from '../data/user/standardFooter';
 import emptyCart from '../images/emptyCart.png';
+import { fetchUserCart } from '../data/cart/fetchCart.js';
+import { handleCheckboxChange } from '../utils/checkboxChanges.js';
 
 const Cart = () => {
   const [userDetails, setUserDetails] = useState({});
@@ -30,7 +32,7 @@ const Cart = () => {
     const userDetails = JSON.parse(storedUserDetails);
     setUserDetails(userDetails);
 
-    fetchUserCart(userDetails._id, authToken);
+    fetchUserCart(userDetails._id, authToken, setCartProducts, setLoading);
     
     const isTokenValid = validateToken(authToken);
     if (!isTokenValid) {
@@ -38,36 +40,8 @@ const Cart = () => {
     }
   }, [navigate]);
 
-  const fetchUserCart = async (userId, authToken) => {
-    try {
-      const response = await fetch(`https://localhost:5000/user/${userId}/cart`, {
-        method: 'GET',
-        headers: {
-          Authorization: `Bearer ${authToken}`
-        }
-      });
-      if (response.ok) {
-        const cartData = await response.json();
-        setCartProducts(cartData.cartItems);
-        setLoading(false);
-      } else {
-        console.error('User cart empty', response);
-        setLoading(false);
-      }
-    } catch (error) {
-      console.error('Error fetching user data:', error);
-      setLoading(false);
-    }
-  };
-
-  const handleCheckboxChange = (productNumber, checked) => {
-    setSelectedProducts(prevState => {
-      if (checked) {
-        return [...prevState, productNumber];
-      } else {
-        return prevState.filter(item => item !== productNumber);
-      }
-    });
+  const handleCheckboxChangeWrapper = (productNumber, checked) => {
+    handleCheckboxChange(productNumber, checked, selectedProducts, setSelectedProducts);
   };
 
   return (
@@ -96,7 +70,7 @@ const Cart = () => {
                     productNumber={item.productNumber}
                     userId={userDetails._id}
                     isChecked={selectedProducts.includes(item.productNumber)}
-                    handleCheckboxChange={handleCheckboxChange}
+                    handleCheckboxChange={handleCheckboxChangeWrapper}
                   />
                 ))}
               </ul>

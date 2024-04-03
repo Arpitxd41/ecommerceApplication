@@ -101,19 +101,19 @@ const ProductPage = () => {
               </h5>
               <div className='flex flex-row'>
                 <div className='float-left w-3/5 px-5 space-y-2'>
-                  <p className='flex flex-row items-center'>
+                  <div className='flex flex-row items-center'>
                     <i className="fa fa-star text-yellow-400 mr-2" aria-hidden="true"></i>
-                    <a className='text-green-600 font-bold text-xl'>{product.rating}</a>
-                  </p>
-                  <p className='text-black'>
+                    <p className='text-green-600 font-bold text-xl'>{product.rating}</p>
+                  </div>
+                  <div className='text-black'>
                     <i className="fa fa-certificate text-yellow-400 mr-2" aria-hidden="true"></i>
-                    Authentic <a href='somelink' className='text-gray-400 font-bold'>{product.brand}</a> Product
-                  </p>
+                    <p>Authentic <a href='somelink' className='text-gray-400 font-bold'>{product.brand}</a> Product</p>
+                  </div>
                   <p className='text-black text-4xl'>${product.price} /-</p>
-                  <p className='text-black'>
+                  <div className='text-black'>
                     <i className="fa fa-cart-plus text-blue-700 mr-2" aria-hidden="true"></i>
-                    {product.stock} Units available
-                  </p>
+                    <p>{product.stock} Units available</p>
+                  </div>
                   <h2 className='text-black'>{product.description}</h2>
                 </div>
                 <div className='float-right w-2/5 h-40 border overflow-hidden object-contain aspect-square'>

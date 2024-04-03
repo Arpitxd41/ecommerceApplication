@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 import EditUserForm from '../utils/roleCall.js';
 
@@ -9,8 +9,6 @@ const UserList = ({adminId}) => {
   const [error, setError] = useState(null);
   const [showEditUserForm, setShowEditUserForm] = useState(false);
   const [editButtonText, setEditButtonText] = useState('EDIT USER');
-  const navigate = useNavigate();
-
   useEffect(() => {
     const fetchUsers = async () => {
       try {
@@ -27,9 +25,7 @@ const UserList = ({adminId}) => {
     fetchUsers();
   }, []);
 
-  const handleRedirect = async (req, res) => {
-      navigate(`/orders/{user.id}`)
-  }
+  
 
   const toggleEditUserForm = () => {
     setShowEditUserForm(!showEditUserForm);

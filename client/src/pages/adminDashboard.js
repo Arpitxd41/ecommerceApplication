@@ -40,7 +40,6 @@ const AdminDashboard = () => {
     }
   }, [navigate]);
 
-  // Function to handle button click and set active content
   const handleButtonClick = (content) => {
     setActiveContent((prevContent) => (prevContent === content ? null : content));
   };

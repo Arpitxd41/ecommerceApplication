@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import ChartsEmbedSDK from '@mongodb-js/charts-embed-dom';
 
 const EmbeddedDashboard = ({ dashboardChart, dashboardChartId }) => {
-  const [dashboardWidth, setDashboardWidth] = useState(window.innerWidth * 0.9); // Set initial width
-  const [dashboardHeight, setDashboardHeight] = useState(window.innerHeight * 3.5); // Set initial height
+  const [dashboardWidth, setDashboardWidth] = useState(window.innerWidth * 0.9);
+  const [dashboardHeight, setDashboardHeight] = useState(window.innerHeight * 3.5);
 
   useEffect(() => {
     const sdk = new ChartsEmbedSDK({});
@@ -54,7 +54,7 @@ const EmbeddedDashboard = ({ dashboardChart, dashboardChartId }) => {
     return () => {
       window.removeEventListener('resize', handleResize);
     };
-  }, [dashboardWidth, dashboardHeight]);
+  }, [dashboardWidth, dashboardHeight, dashboardChart, dashboardChartId]);
 
   return (
     <div className='flex flex-col w-full bg-slate-950 py-12 px-6 justify-center'>
