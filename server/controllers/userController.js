@@ -8,7 +8,7 @@ const jwtToken = require('jsonwebtoken');
 const generateToken = (user) => {
     // GENERATING TOKEN
     const secretKey = process.env.JWT_SECRET || 'default-secret-key';
-    return jwtToken.sign({ userId: user._id, email: user.mail }, secretKey, { expiresIn: '20m' });
+    return jwtToken.sign({ userId: user._id, email: user.mail }, secretKey, { expiresIn: '30m' });
 };
 
 // REGISTER A NEW USER
