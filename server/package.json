@@ -5,7 +5,8 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "node server.js",
+    "build-server": "babel src/server -d dist/server"
   },
   "keywords": [],
   "author": "",
@@ -24,5 +25,8 @@
     "mongoose": "^8.0.1",
     "nodemon": "^3.0.1",
     "razorpay": "^2.9.2"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.24.4"
   }
 }
