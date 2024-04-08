@@ -42,30 +42,30 @@ const router = express.Router();
 router.get('/' , generateToken);
 router.post('/register', register);
 router.post('/login', login);
-router.get('/getUser/:id', getUser);
-router.put('/edittUser/:id', editUser);
-router.put('/addAddress/:id', addAddress)
-router.get('/getAllUsers', getAllUsers);
-router.put('/editUser/:id', editUser);
-router.put('/forgotPassword/:id', forgotPassword);
-router.delete('/deleteUser/:id', deleteUser);
+router.get('/getuser/:id', getUser);
+router.put('/edituser/:id', editUser);
+router.put('/addaddress/:id', addAddress)
+router.get('/getallusers', getAllUsers);
+router.put('/edituser/:id', editUser);
+router.put('/forgotpassword/:id', forgotPassword);
+router.delete('/deleteuser/:id', deleteUser);
 
 // READ ROUTES:
 router.get('/products', getAllProducts);
 router.get('/product/:id', getProductsById);
 
 // USER ROUTES:
-router.get('/user/:userId/cart', getUserCart);
-router.post('/user/:userId/cart/add/:productNumber', addToCart);
-router.put('/user/:userId/cart/update/:productNumber', updateCartItemQuantity);
-router.put('/user/:userId/cart/selectAll', selectAllCartItems);
-router.get('/user/:userId/cart/:productNumber', getCartProductDetails);
-router.delete('/user/:userId/cart/remove/:productNumber', removeFromCart);
-router.delete('/user/:userId/cart/remove', removeAllFromCart);
-router.get('/user/:userId/getOrder', getOrder);
+router.get('/user/cart/:userId', getUserCart);
+router.post('/user/cart/add/:userId/:productNumber', addToCart);
+router.put('/user/cart/update/:userId/:productNumber', updateCartItemQuantity);
+router.put('/user/cart/selectall/:userId', selectAllCartItems);
+router.get('/user/cart/:userId/:productNumber', getCartProductDetails);
+router.delete('/user/cart/remove/:userId/:productNumber', removeFromCart);
+router.delete('/user/cart/remove/:userId', removeAllFromCart);
 
 // PAYMENT ROUTES :
-router.post('/user/:userId/order', order);
+router.get('/user/getorder/:userId', getOrder);
+router.post('/user/order/:userId', order);
 router.post('/verify', verify);
 
 

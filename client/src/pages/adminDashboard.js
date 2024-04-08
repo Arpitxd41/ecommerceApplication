@@ -15,8 +15,6 @@ const AdminDashboard = () => {
   const [activeContent, setActiveContent] = useState(null);
   const navigate = useNavigate();
   const adminId = userDetails._id;
-  const dashboardChart = process.env.REACT_APP_DASHBOARD_CHART;
-  const dashboardChartId = process.env.REACT_APP_DASHBOARD_CHART_ID;
 
   useEffect(() => {
     const authToken = localStorage.getItem('authToken');
@@ -83,7 +81,7 @@ const AdminDashboard = () => {
         {activeContent === 'products' && <ProductList products={products} userDetails={userDetails} />}
         {activeContent === 'addProduct' && <AddProduct />}
         {activeContent === 'users' && <UserList adminId={adminId} />}
-        {activeContent === 'stats' && <Stats dashboardChart={dashboardChart} dashboardChartId={dashboardChartId} />}
+        {activeContent === 'stats' && <Stats />}
       </div>
 
       <Footer />

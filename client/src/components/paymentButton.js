@@ -17,13 +17,15 @@ const loadScript = (src) => {
 
 const PayButton = ({ userId, totalAmount, selectedProducts, selectedAddress }) => {
   const [errorMessage, setErrorMessage] = useState('');
+  const razorpayCheckout = process.env.REACT_APP_CHECKOUT_SCRIPT;
   
   const handlePaymentSuccess = () => {
     window.location.href = `/orders/${userId}`;
   };
 
   const displayRazorpay = async () => {
-    const res = await loadScript('https://checkout.razorpay.com/v1/checkout.js')
+    const res = await loadScript(`${razorpayCheckout}`)
+    const userHead = process.env.REACT_APP_USER;
     if (!res) {
       alert('Razorpay sdk failed to load. Check IF you are offline');
       return;
@@ -34,7 +36,7 @@ const PayButton = ({ userId, totalAmount, selectedProducts, selectedAddress }) =
         window.alert("Address not selected. Please select Address !");
         return;
       }
-      const data = await fetch(`https://localhost:5000/user/${userId}/order`, {
+      const data = await fetch(`${userHead}/order/${userId}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

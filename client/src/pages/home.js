@@ -18,7 +18,7 @@ const HomePage = () => {
     if (successMessage) {
         localStorage.removeItem('successMessage');
     }
-    if (!authToken) {
+    if (!authToken || !userDetails) {
       navigate('/login');
       return;
     }

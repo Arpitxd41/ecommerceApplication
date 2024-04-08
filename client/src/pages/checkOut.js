@@ -21,6 +21,9 @@ const CheckOut = () => {
   const navigate = useNavigate();
 
   const userId = userDetails._id;
+  const server = process.env.REACT_APP_SERVER;
+  const cartHead = process.env.REACT_APP_USER_CART;
+  const dummyProduct = process.env.REACT_APP_PRODUCTS;
 
   useEffect(() => {
     const fetchData = async () => {
@@ -51,9 +54,11 @@ const CheckOut = () => {
 
   useEffect(() => {
     const fetchProductDetails = async () => {
+      if (selectedProducts.length === 0) return;
+
       const productDetails = await Promise.all(
         selectedProducts.map(async (product) => {
-          const response = await fetch(`https://dummyjson.com/products/${product.productNumber}`);
+          const response = await fetch(`${dummyProduct}/${product.productNumber}`);
           if (response.ok) {
             const productData = await response.json();
             return { ...productData, quantity: product.quantity };
@@ -64,10 +69,8 @@ const CheckOut = () => {
       setProductDetails(productDetails);
     };
 
-    if (selectedProducts.length > 0) {
-      fetchProductDetails();
-    }
-  }, [selectedProducts]);
+    fetchProductDetails();
+  }, [selectedProducts, dummyProduct]);
 
   useEffect(() => {
     const amount = productDetails.reduce((total, product) => total + (product.quantity * product.price), 0);
@@ -78,7 +81,7 @@ const CheckOut = () => {
     const fetchAddresses = async () => {
       try {
         const authToken = localStorage.getItem('authToken');
-        const response = await fetch(`https://localhost:5000/getUser/${userId}`, {
+        const response = await fetch(`${server}/getuser/${userId}`, {
           method: 'GET',
           headers: {
             Authorization: `Bearer ${authToken}`
@@ -114,11 +117,11 @@ const CheckOut = () => {
     };
 
     fetchAddresses();
-  }, [userId]);
+  }, [userId, server]);
 
   const fetchUserCart = async (userId, authToken) => {
     try {
-      const response = await fetch(`https://localhost:5000/user/${userId}/cart`, {
+      const response = await fetch(`${cartHead}/${userId}`, {
         method: 'GET',
         headers: {
           Authorization: `Bearer ${authToken}`
@@ -129,7 +132,7 @@ const CheckOut = () => {
         const products = cartData.cartItems;
 
         const updatedProducts = await Promise.all(products.map(async (product) => {
-          const productResponse = await fetch(`https://dummyjson.com/products/${product.productNumber}`);
+          const productResponse = await fetch(`${dummyProduct}/${product.productNumber}`);
           if (productResponse.ok) {
             const productData = await productResponse.json();
             return { ...product, category: productData.category, brand: productData.brand };
@@ -156,13 +159,13 @@ const CheckOut = () => {
       [e.target.name]: e.target.value
     });
   };
-// TO ADD NEW ADDRESS
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const authToken = localStorage.getItem('authToken');
 
     try {
-      const response = await fetch(`https://localhost:5000/addAddress/${userDetails._id}`, {
+      const response = await fetch(`${server}/addaddress/${userDetails._id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -278,17 +281,17 @@ const CheckOut = () => {
             <div className='w-full overflow-y-scroll h-44 bg-red-500 border border-black rounded-sm px-5 py-5 space-y-4 my-2'>
               {addressesList}
             </div>
-        </div>
+          </div>
         </div>
         <h5 className='text-white font-bold text-lg'>Selected Address :</h5>
         <div className='w-full h-auto bg-white drop-shadow-lg shadow-inner shadow-black p-5 rounded-sm text-black font-semibold'>{selectedAddress && (
-              <div className='flex flex-col md:flex-row md:space-x-4'>
-                <p>{selectedAddress.street},</p>
-                <p>{selectedAddress.city} ({selectedAddress.postalCode})</p>
-                <p>Contact : {selectedAddress.phoneNumber}</p>
-              </div>
-            )}</div>
-        </div>
+          <div className='flex flex-col md:flex-row md:space-x-4'>
+            <p>{selectedAddress.street},</p>
+            <p>{selectedAddress.city} ({selectedAddress.postalCode})</p>
+            <p>Contact : {selectedAddress.phoneNumber}</p>
+          </div>
+        )}</div>
+      </div>
     </div>
   );
 };

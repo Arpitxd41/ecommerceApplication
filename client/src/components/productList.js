@@ -8,11 +8,13 @@ const ProductList = ({ userDetails }) => {
   const [sortingOrder, setSortingOrder] = useState('default');
   const [sortingType, setSortingType] = useState('none');
   const [matchedProducts, setMatchedProducts] = useState([]);
+  const dummyProducts = process.env.REACT_APP_PRODUCTS;
+  
 
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await axios.get(`https://dummyjson.com/products${selectedCategory ? `/category/${selectedCategory}` : ''}`);
+        const response = await axios.get(`${dummyProducts}${selectedCategory ? `/category/${selectedCategory}` : ''}`);
         const { products } = response.data;
         if (sortingType === 'none') {
           setMatchedProducts(products);
@@ -30,7 +32,7 @@ const ProductList = ({ userDetails }) => {
     };
 
     fetchProducts();
-  }, [selectedCategory, sortingOrder, sortingType]);
+  }, [selectedCategory, sortingOrder, sortingType, dummyProducts]);
 
   const handleCategoryChange = (category) => {
     setSelectedCategory(category);

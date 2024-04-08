@@ -34,7 +34,7 @@ const NavbarOne = ({ isLoggedIn }) => {
           <SearchBar />
         </div>
 
-        <div className="lg:hidden">
+        <div className="lg:hidden z-50">
           <button onClick={toggleMenu} className="text-red-600 text-3xl focus:outline-none">
             <i className={`fa ${showMenu ? 'fa-times' : 'fa-bars'}`} aria-hidden="true"></i>
           </button>

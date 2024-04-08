@@ -8,6 +8,7 @@ const CounterButtons = ({ product, userId }) => {
   const [inCart, setInCart] = useState(false);
   const productNumber = product.id;
   const navigate = useNavigate();
+  const cartHead = process.env.REACT_APP_USER_CART;
 
   const handleAddToCart = async () => {
     try {
@@ -23,7 +24,7 @@ const CounterButtons = ({ product, userId }) => {
     try {
       // Make request to add product to cart
       console.log('productNumber-------', productNumber);
-      await axios.post(`https://localhost:5000/user/${userId}/cart/add/${productNumber}`, { quantity });
+      await axios.post(`${cartHead}/add/${userId}/${productNumber}`, { quantity });
       // Redirect to cart page
       navigate(`/cart/${userId}`); 
     } catch (error) {

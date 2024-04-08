@@ -1,6 +1,7 @@
 export const fetchUserCart = async (userId, authToken, setCartProducts, setLoading) => {
+  const userCartHead = process.env.REACT_APP_USER_CART;
       try {
-        const response = await fetch(`https://localhost:5000/user/${userId}/cart`, {
+        const response = await fetch(`${userCartHead}/${userId}`, {
           method: 'GET',
           headers: {
             Authorization: `Bearer ${authToken}`

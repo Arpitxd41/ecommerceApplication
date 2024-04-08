@@ -8,13 +8,14 @@ const ProductFilter = ({ onCategoryChange, onSortingTypeChange, onSortingChange 
   const [sortingType, setSortingType] = useState('none');
   const [sortingOrder, setSortingOrder] = useState('default');
   const [orderDropdownActive, setOrderDropdownActive] = useState(false);
-
+  const dummyCategory = process.env.REACT_APP_PRODUCT_CATEGORIES;
+  
   useEffect(() => {
     // Fetch categories from the API
-    axios.get('https://dummyjson.com/products/categories')
+    axios.get(dummyCategory)
       .then(response => setCategories(response.data))
       .catch(error => console.error(error));
-  }, []);
+  }, [dummyCategory]);
 
   const handleCategoryChange = (event) => {
     const category = event.target.value;
@@ -88,7 +89,7 @@ const ProductFilter = ({ onCategoryChange, onSortingTypeChange, onSortingChange 
                 id='orderDropdown'
                 onChange={(e) => handleSortingChange(e.target.value)}
                 className='appearance-none rounded-sm bg-black border-x-0 border-t-0 text-white mx-1 md:w-56 w-full' >
-                <option value="default">Order:</option>
+                <option value="default">Sorting Order:</option>
                 <option value="descending">High to Low</option>
                 <option value="ascending">Low to High</option>
               </select>

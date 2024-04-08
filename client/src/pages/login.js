@@ -9,6 +9,7 @@ const Login = () => {
     const [password, setPassword] = useState('');
     const [errorMessage, setErrorMessage] = useState("");
     const navigate = useNavigate();
+    const server = process.env.REACT_APP_SERVER;
 
     useEffect(() => {
       window.scrollTo(0, 0);
@@ -17,7 +18,7 @@ const Login = () => {
     const handleSubmit = async (e) => {
       e.preventDefault();    
       try {
-          const result = await axios.post("https://localhost:5000/login", { mail, password });
+          const result = await axios.post(`${server}/login`, { mail, password });
           if (result.data.success) {
               const { token, user } = result.data;
               

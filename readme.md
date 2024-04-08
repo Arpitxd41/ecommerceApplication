@@ -82,3 +82,5 @@ In the frontend of the project I added a catalog where the user can see the prod
 
 <a href="https://iconscout.com/illustrations/shopping-day" class="text-underline font-size-sm" target="_blank">Shopping day</a> by <a href="https://iconscout.com/contributors/Aleshaku" class="text-underline font-size-sm">Ilusiku Studio</a> on <a href="https://iconscout.com" class="text-underline font-size-sm">IconScout</a>
 -->
+
+<!-- export HTTPS=true&&SSL_CRT_FILE=...certificate/cert.pem && SSL_KEY_FILE=.../certificate/key.pem  -->

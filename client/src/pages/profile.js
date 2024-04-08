@@ -10,6 +10,7 @@ const ProfilePage = () => {
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
   const [userData, setUserData] = useState(null);
+  const server = process.env.REACT_APP_SERVER;
   
   useEffect(() => {
     const authToken = localStorage.getItem('authToken');
@@ -35,7 +36,7 @@ const ProfilePage = () => {
 
   const fetchUser = async (userId, authToken) => {
     try {
-      const response = await axios.get(`https://localhost:5000/getUser/${userId}`, {
+      const response = await axios.get(`${server}/getuser/${userId}`, {
         headers: {
           Authorization: `Bearer ${authToken}`
         }
@@ -114,8 +115,9 @@ const ProfilePage = () => {
                 )}
               </div>
           </div>
-          <div className='bg-white drop-shadow-xl shadow-inner shadow-black rounded-md p-5 text-bold'>
-            <h5 className='text-black'>"Greetings viewer - I present a testament to my expertise in web development. Designed and developed entirely by me, this platform combines the latest technologies to deliver a seamless user experience. From sleek CSS and Tailwind CSS designs to responsive React components, every detail is meticulously crafted to ensure user satisfaction.<br />
+          <div className='bg-white drop-shadow-xl shadow-inner shadow-black rounded-md px-8 py-5 text-bold'>
+            <i className="fa fa-paperclip text-xl text-yellow-600" aria-hidden="true"></i>
+            <h5 className='text-black font-semibold'>"Greetings viewer - I present a testament to my expertise in web development. Designed and developed entirely by me, this platform combines the latest technologies to deliver a seamless user experience. From sleek CSS and Tailwind CSS designs to responsive React components, every detail is meticulously crafted to ensure user satisfaction.<br />
                          A robust backend built on Express.js and Node.js, with authentication secured using bcrypt and JWT Tokens. Leveraging MongoDB with Mongoose, product data and user information are managed efficiently. Integrating Razorpay for payment processing, ensured smooth transactions using ngrok for local testing. With icons, illustrations and animations the frontend is adorned with interactive elements, for an engaging user interface. This project not only showcases my frontend design skills but also highlights my proficiency in backend development and integration of third-party services, making it a standout addition to my web development portfolio."</h5>
           </div>        
         </div>

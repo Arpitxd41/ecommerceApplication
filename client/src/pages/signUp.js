@@ -12,7 +12,8 @@ const Signup = () => {
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
-
+    const server = process.env.REACT_APP_SERVER;
+    console.log(server);
     const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
@@ -25,7 +26,7 @@ const Signup = () => {
             }
 
             try {
-                const response = await axios.post("https://localhost:5000/register", {
+                const response = await axios.post(`${server}/register`, {
                   firstName,
                   lastName,
                   dob,

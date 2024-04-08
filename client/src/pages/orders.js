@@ -11,6 +11,7 @@ const Orders = () => {
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
   const { userId } = useParams();
+  const userHead = process.env.REACT_APP_USER;
 
   useEffect(() => {
     const authToken = localStorage.getItem('authToken');
@@ -38,7 +39,7 @@ const Orders = () => {
 
   const fetchUserOrders = async (userId, authToken) => {
     try {
-      const response = await fetch(`https://localhost:5000/user/${userId}/getOrder`, {
+      const response = await fetch(`${userHead}/getorder/${userId}`, {
         method: 'GET',
         headers: {
           Authorization: `Bearer ${authToken}`
@@ -74,7 +75,7 @@ const Orders = () => {
           <h1 className="text-3xl font-semibold">{userDetails.role} ACCESS</h1>
           <h1 className="text-white text-xl font-semibold">USER: {userId}</h1>
         </div>
-      <div className="">
+      <div className="p-2 h-96">
         {loading ? (
           <p>Loading...</p>
         ) : (

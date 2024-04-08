@@ -9,10 +9,12 @@ const UserList = ({adminId}) => {
   const [error, setError] = useState(null);
   const [showEditUserForm, setShowEditUserForm] = useState(false);
   const [editButtonText, setEditButtonText] = useState('EDIT USER');
+
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const response = await axios.get('https://localhost:5000/getAllUsers');
+        const server = process.env.REACT_APP_SERVER;
+        const response = await axios.get(`${server}/getallusers`);
         const userList = Object.values(response.data.users);
         setUsers(userList.reverse());
         setLoading(false);

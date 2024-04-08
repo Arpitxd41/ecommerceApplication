@@ -8,13 +8,15 @@ const StickyFooter = ({ cartProducts, setCartProducts, userDetails }) => {
   );
   const userId = userDetails._id;
   const navigate = useNavigate();
+  const userCart = process.env.REACT_APP_USER_CART;
 
   useEffect(() => {
     let price = 0;
     const selectedProducts = cartProducts.filter(product => product.checked);
     Promise.all(selectedProducts.map(async (product) => {
       try {
-        const response = await fetch(`https://dummyjson.com/products/${product.productNumber}`);
+        const dummyProducts = process.env.REACT_APP_PRODUCTS;
+        const response = await fetch(`${dummyProducts}/${product.productNumber}`);
         const productDetails = await response.json();
         price += productDetails.price * product.quantity;
       } catch (error) {
@@ -59,7 +61,7 @@ const StickyFooter = ({ cartProducts, setCartProducts, userDetails }) => {
       });
     }
 
-    fetch(`https://localhost:5000/user/${userId}/cart/selectAll`, {
+    fetch(`${userCart}/selectall/${userId}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json'
@@ -78,7 +80,7 @@ const StickyFooter = ({ cartProducts, setCartProducts, userDetails }) => {
   };
 
   const handleClearAll = () => {
-    fetch(`https://localhost:5000/user/${userId}/cart/remove`, {
+    fetch(`${userCart}/remove/${userId}`, {
       method: 'DELETE'
     })
       .then(response => {

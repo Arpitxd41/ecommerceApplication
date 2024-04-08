@@ -8,8 +8,9 @@ const CartItem = ({ productNumber, userId }) => {
 
   useEffect(() => {
     const fetchProductDetails = async () => {
+      const dummyProducts = process.env.REACT_APP_PRODUCTS;
       try {
-        const response = await fetch(`https://dummyjson.com/products/${productNumber}`);
+        const response = await fetch(`${dummyProducts}/${productNumber}`);
         if (response.ok) {
           const productData = await response.json();
           setProduct(productData);

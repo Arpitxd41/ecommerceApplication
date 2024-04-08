@@ -5,12 +5,15 @@ import { useNavigate } from 'react-router-dom';
 const CartButtons = ({ productNumber, userId, handleCheckboxChange }) => {
   const [quantity, setQuantity] = useState(1);
   const [isChecked, setIsChecked] = useState(false);
+  const [message, setMessage] = useState('');
   const navigate = useNavigate();
+  const userCart = process.env.REACT_APP_USER_CART;
 
   useEffect(() => {
     const fetchCartItem = async () => {
       try {
-        const response = await axios.get(`https://localhost:5000/user/${userId}/cart/${productNumber}`);
+        const cartHead = process.env.REACT_APP_USER_CART;
+        const response = await axios.get(`${cartHead}/${userId}/${productNumber}`);
         const cartItem = response.data;
         const { quantity: fetchedQuantity, checked } = cartItem;
         setQuantity(fetchedQuantity);
@@ -25,7 +28,7 @@ const CartButtons = ({ productNumber, userId, handleCheckboxChange }) => {
 
   const updateCartItem = async (newQuantity, checked) => {
     try {
-      await axios.put(`https://localhost:5000/user/${userId}/cart/update/${productNumber}`, { quantity: newQuantity, checked });
+      await axios.put(`${userCart}/update/${userId}/${productNumber}`, { quantity: newQuantity, checked });
       if (newQuantity === 0) {
         await removeProductFromCart();
       }
@@ -36,8 +39,11 @@ const CartButtons = ({ productNumber, userId, handleCheckboxChange }) => {
 
   const removeProductFromCart = async () => {
     try {
-      await axios.delete(`https://localhost:5000/user/${userId}/cart/remove/${productNumber}`);
-      window.location.reload();
+      await axios.delete(`${userCart}/remove/${userId}/${productNumber}`);
+      setMessage(`The product has been removed from the cart !!`);
+      setTimeout(() => {
+        window.location.reload();
+      }, 4000);
     } catch (error) {
       console.error("Error removing product from cart", error);
     }
@@ -71,7 +77,9 @@ const CartButtons = ({ productNumber, userId, handleCheckboxChange }) => {
   };
 
   return (
-    <div className="h-12 flex flex-row text-md font-semibold justify-between space-x-2 w-fit px-8 items-center">
+    <div className="h-12 flex flex-row text-md font-semibold justify-between space-x-2 w-fit px-8 items-center relative">
+
+      {message && <div className='left-0 w-full absolute bg-black text-white font-bold px-6 py-4 text-2xl text-center'>{message}</div>}
 
       {/* BUTTON */}
       <div className="items-center lg:text-2xl text-xl flex flex-row justify-evenly w-36 lg:w-52 bg-yellow-400 text-black px-2 py-1 rounded-sm shadow-xs shadow-black">

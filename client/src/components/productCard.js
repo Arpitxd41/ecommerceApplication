@@ -17,6 +17,7 @@ const ProductCard = ({ product }) => {
   const [userCart, setUserCart] = useState(null);
   const [message, setMessage] = useState('');
   const fetchUserCart = useCallback(async () => {
+
     try {
       // let userCart = await axios.get(`https://localhost:5000/user/${userId}/cart`);
       
@@ -34,10 +35,10 @@ const ProductCard = ({ product }) => {
 
   const { id, images, title, discountPercentage, price, rating } = product;
   const productNumber = id;
-
+  const userHead = process.env.REACT_APP_USER_CART;
   const handleAddToCart = async (e) => {
     try {
-      await axios.post(`https://localhost:5000/user/${userId}/cart/add/${productNumber}`, {quantity: 1});
+      await axios.post(`${userHead}/add/${userId}/${productNumber}`, {quantity: 1});
       setMessage(`${title} added to cart`);
       setTimeout(() => {
         setMessage('');

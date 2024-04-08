@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import ChartsEmbedSDK from '@mongodb-js/charts-embed-dom';
 
-const EmbeddedDashboard = ({ dashboardChart, dashboardChartId }) => {
+const EmbeddedDashboard = () => {
   const [dashboardWidth, setDashboardWidth] = useState(window.innerWidth * 0.9);
   const [dashboardHeight, setDashboardHeight] = useState(window.innerHeight * 3.5);
 
+  const dashboardChart = process.env.REACT_APP_DASHBOARD_CHART;
+  const dashboardChartId = process.env.REACT_APP_DASHBOARD_CHART_ID;
   useEffect(() => {
     const sdk = new ChartsEmbedSDK({});
     console.log("Dashboard Chart URL:", dashboardChart);

@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 
-const SearchBar = (userId) => {
+const SearchBar = ({ userId }) => {
   const [input, setInput] = useState("");
   const [results, setResults] = useState([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
-  
+  const dummyProducts = process.env.REACT_APP_PRODUCTS;
+  const dummyProduct = process.env.REACT_APP_PRODUCT;
 
   const fetchData = (value) => {
-    fetch('https://dummyjson.com/products')
+    fetch(dummyProducts)
       .then((response) => response.json())
       .then((data) => {
         const products = data.products || [];
@@ -33,7 +34,7 @@ const SearchBar = (userId) => {
   const handleSelectSuggestion = (suggestion) => {
     setInput(suggestion.title);
     const productNumber = suggestion.id;
-    const productUrl = `https://localhost:3000/product/${productNumber}`;
+    const productUrl = `${dummyProduct}/${productNumber}`;
     window.location.href = productUrl;
     setShowSuggestions(false);
   };

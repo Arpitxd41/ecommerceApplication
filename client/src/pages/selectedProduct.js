@@ -26,8 +26,9 @@ const ProductPage = () => {
 
   useEffect(() => {
     const fetchProduct = async () => {
+      const dummyProducts = process.env.REACT_APP_PRODUCTS;
       try {
-        const response = await axios.get(`https://dummyjson.com/products/${productNumber}`);
+        const response = await axios.get(`${dummyProducts}/${productNumber}`);
         setProduct(response.data);
       } catch (error) {
         console.error('Error fetching product:', error);
@@ -41,9 +42,10 @@ const ProductPage = () => {
 
   useEffect(() => {
     const fetchSimilarProducts = async () => {
+      const dummyCategory = process.env.REACT_APP_CATEGORY_PRODUCTS;
       try {
         if (product && product.category) {
-          const response = await axios.get(`https://dummyjson.com/products/category/${product.category}`);
+          const response = await axios.get(`${dummyCategory}/${product.category}`);
           setSimilarProducts(response.data.products);
         }
       } catch (error) {

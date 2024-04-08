@@ -6,10 +6,11 @@ const OrderedBundle = ({ order }) => {
 
   useEffect(() => {
     const fetchProducts = async () => {
+      const dummyProducts = process.env.REACT_APP_PRODUCTS;
       try {
         setLoading(true);
         const promises = order.selectedProducts.map(async (product) => {
-          const response = await fetch(`https://dummyjson.com/products/${product.productNumber}`);
+          const response = await fetch(`${dummyProducts}/${product.productNumber}`);
           if (response.ok) {
             const productDetails = await response.json();
             return { ...productDetails, quantity: product.quantity };
