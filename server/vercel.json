@@ -1,13 +1,14 @@
 {
       "version": 2,
+      "name": "ecommerce-app-by-arpit",
       "builds": [
-            { "src": "*.js", "use": "@vercel/static" }
+            { "src": "app.js", "use": "@vercel/node" }
       ],
       "routes": [
-            { "src": "/(.*)", "dest": "/" }
+            { "src": "/(.*)", "dest": "/app.js" }
       ],
       "rewrites": [
-            { "source": "/server(.*)", "destination": "/server" }
+            { "source": "/(.*)", "destination": "/" }
       ],
       "requireStack": [ "/vercel/path0/server/app.js", "/vercel/path0/server/server.js" ]
 }
