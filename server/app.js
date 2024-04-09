@@ -24,10 +24,8 @@ app.use(bodyParser.json());
 // Router
 app.use(userRouter);
 
-// Export the Express app
 module.exports = app;
 
-// Connect to the database and start the server
 connectToDB(() => {
     const server = require('./server.js');
     server.start();

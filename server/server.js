@@ -1,9 +1,9 @@
-const http = require('http'); // Change to http
+const http = require('http');
 const app = require('./app.js');
 
 const PORT = process.env.PORT || 5000;
 
-const server = http.createServer(app); // Change to http
+const server = http.createServer(app);
 
 function startServer() {
     server.listen(PORT, () => {
