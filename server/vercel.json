@@ -7,7 +7,7 @@
             { "src": "/(.*)", "dest": "/" }
       ],
       "rewrites": [
-            { "source": "/(.*)", "destination": "/" }
+            { "source": "/server(.*)", "destination": "/server" }
       ],
       "requireStack": [ "/vercel/path0/server/app.js", "/vercel/path0/server/server.js" ]
 }
