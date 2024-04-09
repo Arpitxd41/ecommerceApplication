@@ -13,6 +13,7 @@ const AdminDashboard = () => {
   const [products, setProducts] = useState([]);
   const [userDetails, setUserDetails] = useState({});
   const [activeContent, setActiveContent] = useState(null);
+  const [isUnauthorized, setIsUnauthorized] = useState(false);
   const navigate = useNavigate();
   const adminId = userDetails._id;
 
@@ -35,6 +36,11 @@ const AdminDashboard = () => {
     const isTokenValid = validateToken(authToken);
     if (!isTokenValid) {
       navigate('/login');
+      return;
+    }
+
+    if (userDetails.role !== 'admin') {
+      setIsUnauthorized(true);
     }
   }, [navigate]);
 
@@ -50,10 +56,17 @@ const AdminDashboard = () => {
 
       <Corousel />
       <div className='z-40 relative flex flex-col justify-center md:flex-row items-center px-12 mt-64 mb-24 md:my-64 lg:my-16'>
-        <div className='quicksand bg-black shadow-xl shadow-black px-12 items-center justify-center flex-col py-8 text-center my-8 md:my-20 lg:my-40 rounded-full align-middle md:space-x-4 text-2xl md:text-4xl font-bold'>
-          <h4 className='animate-characters'>{userDetails.role} :</h4>
-          <h1 className='animate-characters'>{userDetails.firstName}</h1>
-        </div>
+      {isUnauthorized ? (
+          <div className='quicksand bg-black shadow-xl shadow-black px-12 items-center justify-center flex-col py-8 text-center my-8 md:my-20 lg:my-40 rounded-full align-middle md:space-x-4 text-2xl md:text-4xl font-bold'>
+            <h4 className='animate-characters'>Warning:</h4>
+            <h1 className='animate-characters'>You are not authorized to access this page.</h1>
+          </div>
+        ) : (
+          <div className='quicksand bg-black shadow-xl shadow-black px-12 items-center justify-center flex-col py-8 text-center my-8 md:my-20 lg:my-40 rounded-full align-middle md:space-x-4 text-2xl md:text-4xl font-bold'>
+            <h4 className='animate-characters'>{userDetails.role} :</h4>
+            <h1 className='animate-characters'>{userDetails.firstName}</h1>
+          </div>
+        )}
       </div>
 
       {/* Buttons to toggle visibility of product list and other functionalities */}
