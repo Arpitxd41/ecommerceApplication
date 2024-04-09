@@ -14,7 +14,7 @@ const ProductList = ({ userDetails }) => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await axios.get(`${dummyProducts}${selectedCategory ? `/category/${selectedCategory}` : ''}`);
+        const response = await axios.get(`${dummyProducts}/${selectedCategory ? `/category/${selectedCategory}` : ''}`);
         const { products } = response.data;
         if (sortingType === 'none') {
           setMatchedProducts(products);

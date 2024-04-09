@@ -35,10 +35,10 @@ const ProductCard = ({ product }) => {
 
   const { id, images, title, discountPercentage, price, rating } = product;
   const productNumber = id;
-  const userHead = process.env.REACT_APP_USER_CART;
+  const userCartHead = process.env.REACT_APP_USER_CART;
   const handleAddToCart = async (e) => {
     try {
-      await axios.post(`${userHead}/add/${userId}/${productNumber}`, {quantity: 1});
+      await axios.post(`${userCartHead}/add/${userId}/${productNumber}`, {quantity: 1});
       setMessage(`${title} added to cart`);
       setTimeout(() => {
         setMessage('');

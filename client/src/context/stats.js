@@ -9,7 +9,6 @@ const EmbeddedDashboard = () => {
   const dashboardChartId = process.env.REACT_APP_DASHBOARD_CHART_ID;
   useEffect(() => {
     const sdk = new ChartsEmbedSDK({});
-    console.log("Dashboard Chart URL:", dashboardChart);
     const dashboard = sdk.createDashboard({
       baseUrl: dashboardChart,
       dashboardId: dashboardChartId,
