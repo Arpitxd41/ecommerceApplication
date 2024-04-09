@@ -26,7 +26,7 @@ const Login = () => {
               localStorage.setItem('userDetails', JSON.stringify(user));
 
               if (user.role === 'ADMIN') {
-                navigate('/dashboard');
+                navigate(`/dashboard/${user._id}`);
               } else {
                 navigate('/');
               }

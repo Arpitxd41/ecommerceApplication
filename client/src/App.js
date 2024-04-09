@@ -24,7 +24,7 @@ function App() {
           <Route path="/orders/:userId" element={<Orders />}></Route>
           <Route path="/profile/:userId" element={<Profile />}></Route>
           <Route path="/checkout/:userId" element={<Checkout />}></Route>
-          <Route path="/dashboard" element={<AdminDashboard />}></Route>
+          <Route path="/dashboard/:adminId" element={<AdminDashboard />}></Route>
           <Route path="/product/:productNumber" element={<ProductPage />}></Route>
         </Routes>
       </AuthProvider>
