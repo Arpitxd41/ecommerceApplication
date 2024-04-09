@@ -7,6 +7,6 @@
             { "src": "/(.*)", "dest": "/" }
       ],
       "rewrites": [
-            { "src": "/(.*)", "dest": "/" }
+            { "source": "/(.*)", "destination": "/" }
       ]
 }
