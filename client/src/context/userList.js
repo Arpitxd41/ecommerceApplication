@@ -67,7 +67,7 @@ const UserList = ({adminId}) => {
                 <h4>{user.firstName} {user.lastName}</h4>
               </div>
               <div className='w-3/4 flex flex-col md:flex-row md:items-center md:space-x-4 justify-start md:justify-between'>
-                <p className='flex w-fit md:w-1/6 bg-green-600 px-2 md:px-3 md:py-1 rounded-sm text-white text-sm md:text-md lg:text-lg font-semibold justify-center text-center'>{`${user.role}`}</p>
+                <p className='flex w-fit md:w-1/5 bg-green-600 px-2 rounded-full text-white text-sm font-semibold justify-center text-center'>{`${user.role}`}</p>
                 <p className='md:w-5/6'>{`${user.mail}`}</p>
                 <p className='md:w-5/6'>{`${user._id}`}</p>
               </div>

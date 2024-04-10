@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { validateToken } from '../utils/filter';
 import axios from 'axios';
 import NavbarOne from '../components/navbarOne';
-import profileImage from '../images/profile_Reg.png'
+import profileImage from '../images/kingStickmanByIconScoutStore.png'
 import Footer from '../data/user/standardFooter';
 
 const ProfilePage = () => {
@@ -64,14 +64,14 @@ const ProfilePage = () => {
       ) : (
         <div className="flex flex-col space-y-10 justify-center px-12 py-12 bg-gradient-to-tr from-fuchsia-700 via-cyan-500 to-violet-900">
           <div className="flex flex-col md:flex-row rounded-md drop-shadow-2xl shadow-inner shadow-black bg-white space-x-2 object-contain justify-between items-center">
-              <div className="md:float-left md:w-1/3">
+              <div className="md:float-left md:w-1/3 flex justify-center">
                     <img src={profileImage} alt="User" className='h-64 md:h-80' />
               </div>
               <div className="md:float-right md:w-2/3 p-2">
                 {userData && (
                   <div className='py-8'>
                       <div className='flex flex-row items-center space-x-2'>
-                        <i className="fa fa-check bg-lime-500 text-white rounded-full p-1 font-bold" aria-hidden="true"></i>
+                        <i className="fa fa-check bg-lime-500 text-white rounded-sm px-4 py-1 font-bold" aria-hidden="true"></i>
                         <h2 className='font-bold text-xl'>{userData.user.role} : {userData.user.firstName} {userData.user.lastName}</h2>
                       </div>
                       <hr />
@@ -115,8 +115,8 @@ const ProfilePage = () => {
                 )}
               </div>
           </div>
-          <div className='bg-white drop-shadow-xl shadow-inner shadow-black rounded-md px-8 py-5 text-bold'>
-            <i className="fa fa-paperclip text-xl text-yellow-600" aria-hidden="true"></i>
+          <div className='bg-white drop-shadow-xl shadow-inner shadow-black rounded-md px-8 py-5 text-bold space-y-2'>
+            <i className="fa fa-paperclip text-xl bg-yellow-500 text-white px-5 rounded-sm" aria-hidden="true"></i>
             <h5 className='text-black font-semibold'>"Greetings viewer - I present a testament to my expertise in web development. Designed and developed entirely by me, this platform combines the latest technologies to deliver a seamless user experience. From sleek CSS and Tailwind CSS designs to responsive React components, every detail is meticulously crafted to ensure user satisfaction.<br />
                          A robust backend built on Express.js and Node.js, with authentication secured using bcrypt and JWT Tokens. Leveraging MongoDB with Mongoose, product data and user information are managed efficiently. Integrating Razorpay for payment processing, ensured smooth transactions using ngrok for local testing. With icons, illustrations and animations the frontend is adorned with interactive elements, for an engaging user interface. This project not only showcases my frontend design skills but also highlights my proficiency in backend development and integration of third-party services, making it a standout addition to my web development portfolio."</h5>
           </div>        

@@ -3,7 +3,8 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { validateToken } from '../utils/filter.js';
 import NavbarOne from '../components/navbarOne.js';
 import OrderBundle from '../components/orderedBundle.js';
-import Footer from '../data/user/standardFooter';
+import payment from "../images/payements.png";
+import Footer from '../data/user/standardFooter.js';
 
 const Orders = () => {
   const [userDetails, setUserDetails] = useState({});
@@ -75,7 +76,7 @@ const Orders = () => {
           <h1 className="text-3xl font-semibold">{userDetails.role} ACCESS</h1>
           <h1 className="text-white text-xl font-semibold">USER: {userId}</h1>
         </div>
-      <div className="p-2 h-96">
+      <div className="p-2">
         {loading ? (
           <p>Loading...</p>
         ) : (
@@ -128,7 +129,9 @@ const Orders = () => {
           </div>
         )}
       </div>
-
+      <div className='flex items-center justify-around bg-gray-200'>
+        <img alt='footer' src={payment}/>
+      </div>
       <Footer />
     </div>
   );

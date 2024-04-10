@@ -43,7 +43,7 @@ const AddProduct = () => {
   };
 
   return (
-    <div className='flex flex-col md:flex-row w-full md:w-11/12 bg-gradient-to-r from-cyan-600 to-violet-600 px-4 py-5 md:p-12 my-5 rounded-sm md:space-x-12 space-y-8 justify-around'>
+    <div className='flex flex-col md:flex-row w-full md:w-5/6 bg-gradient-to-r from-cyan-600 to-violet-600 px-4 py-5 md:p-12 my-5 rounded-sm space-x-12 md:space-y-8 justify-around'>
       <div className='w-11/12 md:w-3/5 text-slate-950 bg-gray-100 drop-shadow-xl shadow-inner shadow-black rounded-xl p-2 md:p-8 space-y-5'>
         <h2 className='text-xl md:text-2xl font-bold text-center'>ADD NEW PRODUCT</h2>
           <form onSubmit={handleSubmit}

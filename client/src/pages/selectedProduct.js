@@ -140,7 +140,7 @@ const ProductPage = () => {
           <div className="bg-gray-300 rounded-xl drop-shadow-2xl shadow-inner shadow-black object-contain overflow-x-scroll justify-around mt-5 py-8 px-6">
             <div className='flex flex-row object-contain space-x-6 w-fit'>
               {similarProducts.map((similarProduct) => (
-                <ProductCard key={similarProduct.id} product={similarProduct} />
+                <ProductCard key={similarProduct.id} product={similarProduct} userDetails={userDetails} />
               ))}
             </div>
           </div>

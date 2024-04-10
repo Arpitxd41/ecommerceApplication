@@ -49,6 +49,11 @@ const AdminDashboard = () => {
       navigate('/login');
     } else {
       setActiveContent((prevContent) => (prevContent === content ? null : content));
+      const offset = 200;
+      window.scrollTo({
+        top: document.documentElement.scrollHeight + offset,
+        behavior: 'smooth'
+      });
     }
   };
 
