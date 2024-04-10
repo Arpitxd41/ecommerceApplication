@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import filterIcon from '../images/icons/filter.png';
 
 const ProductFilter = ({ onCategoryChange, onSortingTypeChange, onSortingChange }) => {
   const [categories, setCategories] = useState([]);
@@ -24,7 +23,6 @@ const ProductFilter = ({ onCategoryChange, onSortingTypeChange, onSortingChange 
   };
 
   const handleSortingTypeChange = (type) => {
-    console.log(sortingType);
     setSortingType(type);
     onSortingTypeChange(type);
     
@@ -33,7 +31,6 @@ const ProductFilter = ({ onCategoryChange, onSortingTypeChange, onSortingChange 
       setSortingOrder('default');
       setOrderDropdownActive(false);
     } else {
-      console.log(sortingOrder)
       setOrderDropdownActive(true);
     }
   };
@@ -46,7 +43,7 @@ const ProductFilter = ({ onCategoryChange, onSortingTypeChange, onSortingChange 
   return (
     <div className='bg-black flex flex-col md:flex-row px-2 md:px-12 h-fit rounded-sm w-full justify-evenly'>
       <div className='w-1/5 items-center justify-start hidden md:flex'>
-        <img src={filterIcon} className='h-12' alt='filter-icon'/>
+        <i className="fa fa-filter text-3xl border-2 p-2 rounded-md" aria-hidden="true"></i>
       </div>
       <div className='flex flex-col md:flex-row justify-center md:justify-evenly w-full md:w-4/5 py-5' >
         {/* Category Selection */}

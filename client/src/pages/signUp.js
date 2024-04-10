@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import axios from "axios";
-import unregProfile from "../images/profile_Reg.png";
 import image2 from '../images/andreaPiacquadio.jpg';
 
 const Signup = () => {
@@ -140,11 +139,7 @@ const Signup = () => {
                          </div>
                     </div>
                     <div className="flex flex-row space-x-2 h-20 items-center text-gray-50">
-                        <img
-                            className="h-12 p-1 border-lime-600 border-2 rounded-full"
-                            alt="Unregistered-profile"
-                            src={unregProfile}
-                        />
+                        <i className="fa fa-user-circle text-4xl" aria-hidden="true"></i>
                         <h6 className="">Already have an account</h6>
                         <a href="/login">
                             <p

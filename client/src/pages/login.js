@@ -94,11 +94,7 @@ const Login = () => {
                             </div>
                         </div>
                         <div className="flex flex-row space-x-2 h-20 items-center opacity-100">
-                          <img
-                            className="h-12 p-1 border-lime-600 border-2 rounded-full"
-                            alt="Unregistered-profile"
-                            src={unregProfile}
-                          />
+                          <i className="fa fa-user-circle text-4xl" aria-hidden="true"></i>
                           <h6> not a registered user ? : </h6>
                           <a href="/register">
                             <p

@@ -1,19 +1,27 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import logo from '../images/logo512.png';
 import SearchBar from '../utils/searchBar';
 
 const NavbarOne = ({ isLoggedIn }) => {
-  const userDetails = JSON.parse(localStorage.getItem('userDetails'));
-  const userId = userDetails._id;
+  let userDetails = JSON.parse(localStorage.getItem('userDetails'));
+  let userId = userDetails ? userDetails._id : process.env.REACT_APP_JOHN_DOE;
   const [showMenu, setShowMenu] = useState(false);
   const navigate = useNavigate();
 
   const handleLogoClick = () => {
-    if (userDetails.role === 'ADMIN') {
+    if (userDetails && userDetails.role === 'ADMIN') {
       navigate('/dashboard');
     } else {
       navigate('/');
+    }
+  };
+
+  const handleNavigation = (path) => {
+    if (userId === process.env.REACT_APP_JOHN_DOE) {
+      navigate('/login');
+    } else {
+      navigate(path);
     }
   };
 
@@ -23,7 +31,7 @@ const NavbarOne = ({ isLoggedIn }) => {
 
   return (
     <nav className='relative z-40 w-full'>
-      <div className='flex flex-row py-2 px-3 md:px-6 justify-between bg-slate-900 text-red-600 items-center lg:justify-evenly'>
+      <div className='flex flex-row py-2 px-3 md:px-6 justify-between bg-slate-950 text-yellow-500 items-center lg:justify-evenly'>
         <div className="w-1/5 md:w-1/12 logo h-12" onClick={handleLogoClick}>
           <div >
             <img src={logo} className='md:h-12 h-10 rounded-full' alt='appLogo' />
@@ -35,7 +43,7 @@ const NavbarOne = ({ isLoggedIn }) => {
         </div>
 
         <div className="lg:hidden z-50">
-          <button onClick={toggleMenu} className="text-red-600 text-3xl focus:outline-none">
+          <button onClick={toggleMenu} className="text-red-500 text-3xl focus:outline-none">
             <i className={`fa ${showMenu ? 'fa-times' : 'fa-bars'}`} aria-hidden="true"></i>
           </button>
         </div>
@@ -43,34 +51,34 @@ const NavbarOne = ({ isLoggedIn }) => {
         <ul className={`lg:flex lg:w-2/5 ${showMenu ? 'block absolute right-5 top-16 space-y-2' : 'hidden'} justify-evenly lg:items-center`}>
           <li className='rounded-sm hover:shadow-black hover:shadow-md hover:opacity-100 bg-black lg:bg-transparent cursor-pointer'>
             <button className='block lg:flex lg:flex-row items-center py-4 px-6 object-contain
-            lg:px-5 lg:py-2' onClick={handleLogoClick}>
+            lg:px-5 lg:py-2' onClick={() => handleNavigation('/')}>
               <i className="fa fa-home" aria-hidden="true"></i>
               <p className='hidden lg:flex ml-2 text-sm font-semibold text-gray-100'>HOME</p>
             </button>
           </li>
 
           <li className='rounded-sm hover:shadow-black hover:shadow-md hover:opacity-100 bg-black lg:bg-transparent'>
-            <Link className='block lg:flex lg:flex-row items-center py-4 px-6 object-contain
-            lg:px-5 lg:py-2' to={`/cart/${userId}`}>
-              <i className="fa fa-shopping-cart" aria-hidden="true"></i>
+            <button className='block lg:flex lg:flex-row items-center py-4 px-6 object-contain
+            lg:px-5 lg:py-2' onClick={() => handleNavigation(`/cart/${userId}`)}>
+              <i className="fa fa-shopping-cart text-red-500" aria-hidden="true"></i>
               <p className='hidden lg:flex ml-2 text-sm font-semibold text-gray-100'>CART</p>
-            </Link>
+            </button>
           </li>
 
           <li className='rounded-sm hover:shadow-black hover:shadow-md hover:opacity-100 bg-black lg:bg-transparent'>
-            <Link className='block lg:flex lg:flex-row items-center py-4 px-6 object-contain
-            lg:px-5 lg:py-2' to={`/orders/${userId}`}>
-              <i className="fa fa-shopping-bag" aria-hidden="true"></i>
+            <button className='block lg:flex lg:flex-row items-center py-4 px-6 object-contain
+            lg:px-5 lg:py-2' onClick={() => handleNavigation(`/orders/${userId}`)}>
+              <i className="fa fa-shopping-bag text-blue-500" aria-hidden="true"></i>
               <p className='hidden lg:flex ml-2 text-sm font-semibold text-gray-100'>MY ORDERS</p>
-            </Link>
+            </button>
           </li>
 
           <li className='rounded-sm hover:shadow-black hover:shadow-md hover:opacity-100 bg-black lg:bg-transparent'>
-            <Link className='block lg:flex lg:flex-row items-center py-4 px-6 object-contain
-            lg:px-5 lg:py-2' to={`/profile/${userId}`}>
-              <i className='fa fa-user' aria-hidden="true"></i>
+            <button className='block lg:flex lg:flex-row items-center py-4 px-6 object-contain
+            lg:px-5 lg:py-2' onClick={() => handleNavigation(`/profile/${userId}`)}>
+              <i className='fa fa-user text-lime-500' aria-hidden="true"></i>
               <p className='hidden lg:flex ml-2 text-sm font-semibold text-gray-100'>PROFILE</p>
-            </Link>
+            </button>
           </li>
 
         </ul>

@@ -13,20 +13,30 @@ const HomePage = () => {
  
   useEffect(() => {
     const authToken = localStorage.getItem('authToken');
-    const userDetails = JSON.parse(localStorage.getItem('userDetails'));
+    const storedUserDetails = JSON.parse(localStorage.getItem('userDetails'));
     const successMessage = localStorage.getItem('successMessage');
+    
     if (successMessage) {
         localStorage.removeItem('successMessage');
     }
-    if (!authToken || !userDetails) {
-      navigate('/login');
+
+    if (!authToken || !storedUserDetails) {
+      // guest details if not logged in 
+      const dummyUserDetails = {
+        firstName: 'John',
+        lastName: 'Doe',
+        id: process.env.REACT_APP_JOHN_DOE,
+        role: 'USER'
+      };
+      setUserDetails(dummyUserDetails);
       return;
     }
 
-    setUserDetails(userDetails);
+    setUserDetails(storedUserDetails);
     
     const fetchedProducts = [];
     setProducts(fetchedProducts);
+
     const isTokenValid = validateToken(authToken);
     if (!isTokenValid) {
       navigate('/login');
@@ -36,14 +46,14 @@ const HomePage = () => {
   return (
     <div className='shadow-inner shadow-black bg-gradient-to-l from-black to-slate-900 text-white'>
       <div className='flex justify-center'>
-        <NavbarOne />
+        <NavbarOne userDetails={userDetails} />
       </div>
 
       <Corousel />
       <div className='z-40 relative flex flex-col justify-center md:flex-row items-center px-12 mt-64 mb-24 md:my-64 lg:my-16'>
-        <div className='quicksand bg-black shadow-xl shadow-black px-12 items-center justify-center flex-col py-8 text-center my-8 md:my-20 lg:my-40 rounded-full align-middle md:space-x-4 text-2xl md:text-4xl font-bold'>
+        <div className='w-5/6 md:w-3/5 quicksand bg-black shadow-xl shadow-black px-12 items-center justify-center flex flex-col py-2 md:py-5 text-center my-8 md:my-20 lg:my-40 rounded-full align-middle md:space-x-4 text-2xl md:text-4xl font-bold'>
           <h4 className='animate-characters'>WELCOME !</h4>
-          <h1 className='animate-characters'>{userDetails.firstName}</h1>
+          <h1 className='text-lg animate-characters'>{userDetails.firstName} {userDetails.lastName}</h1>
         </div>
       </div>
       <div className='flex justify-center bg-black w-full'>

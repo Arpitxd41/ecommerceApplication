@@ -2,17 +2,17 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 
-const useUserAuthentication = () => {
-  const [userDetails, setUserDetails] = useState({});
-  useEffect(() => {
-    const storedUserDetails = JSON.parse(localStorage.getItem("userDetails"));
-    setUserDetails(storedUserDetails);
-  }, []);
-  return userDetails;
-}
+// const useUserAuthentication = () => {
+//   const [userDetails, setUserDetails] = useState({});
+//   useEffect(() => {
+//     const storedUserDetails = JSON.parse(localStorage.getItem("userDetails"));
+//     setUserDetails(storedUserDetails);
+//   }, []);
+//   return userDetails;
+// }
 
-const ProductCard = ({ product }) => {
-  const userDetails = useUserAuthentication();
+const ProductCard = ({ product, userDetails }) => {
+  // const userDetails = useUserAuthentication();
   const userId = userDetails._id;
   const [userCart, setUserCart] = useState(null);
   const [message, setMessage] = useState('');
@@ -81,7 +81,7 @@ const ProductCard = ({ product }) => {
           </button>
           {userDetails && (
             <button onClick={handleAddToCart} className="w-52 bg-black border border-black rounded-sm shadow-sm shadow-black">
-              <span className="font-semibold hover:underline">
+              <span className="font-semibold">
                 ADD TO CART
               </span>
             </button>

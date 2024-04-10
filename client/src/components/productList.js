@@ -50,8 +50,8 @@ const ProductList = ({ userDetails }) => {
     <div className="w-full flex flex-col-reverse bg-gradient-to-r from-violet-600 via-cyan-500 to-fuchsia-500 relative z-20 rounded-sm justify-center shadow-inner-black">
 
       {/* PRODUCT LIST */}
-      <div className="grid grid-cols-2 gap-1 bg-gray-300 drop-shadow-2xl rounded-sm shadow-inner shadow-black border my-10 mx-0  
-      lg:grid-cols-4 lg:gap-8 lg:w-11/12 lg:float-left lg:mx-14 lg:p-10
+      <div className="grid grid-cols-2 gap-1 bg-gray-300 drop-shadow-2xl rounded-sm shadow-inner shadow-black my-10 mx-0 items-center align-middle 
+      lg:grid-cols-4 lg:gap-8 lg:w-11/12 lg:float-left lg:mx-14 lg:py-12 lg:px-2
       md:grid-cols-3 md:gap-4 md:mx-8 md:p-6">
         {matchedProducts.map(product => (
           <ProductCard key={product.id} product={product} userDetails={userDetails} />

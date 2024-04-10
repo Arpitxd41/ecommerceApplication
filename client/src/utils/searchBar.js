@@ -42,7 +42,7 @@ const SearchBar = ({ userId }) => {
   return (
     <div className="relative w-11/12">
       <div className="relative flex items-center h-10 rounded-full w-full">
-        <div className="items-center h-10 text-gray-100 px-2 py-2 bg-red-600 rounded-l-full">
+        <div className="items-center h-10 text-gray-100 px-2 py-2 bg-blue-500 rounded-l-full">
           <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
           </svg>
