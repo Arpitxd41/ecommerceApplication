@@ -43,7 +43,7 @@ const ProductFilter = ({ onCategoryChange, onSortingTypeChange, onSortingChange 
   return (
     <div className='bg-black flex flex-col md:flex-row px-2 md:px-12 h-fit rounded-sm w-full justify-evenly'>
       <div className='w-1/5 items-center justify-start hidden md:flex'>
-        <i className="fa fa-filter text-3xl border-2 p-2 rounded-md" aria-hidden="true"></i>
+        <i className="fa fa-filter text-2xl border-2 p-2 rounded-md" aria-hidden="true"></i>
       </div>
       <div className='flex flex-col md:flex-row justify-center md:justify-evenly w-full md:w-4/5 py-5' >
         {/* Category Selection */}
