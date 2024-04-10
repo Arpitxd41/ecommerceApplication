@@ -13,7 +13,6 @@ import axios from 'axios';
 
 const ProductCard = ({ product, userDetails }) => {
   // const userDetails = useUserAuthentication();
-  console.log(userDetails);
   const userId = userDetails._id;
   const [userCart, setUserCart] = useState(null);
   const [message, setMessage] = useState('');
