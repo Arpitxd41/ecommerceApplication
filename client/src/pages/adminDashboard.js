@@ -39,7 +39,7 @@ const AdminDashboard = () => {
       return;
     }
 
-    if (userDetails.role !== 'admin') {
+    if (userDetails.role !== 'ADMIN') {
       setIsUnauthorized(true);
     }
   }, [navigate]);
@@ -61,7 +61,7 @@ const AdminDashboard = () => {
       <Corousel />
       <div className='z-40 relative flex flex-col justify-center md:flex-row items-center px-12 mt-64 mb-24 md:my-64 lg:my-16'>
         {isUnauthorized ? (
-          <div className='quicksand bg-red-500 shadow-xl shadow-black px-12 items-center justify-center flex-col py-8 text-center my-8 md:my-20 lg:my-40 rounded-full align-middle md:space-x-4 text-2xl md:text-4xl font-bold'>
+          <div className='quicksand bg-red-600 shadow-xl shadow-black px-12 items-center justify-center flex-col py-2 text-center my-8 md:my-20 lg:my-40 rounded-full align-middle md:space-x-4 text-2xl md:text-4xl font-bold'>
             <h4 className='text-white'>Warning:</h4>
             <h1 className='text-white'>You are not authorized to access this page.</h1>
           </div>
