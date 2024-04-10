@@ -34,7 +34,7 @@ const CartItem = ({ productNumber, userId }) => {
     console.log('true');
   }
   return (
-    <div className='h-96'>
+    <div className=''>
       <li className='bg-gradient-to-r from-cyan-500 to-black p-5 md:px-5
       lg:px-8 border-t'>
         {loading ? (

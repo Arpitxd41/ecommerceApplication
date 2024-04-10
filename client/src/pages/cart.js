@@ -63,7 +63,7 @@ const Cart = () => {
         ) : (
           <>
             {cartProducts.length ? (
-              <ul className=''>
+              <ul className='h-96'>
                 {cartProducts.map((item) => (
                   <CartItem
                     key={item.productNumber}

@@ -69,7 +69,7 @@ const NavbarOne = ({ isLoggedIn }) => {
             <button className='block lg:flex lg:flex-row items-center py-4 px-6 object-contain
             lg:px-5 lg:py-2' onClick={() => handleNavigation(`/orders/${userId}`)}>
               <i className="fa fa-shopping-bag text-blue-500" aria-hidden="true"></i>
-              <p className='hidden lg:flex ml-2 text-sm font-semibold text-gray-100'>MY ORDERS</p>
+              <p className='hidden lg:flex ml-2 text-sm font-semibold text-gray-100'>ORDERS</p>
             </button>
           </li>
 
