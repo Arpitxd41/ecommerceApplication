@@ -53,7 +53,7 @@ const Cart = () => {
           <NavbarOne />
         </div>
 
-        <div className='flex flex-row h-16 md:h-12 px-8 text-center bg-black text-md text-gray-100 justify-between shadow-md shadow-black'>
+        <div className='flex flex-row h-16 md:h-12 px-8 text-center bg-black text-md text-gray-100 justify-between shadow-md shadow-black mt-20'>
           <h2 className='text-md font-semibold py-2'>{cartProducts.length ? `Hurry ${userDetails.firstName}! Checkout your products now before they're gone..` : 'No product added to cart, Grab the products before they are gone'}</h2>          
         </div>
 

@@ -278,7 +278,8 @@ const CheckOut = () => {
             </form>
           </div>
           <div className='p-5 md:w-1/3 md:float-right items-center flex flex-col justify-center space-y-2'>
-            <div className='w-full overflow-y-scroll h-44 bg-red-500 border border-black rounded-sm px-5 py-5 space-y-4 my-2'>
+            <div className='w-full overflow-y-scroll h-44 bg-red-500 border border-black rounded-sm px-5 py-2 space-y-2 my-2'>
+              <p className='text-white font-bold text-sm'><i class="fa fa-map-marker" aria-hidden="true"></i> Tap on address to select</p>
               {addressesList}
             </div>
           </div>

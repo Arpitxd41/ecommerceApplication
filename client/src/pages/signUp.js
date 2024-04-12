@@ -49,7 +49,7 @@ const Signup = () => {
   return (
     <div className="bg-black flex flex-row bg-cover bg-center bg-no-repeat px-8 justify-center"
     style={{ backgroundImage: `url(${image2})`}}>
-        <div className="text-gray-50 bg-black bg-opacity-90 py-10 px-12 drop-shadow-xl shadow-black shadow-inner">
+        <div className="text-gray-50 bg-black bg-opacity-90 py-40 md:py-12 px-12 drop-shadow-xl shadow-black shadow-inner">
             <div className="flex flex-col h-8 space-x-2 items-center">
                 <h2 className="animate-characters text-2xl font-bold">SIGN UP :</h2>
             </div>

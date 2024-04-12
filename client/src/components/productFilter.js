@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import filter from '../images/icons/filter.png';
 
 const ProductFilter = ({ onCategoryChange, onSortingTypeChange, onSortingChange }) => {
   const [categories, setCategories] = useState([]);
@@ -44,7 +43,7 @@ const ProductFilter = ({ onCategoryChange, onSortingTypeChange, onSortingChange 
   return (
     <div className='bg-black flex flex-col md:flex-row px-2 md:px-12 h-fit rounded-sm w-full justify-evenly'>
       <div className='w-1/5 items-center justify-start hidden md:flex'>
-        <img src={filter} alt='filter' className='h-10' />
+        <i className="fa fa-sliders text-3xl font-semibold" aria-hidden="true"></i>
       </div>
       <div className='flex flex-col md:flex-row justify-center md:justify-evenly w-full md:w-4/5 py-5' >
         {/* Category Selection */}

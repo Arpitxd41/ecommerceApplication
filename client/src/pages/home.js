@@ -5,6 +5,7 @@ import NavbarOne from '../components/navbarOne';
 import Corousel from '../components/corousel';
 import ProductList from '../components/productList';
 import { validateToken } from '../utils/filter';
+import Footer from '../data/user/standardFooter';
 
 const HomePage = () => {
   const [products, setProducts] = useState([]);
@@ -44,7 +45,7 @@ const HomePage = () => {
   }, [ navigate ]);
 
   return (
-    <div className='shadow-inner shadow-black bg-gradient-to-l from-black to-slate-900 text-white'>
+    <div className='shadow-inner shadow-black bg-black text-white'>
       <div className='flex justify-center'>
         <NavbarOne userDetails={userDetails} />
       </div>
@@ -61,14 +62,9 @@ const HomePage = () => {
       </div>
       <div className='p-2 object-contain h-fit'>
         <hr className='border-gray-950 my-12 relative z-40'/>
-        <div className='footer w-full text-center flex justify-center h-40 relative z-40'>
-          <div className="">
-              <p className="object-contain h-12 items-center align-middle rounded-full px-8 py-2 bg-black shadow-xl shadow-black text-slate-300">
-               <a href="{somelink}" className="hover:underline mb-2"> Made with <i className="fa fa-heart animate-characters h-12 text-lg"></i> by Arpit</a>
-              </p>
-          </div>
-        </div>
       </div>
+
+      <Footer />
     </div>
   );
 };

@@ -52,7 +52,7 @@ const Login = () => {
             </h2>
             <div className="flex flex-row bg-cover bg-center bg-no-repeat px-8 justify-center"
             style={{ backgroundImage: `url(${image3})`}}>
-                <div className="text-gray-50 bg-black bg-opacity-90 py-12 px-12 drop-shadow-xl shadow-black shadow-inner">
+                <div className="text-gray-50 bg-black bg-opacity-90 py-40 md:py-12 px-12 drop-shadow-xl shadow-black shadow-inner">
 
                     <div className="flex h-8 space-x-2 items-center justify-center">
                       <h2 className="animate-characters text-2xl font-bold">LOGIN :</h2>

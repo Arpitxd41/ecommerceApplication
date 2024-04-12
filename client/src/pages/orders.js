@@ -72,9 +72,9 @@ const Orders = () => {
   return (
     <div className="bg-gray-200">
       <NavbarOne />
-        <div className='text-center items-center bg-black px-8 py-2 justify-between flex flex-row'>
-          <h1 className="text-3xl font-semibold">{userDetails.role} ACCESS</h1>
-          <h1 className="text-white text-xl font-semibold">USER: {userId}</h1>
+        <div className='text-center items-center bg-black md:px-8 py-2 justify-between flex flex-row'>
+          <h1 className="text-md md:text-xl lg:text-3xl font-semibold">{userDetails.role} ACCESS</h1>
+          <h1 className="text-white text-sm md:text-lg lg:text-xl font-semibold"> <i class="fa fa-user" aria-hidden="true"> </i>UID{userId}</h1>
         </div>
       <div className="p-2">
         {loading ? (
