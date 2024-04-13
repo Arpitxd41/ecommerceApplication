@@ -74,13 +74,13 @@ const ProductCard = ({ product, userDetails }) => {
           <p className="text-gray-50 font-bold text-md bg-red-600 rounded-full px-4 py-1 w-32 md:w-44">{discountPercentage}% OFF</p>
         </div>
         <div className="flex flex-row w-9/10 justify-between text-white text-xl font-bold">
-          <button className="w-1/4 bg-lime-600 border border-lime-600 rounded-sm shadow-sm shadow-black">
+          <button className="w-1/4 bg-lime-600 border border-lime-600 rounded-l-sm md:rounded-sm md:shadow-sm shadow-black">
             <Link to={`/product/${productNumber}`} className="hover:underline">
               <i className="fa fa-external-link" aria-hidden="true"></i>
             </Link>
           </button>
           {userDetails && (
-            <button onClick={handleAddToCart} className="w-52 bg-black border border-black rounded-sm shadow-sm shadow-black">
+            <button onClick={handleAddToCart} className="w-40 md:w-52 bg-black border border-black rounded-r-sm md:rounded-sm md:shadow-sm shadow-black">
               <span className="font-semibold">
                 ADD TO CART
               </span>

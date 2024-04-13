@@ -45,11 +45,11 @@ const CounterButtons = ({ product, userId }) => {
   };
 
   return (
-    <div className="h-12 flex flex-row text-black text-md font-semibold justify-between space-x-2 w-fit">
+    <div className="h-12 flex flex-row text-black text-sm md:text-md font-semibold justify-between space-x-2 w-full">
       {error ? (
         <p style={{ color: "red" }}>{error}</p>
       ) : inCart ? (
-        <div className="text-xl flex flex-row justify-evenly w-52 border-black border-2 bg-yellow-400 px-2 py-1 rounded-sm shadow-sm shadow-black items-center">
+        <div className="text-xl flex flex-row justify-evenly w-1/2 bg-yellow-400 px-2 py-1 rounded-sm shadow-sm shadow-black items-center">
           <button onClick={handleDecrement}>-</button>
           <span className='shadow-sm shadow-black items-center text-center h-8 text-xl w-8'>{quantity}</span>
           <button onClick={handleIncrement}>+</button>
@@ -57,7 +57,7 @@ const CounterButtons = ({ product, userId }) => {
       ) : (
         <button
           onClick={handleAddToCart}
-          className="bg-yellow-400 w-52 px-5 py-2 border-2 border-yellow-400 rounded-sm shadow-sm shadow-black"
+          className="bg-yellow-400 w-1/2 px-5 py-2 border-2 border-yellow-400 rounded-sm shadow-sm shadow-black"
         >
           ADD TO CART
         </button>
@@ -65,7 +65,7 @@ const CounterButtons = ({ product, userId }) => {
 
       <button 
         onClick={handleBuyNow}
-        className='w-44 text-md bg-orange-500 px-8 py-2 rounded-sm shadow-sm shadow-black'>
+        className='w-1/2 text-md bg-orange-500 px-8 py-2 rounded-sm shadow-sm shadow-black'>
         BUY NOW
       </button>
     </div>

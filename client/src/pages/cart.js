@@ -53,7 +53,7 @@ const Cart = () => {
           <NavbarOne />
         </div>
 
-        <div className='flex flex-row h-16 md:h-12 px-8 text-center bg-black text-md text-gray-100 justify-between shadow-md shadow-black mt-20'>
+        <div className='flex flex-row h-16 md:h-12 px-8 text-center bg-black text-md text-gray-100 justify-between shadow-md shadow-black'>
           <h2 className='text-md font-semibold py-2'>{cartProducts.length ? `Hurry ${userDetails.firstName}! Checkout your products now before they're gone..` : 'No product added to cart, Grab the products before they are gone'}</h2>          
         </div>
 
@@ -75,7 +75,7 @@ const Cart = () => {
                 ))}
               </ul>
             ) : (
-              <div className="flex justify-center items-center h-full bg-transparent flex-col md:py-16 space-y-6">
+              <div className="flex justify-center items-center h-full bg-transparent flex-col py-28 md:py-16 space-y-6">
                 <h2 className='text-2xl font-bold'>Empty Cart</h2>
                 <div className='bg-yellow-500 rounded-full p-8'>
                   <img src={emptyCart} alt="Empty Cart" className="w-40 h-40" />
