@@ -70,7 +70,7 @@ const ProductCard = ({ product, userDetails }) => {
           {message && <div className='left-0 w-full absolute bg-black text-white font-bold px-6 py-4 text-2xl text-center'>{message}</div>}
         <div className="w-fit flex flex-col space-y-2 items-center pb-2 text-center mx-10">
           <h3 className="text-xl h-6 font-semibold overflow-hidden"> {title} </h3>
-          <p className="text-gray-950 font-semibold text-2xl">₹ {price} /-</p>
+          <p className="text-gray-950 font-semibold text-2xl">$ {price} /-</p>
           <p className="text-gray-50 font-bold text-md bg-red-600 rounded-full px-4 py-1 w-32 md:w-44">{discountPercentage}% OFF</p>
         </div>
         <div className="flex flex-row w-9/10 justify-between text-white text-xl font-bold">

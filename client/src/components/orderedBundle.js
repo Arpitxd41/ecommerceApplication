@@ -44,7 +44,7 @@ const OrderedBundle = ({ order }) => {
                   </div>
                   <div className='font-semibold w-44'>
                         <p className='overflow-x-hidden'>{product.title}</p>
-                        <p className=''> ₹ {product.price}</p>
+                        <p className=''> $ {product.price}</p>
                         <p className=''>Quantity: {product.quantity}</p>
                   </div>
             </div>

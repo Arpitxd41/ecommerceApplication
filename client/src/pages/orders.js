@@ -100,7 +100,7 @@ const Orders = () => {
                         {order.paymentDetails.length > 0 && (
                           <p className='font-bold'>Payment Method : {order.paymentDetails[0].method}</p>
                         )}
-                          <h4 className='font-bold'>Amount : ₹ {order.totalAmount}</h4>
+                          <h4 className='font-bold'>Amount : $ {order.totalAmount}</h4>
                         </div>
                       </div>
                       <div className='w-full flex flex-col px-2'>

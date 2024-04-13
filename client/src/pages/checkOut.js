@@ -111,7 +111,7 @@ const CheckOut = () => {
           setAddressesList(<p>Error fetching user data.</p>);
         }
       } catch (error) {
-        console.error('Error fetching user data:', error);
+        console.error('Adresses not available at this moment:', error);
         setAddressesList(<p>Error fetching user data.</p>);
       }
     };
@@ -216,8 +216,8 @@ const CheckOut = () => {
                       </div>
                     </div>
                     <div className='pl-4'>{product.quantity}</div>
-                    <div className='pl-4'>₹{product.price}/-</div>
-                    <div className='pl-4'>₹{product.quantity * product.price}/-</div>
+                    <div className='pl-4'>$ {product.price}/-</div>
+                    <div className='pl-4'>$ {product.quantity * product.price}/-</div>
                   </div>
                 </div>
               </div>
@@ -232,7 +232,7 @@ const CheckOut = () => {
             <div className='col-span-1'>
               <div className='border-black border-b w-full'>
                 <div className='flex justify-end p-2'>
-                  <div className='text-3xl'>₹{totalAmount}/-</div>
+                  <div className='text-3xl'>$ {totalAmount}/-</div>
                 </div>
               </div>
             </div>

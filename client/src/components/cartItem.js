@@ -46,13 +46,13 @@ const CartItem = ({ productNumber, userId }) => {
                 <h3 className='h-8 overflow-y-hidden text-lg lg:text-2xl font-bold'>{product.title}</h3>
                 <p className='text-red-500 font-bold'>{product.discountPercentage} % OFF</p>
                 <p className=''>only {product.stock} left in cart</p>
-                <p className=''>₹ {product.price}</p>
+                <p className=''>$ {product.price}</p>
               </div>
               <img className='lg:w-32 w-28 object-cover bg-white' src={product.thumbnail} alt={product.title} />
             </div>
             <div className='text-xl lg:text-2xl font-bold text-white flex flex-row'>
               <i className="fa fa-tag mr-2 text-yellow-400 mt-2" aria-hidden="true"></i>
-              <p>Price: ₹ {product.price}</p>
+              <p>Price: $ {product.price}</p>
             </div>
             <CounterButtons productNumber={productNumber} userId={userId} handleCheckboxChange={handleLocalCheckboxChange} />
           </div>

@@ -104,7 +104,7 @@ const StickyFooter = ({ cartProducts, setCartProducts, userDetails }) => {
   return (
     <div className="text-sm md:text-lg sticky bottom-0 left-0 right-0 bg-slate-950 shadow-md shadow-black py-2 px-2 md:px-8 flex justify-between items-center text-white font-semibold">
       <div className="w-1/4 md:w-1/5 flex items-center">
-        <span className='text-lg'>₹{totalPrice.toFixed(2)}</span>
+        <span className='text-lg'>$ {totalPrice.toFixed(2)}</span>
       </div>
       <div className="w-1/5 hidden md:flex flex-row items-center">
         <div className="flex flex-row items-center">
