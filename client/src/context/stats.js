@@ -58,14 +58,13 @@ const EmbeddedDashboard = () => {
   }, [dashboardWidth, dashboardHeight, dashboardChart, dashboardChartId]);
 
   return (
-    <div className='flex flex-col w-full bg-slate-950 py-12 px-6 justify-center'>
-      <div className='flex justify-center'>
+    <div className='flex flex-col w-full bg-slate-950 py-12 px-2 md:px-6 justify-center'>
+      <div className='flex justify-center flex-col'>
         <h4 className='text-3xl animate-characters font-bold mb-4'>INSIGHTS AND ANALYTICS</h4>
+        <p className='text-sm'>(free flow chart)</p>
       </div>
-      <div className='flex flex-row space-x-2 bg-zinc-300 drop-shadow-xl shadow-inner shadow-black justify-center py-5 px-0'>
-        <i className="fa fa-chevron-left text-black font-bold text-lg" aria-hidden="true"></i>
+      <div className='flex bg-zinc-300 drop-shadow-xl shadow-inner shadow-black justify-center py-5 px-1'>
         <div id="dashboard" />
-        <i className="fa fa-chevron-right text-black font-bold text-lg" aria-hidden="true"></i>
       </div>
     </div>
   );

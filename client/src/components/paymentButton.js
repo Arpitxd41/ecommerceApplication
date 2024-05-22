@@ -17,15 +17,16 @@ const loadScript = (src) => {
 
 const PayButton = ({ userId, totalAmount, selectedProducts, selectedAddress }) => {
   const [errorMessage, setErrorMessage] = useState('');
-  const razorpayCheckout = process.env.REACT_APP_CHECKOUT_SCRIPT;
+  const RAZOPRPAY_CHECKOUT = process.env.REACT_APP_CHECKOUT_SCRIPT;
   
   const handlePaymentSuccess = () => {
     window.location.href = `/orders/${userId}`;
   };
 
   const displayRazorpay = async () => {
-    const res = await loadScript(`${razorpayCheckout}`)
-    const userHead = process.env.REACT_APP_USER;
+    const res = await loadScript(`${RAZOPRPAY_CHECKOUT}`)
+    const SERVER = process.env.REACT_APP_DEVELOPMENT_SERVER;
+    // const SERVER = process.env.REACT_APP_PRODUCTION_SERVER;
     if (!res) {
       alert('Razorpay sdk failed to load. Check IF you are offline');
       return;
@@ -36,7 +37,7 @@ const PayButton = ({ userId, totalAmount, selectedProducts, selectedAddress }) =
         window.alert("Address not selected. Please select Address !");
         return;
       }
-      const data = await fetch(`${userHead}/order/${userId}`, {
+      const data = await fetch(`${SERVER}/user/order/${userId}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -47,7 +48,7 @@ const PayButton = ({ userId, totalAmount, selectedProducts, selectedAddress }) =
       console.log('data from backend', data);
       
       const options = {
-        key: process.env.RAZORPAY_API_KEY,
+        key: process.env.REACT_APP_RAZORPAY_API_KEY,
         currency: data.currency,
         amount: totalAmount,
         order_id: data.id,
@@ -56,21 +57,19 @@ const PayButton = ({ userId, totalAmount, selectedProducts, selectedAddress }) =
         prefill: {
             name: "Arpit Tiwari",
             email: "arpitnt100@gmail.com",
-            contact: "9993140470"
+            contact: "9997778880"
         },
         notes: {
             address: "Somewhere on Earth"
         },
         theme: {
-            color: "#111"
+            color: "#000"
         },
         handler: function(response) {
-          // Redirect to orders page after payment success
           handlePaymentSuccess();
         },
         modal: {
           ondismiss: function() {
-            // Redirect to orders page if payment window is closed
             window.location.href = `/orders/${userId}`;
           }
         }

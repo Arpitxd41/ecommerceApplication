@@ -4,11 +4,8 @@ const UserModel = require('./userModel');
 
 
 const cartItemSchema = new mongoose.Schema({
-  productNumber: {
-    type: Number,
-    required: true,
-    min: 1,
-    max: 100
+  productId: {
+    type: mongoose.Schema.Types.ObjectId,
   },
   quantity: {
     type: Number,

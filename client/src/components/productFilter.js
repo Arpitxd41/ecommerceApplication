@@ -7,14 +7,14 @@ const ProductFilter = ({ onCategoryChange, onSortingTypeChange, onSortingChange 
   const [sortingType, setSortingType] = useState('none');
   const [sortingOrder, setSortingOrder] = useState('default');
   const [orderDropdownActive, setOrderDropdownActive] = useState(false);
-  const dummyCategory = process.env.REACT_APP_PRODUCT_CATEGORIES;
+  const DUMMY_CATEGORY = process.env.REACT_APP_PRODUCT_CATEGORIES;
   
   useEffect(() => {
     // Fetch categories from the API
-    axios.get(dummyCategory)
+    axios.get(DUMMY_CATEGORY)
       .then(response => setCategories(response.data))
       .catch(error => console.error(error));
-  }, [dummyCategory]);
+  }, [DUMMY_CATEGORY]);
 
   const handleCategoryChange = (event) => {
     const category = event.target.value;
@@ -41,19 +41,19 @@ const ProductFilter = ({ onCategoryChange, onSortingTypeChange, onSortingChange 
   };
 
   return (
-    <div className='bg-black flex flex-col md:flex-row px-2 md:px-12 h-fit rounded-sm w-full justify-evenly'>
-      <div className='w-1/5 items-center justify-start hidden md:flex'>
+    <div className='bg-black flex flex-col md:flex-row px-2 lg:px-8 h-fit rounded-sm w-full justify-evenly'>
+      <div className='lg:w-1/12 items-center justify-start hidden lg:flex'>
         <i className="fa fa-sliders text-3xl font-semibold" aria-hidden="true"></i>
       </div>
-      <div className='flex flex-col md:flex-row justify-center md:justify-evenly w-full md:w-4/5 py-5' >
+      <div className='flex flex-col md:flex-row justify-center md:justify-evenly w-full lg:w-11/12 py-5' >
         {/* Category Selection */}
-        <div className='relative'>
+        <div className='relative w-full md:w-1/3'>
           <label htmlFor="category" className='md:font-semibold'>
             <select
               id="category"
               onChange={handleCategoryChange}
               value={selectedCategory}
-              className='appearance-none rounded-sm bg-black border-x-0 border-t-0 text-white mx-1 md:w-56 w-full'>
+              className='appearance-none rounded-sm bg-black border-x-0 border-t-0 text-white mx-1 w-full'>
               <option className='' value="">Category:</option>
               {categories.map(category => (
                 <option className='' key={category} value={category}>
@@ -65,12 +65,12 @@ const ProductFilter = ({ onCategoryChange, onSortingTypeChange, onSortingChange 
         </div>
 
         {/* Sorting Type */}
-        <div className='relative'>
+        <div className='relative w-full md:w-1/3'>
           <label htmlFor='sortbyDropdown' className='md:font-semibold'>
             <select
               id='sortbyDropdown'
               onChange={(e) => handleSortingTypeChange(e.target.value)}
-              className='appearance-none rounded-sm bg-black border-x-0 border-t-0 text-white mx-1 md:w-56 w-full' >
+              className='appearance-none rounded-sm bg-black border-x-0 border-t-0 text-white mx-1 w-full' >
               <option value="none">Sort by:</option>
               <option value="rating">By Rating</option>
               <option value="price">By Price</option>
@@ -80,12 +80,12 @@ const ProductFilter = ({ onCategoryChange, onSortingTypeChange, onSortingChange 
 
         {/* Order dropdown */}
         {orderDropdownActive && ( 
-          <div className='relative'>
+          <div className='relative w-full md:w-1/3'>
             <label htmlFor='orderDropdown' className='md:font-semibold'>
               <select
                 id='orderDropdown'
                 onChange={(e) => handleSortingChange(e.target.value)}
-                className='appearance-none rounded-sm bg-black border-x-0 border-t-0 text-white mx-1 md:w-56 w-full' >
+                className='appearance-none rounded-sm bg-black border-x-0 border-t-0 text-white mx-1 w-full' >
                 <option value="default">Sorting Order:</option>
                 <option value="descending">High to Low</option>
                 <option value="ascending">Low to High</option>

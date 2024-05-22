@@ -5,7 +5,8 @@ const EditUserForm = ({adminId}) => {
   const [userId, setUserId] = useState('');
   const [isAdmin, setIsAdmin] = useState(false);
   const [isUser, setIsUser] = useState(false);
-  const server = process.env.REACT_APP_SERVER;
+  const DEVELOPMENT_SERVER = process.env.REACT_APP_DEVELOPMENT_SERVER;
+  // const PRODUCTION_SERVER = process.env.REACT_APP_PRODUCTION_SERVER;
 
   const handleApprove = async () => {
     if (!userId) {
@@ -24,7 +25,7 @@ const EditUserForm = ({adminId}) => {
     };
 
     try {
-      await axios.put(`${server}/edituser/${adminId}`, payload);
+      await axios.put(`${DEVELOPMENT_SERVER}/edituser/${adminId}`, payload);
       alert('User role updated successfully');
       window.location.reload();
     } catch (error) {

@@ -43,7 +43,7 @@ const order = async(req, res) => {
             
             await newOrder.save();
             
-            return res.json({
+            return res.status(200).json({
                   id: response.id,
                   currency: response.currency,
                   amount: response.amount,

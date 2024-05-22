@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
 import axios from "axios";
+import Cookies from 'js-cookie';
 import image2 from '../images/andreaPiacquadio.jpg';
 
 const Signup = () => {
@@ -11,8 +12,9 @@ const Signup = () => {
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
-    const server = process.env.REACT_APP_SERVER;
-    console.log(server);
+    // const PRODUCTION_SERVER = process.env.REACT_APP_PRODUCTION_SERVER;
+    const DEVELOPMENT_SERVER = process.env.REACT_APP_DEVELOPMENT_SERVER;
+    
     const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
@@ -23,9 +25,8 @@ const Signup = () => {
                 setError("Passwords do not match.");
                 return;
             }
-
             try {
-                const response = await axios.post(`${server}/register`, {
+                const response = await axios.post(`${DEVELOPMENT_SERVER}/register`, {
                   firstName,
                   lastName,
                   dob,
@@ -35,7 +36,7 @@ const Signup = () => {
 
                 const userToken = response.data.token;
             
-                localStorage.setItem('token', userToken);
+                Cookies.set('token', userToken, { expires: 7 });
             
                 // Redirect to login page with success message
                 navigate('/login',{state : { successMessage: 'Welcome! You are successfully registered. Please log youself in to Continue...' }});
@@ -46,10 +47,20 @@ const Signup = () => {
             }
     };
 
+    useEffect(() => {
+        setFirstName("");
+        setLastName("");
+        setDob("");
+        setMail("");
+        setPassword("");
+        setConfirmPassword("");
+        setError("");
+    }, []);
+
   return (
-    <div className="bg-black flex flex-row bg-cover bg-center bg-no-repeat px-8 justify-center"
+    <div className="bg-black flex flex-row bg-cover bg-center bg-no-repeat px-8 justify-center h-screen"
     style={{ backgroundImage: `url(${image2})`}}>
-        <div className="text-gray-50 bg-black bg-opacity-90 py-40 md:py-12 px-12 drop-shadow-xl shadow-black shadow-inner">
+        <div className="flex flex-col text-gray-50 bg-black bg-opacity-90 py-40 md:py-12 px-12 drop-shadow-xl shadow-black shadow-inner justify-center items-center">
             <div className="flex flex-col h-8 space-x-2 items-center">
                 <h2 className="animate-characters text-2xl font-bold">SIGN UP :</h2>
             </div>
@@ -81,7 +92,7 @@ const Signup = () => {
                             />
                             <label htmlFor='lastname' className=""><span>LASTNAME</span></label>
                         </div>
-                        <div className="hidden">
+                        {/* <div className="hidden">
                             <label className="font-semibold text-md">D.O.B.</label>
                             <input
                                 onChange={(e) => setDob(e.target.value)}
@@ -93,7 +104,7 @@ const Signup = () => {
                                 maxLength={8}
                                 minLength={8}
                             />
-                        </div>
+                        </div> */}
                         <div className="grid-box col-span-2 block relative">
                             <input
                                 onChange={(e) => setMail(e.target.value)}
@@ -144,7 +155,7 @@ const Signup = () => {
                         <a href="/login">
                             <p
                                 className="rounded-sm bg-lime-600 border-2 border-lime-600 text-gray-50 px-5 py-1 font-semibold">
-                                LOGIN
+                                <i className="fa fa-power-off" aria-hidden="true"></i> LOGIN
                             </p>
                         </a>
                     </div>

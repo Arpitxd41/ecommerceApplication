@@ -1,23 +1,26 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Cookies from 'js-cookie';
+import axios from 'axios';
 
 const StickyFooter = ({ cartProducts, setCartProducts, userDetails }) => {
   const [totalPrice, setTotalPrice] = useState(0);
   const [selectAllChecked, setSelectAllChecked] = useState(
-    localStorage.getItem('selectAllChecked') === 'true'
+    Cookies.get('selectAllChecked') === 'true'
   );
+  
   const userId = userDetails._id;
   const navigate = useNavigate();
-  const userCart = process.env.REACT_APP_USER_CART;
+  const SERVER = process.env.REACT_APP_DEVELOPMENT_SERVER;
+  // const SERVER = process.env.REACT_APP_PRODUCTION_SERVER;
 
   useEffect(() => {
     let price = 0;
     const selectedProducts = cartProducts.filter(product => product.checked);
     Promise.all(selectedProducts.map(async (product) => {
       try {
-        const dummyProducts = process.env.REACT_APP_PRODUCTS;
-        const response = await fetch(`${dummyProducts}/${product.productNumber}`);
-        const productDetails = await response.json();
+        const response = await axios.get(`${SERVER}/product/${product.productId}`);
+        const productDetails = response.data.product;
         price += productDetails.price * product.quantity;
       } catch (error) {
         console.error('Error fetching product price:', error);
@@ -25,15 +28,15 @@ const StickyFooter = ({ cartProducts, setCartProducts, userDetails }) => {
     })).then(() => {
       setTotalPrice(price);
     });
-  }, [cartProducts]);  
+  }, [cartProducts, SERVER]);  
 
   useEffect(() => {
-    localStorage.setItem('selectAllChecked', selectAllChecked.toString());
+    Cookies.set('selectAllChecked', selectAllChecked.toString(), { expires: 1 });
   }, [selectAllChecked]);
 
-  const handleCheckboxChange = (productNumber, checked) => {
+  const handleCheckboxChange = (productId, checked) => {
     const updatedCartProducts = cartProducts.map(product =>
-      product.productNumber === productNumber ? { ...product, checked } : product
+      product.productId === productId ? { ...product, checked } : product
     );
 
     setCartProducts(updatedCartProducts);
@@ -57,11 +60,11 @@ const StickyFooter = ({ cartProducts, setCartProducts, userDetails }) => {
       }));
       setCartProducts(updatedCartProductsUncheckAll);
       updatedCartProductsUncheckAll.forEach(product => {
-        handleCheckboxChange(product.productNumber, false);
+        handleCheckboxChange(product.productId, false);
       });
     }
 
-    fetch(`${userCart}/selectall/${userId}`, {
+    fetch(`${SERVER}/user/cart/selectall/${userId}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json'
@@ -80,7 +83,7 @@ const StickyFooter = ({ cartProducts, setCartProducts, userDetails }) => {
   };
 
   const handleClearAll = () => {
-    fetch(`${userCart}/remove/${userId}`, {
+    fetch(`${SERVER}/user/cart/remove/${userId}`, {
       method: 'DELETE'
     })
       .then(response => {
@@ -102,30 +105,26 @@ const StickyFooter = ({ cartProducts, setCartProducts, userDetails }) => {
   }
 
   return (
-    <div className="text-sm md:text-lg sticky bottom-0 left-0 right-0 bg-slate-950 shadow-md shadow-black py-2 px-2 md:px-8 flex justify-between items-center text-white font-semibold">
-      <div className="w-1/4 md:w-1/5 flex items-center">
-        <span className='text-lg'>$ {totalPrice.toFixed(2)}</span>
+    <div className="text-sm md:text-lg sticky bottom-0 left-0 right-0 bg-slate-950 shadow-md shadow-black py-2 px-2 lg:px-8 flex justify-between items-center text-white font-semibold">
+      <div className="w-1/3 md:w-1/4 lg:w-1/5 flex items-center">
+        <span className='text-xl md:text-2xl font-thin'>₹{totalPrice}/-</span>
       </div>
-      <div className="w-1/5 hidden md:flex flex-row items-center">
+      <div className="w-1/3 md:w-1/4 lg:w-1/5 hidden md:flex flex-row items-center">
         <div className="flex flex-row items-center">
           <input
             type="checkbox"
             checked={selectAllChecked}
             onChange={handleSelectAll}
-            className="h-5 w-5 border-2 rounded-sm bg-gray-100 appearance-none select-none"
+            className="h-6 w-6 border-2 rounded-full bg-gray-100 appearance-none select-none"
           />
           <span className="text-sm md:text-lg">Select All</span>
         </div>
       </div>
-      <button
-        onClick={handleClearAll}
-        className="w-1/3 md:w-1/5 text-black bg-red-600 px-2 md:px-5 py-2 border-2 font-semibold border-red-600 rounded-sm shadow-sm shadow-black"
-      >
+      <button onClick={handleClearAll} className="w-1/3 md:w-1/4 lg:w-1/5 text-gray-200 bg-red-600 px-2 md:px-5 py-2 font-semibold rounded-l-sm" >
         <i className="fa fa-trash mr-2" aria-hidden="true"></i>
         CLEAR ALL
       </button>
-      <button onClick={handleCheckout}
-        className="w-1/3 md:w-1/5 text-black bg-yellow-400 px-2 md:px-5 py-2 border-2 font-semibold border-yellow-400 rounded-sm shadow-sm shadow-black">
+      <button onClick={handleCheckout} className="w-1/3 md:w-1/4 lg:w-1/5 text-black bg-yellow-400 px-2 md:px-5 py-2 font-semibold rounded-r-sm">
         CHECKOUT
         <i className="fa fa-caret-right" aria-hidden="true"></i>
       </button>

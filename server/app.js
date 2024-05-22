@@ -8,16 +8,18 @@ const userRouter = require('./routes/route.js');
 const app = express();
 
 const corsOptions = {
-    origin: process.env.CLIENT_ROUTE,
+    origin: [process.env.CLIENT_ROUTE_PRODUCTION, process.env.CLIENT_ROUTE_DEVELOPMENT],
     methods: 'GET,PUT,POST,DELETE,PATCH',
     credentials: true,
     optionsSuccessStatus: 204,
     allowHeaders: '*',
 };
 
+
 // Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cors(corsOptions));
 app.use(bodyParser.json());
 

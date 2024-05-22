@@ -13,8 +13,9 @@ const UserList = ({adminId}) => {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const server = process.env.REACT_APP_SERVER;
-        const response = await axios.get(`${server}/getallusers`);
+        // const PRODUCTION_SERVER = process.env.REACT_APP_PRODUCTION_SERVER;
+        const DEVELOPMENT_SERVER = process.env.REACT_APP_DEVELOPMENT_SERVER;
+        const response = await axios.get(`${DEVELOPMENT_SERVER}/getallusers`);
         const userList = Object.values(response.data.users);
         setUsers(userList.reverse());
         setLoading(false);
@@ -32,7 +33,7 @@ const UserList = ({adminId}) => {
   const toggleEditUserForm = () => {
     setShowEditUserForm(!showEditUserForm);
     if (showEditUserForm) {
-      setEditButtonText('Edit User');
+      setEditButtonText(`Edit User`);
     } else {
       setEditButtonText('Cancel');
     }
@@ -47,13 +48,15 @@ const UserList = ({adminId}) => {
   }
 
   return (
-    <div className='w-full bg-gradient-to-r from-cyan-500 via-blue-500 to-violet-500 p-8 md:p-16'>
-      <div className='bg-gray-200 drop-shadow-xl shadow-inner shadow-black rounded-xl p-8'>
+    <div className='w-full bg-gradient-to-r from-cyan-500 via-blue-500 to-violet-500 px-2 md:px-8 py-8 md:p-16'>
+      
+      <div className='bg-gray-200 drop-shadow-xl shadow-inner shadow-black rounded-xl px-4 md:px-8 py-8'>
+        <h4 className='text-3xl text-black w-full text-center font-bold my-4'>USERS LIST</h4>
         <div className='w-full flex justify-between mb-12 mt-5'>
-          <h4 className='bg-yellow-500 px-4 py-2 text-white rounded-sm shadow-sm shadow-black text-lg font-semibold border-yellow-500 border'>USERS</h4>
+          {/* <h4 className='bg-yellow-500 px-4 py-2 text-white rounded-sm shadow-sm shadow-black text-lg font-semibold border-yellow-500 border'>USERS</h4> */}
           <button className='w-40 bg-black px-4 py-2 text-white rounded-sm shadow-sm shadow-black text-md md:text-lg font-semibold border-black border' onClick={toggleEditUserForm}>{editButtonText}</button>
           {showEditUserForm && (
-            <div id='edit-group' className='absolute w-full top-28 bg-black bg-opacity-70 py-5 px-12'>
+            <div id='edit-group' className='absolute w-full top-40 bg-black bg-opacity-70 py-5 px-12'>
               <EditUserForm adminId={adminId} />
             </div>
           )}

@@ -2,18 +2,18 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
-const CartButtons = ({ productNumber, userId, handleCheckboxChange }) => {
+const CartButtons = ({ productId, userId, handleCheckboxChange }) => {
   const [quantity, setQuantity] = useState(1);
   const [isChecked, setIsChecked] = useState(false);
   const [message, setMessage] = useState('');
   const navigate = useNavigate();
-  const userCart = process.env.REACT_APP_USER_CART;
+  // const SERVER = process.env.REACT_APP_PRODUCTION_SERVER;
+  const SERVER = process.env.REACT_APP_DEVELOPMENT_SERVER;
 
   useEffect(() => {
     const fetchCartItem = async () => {
       try {
-        const cartHead = process.env.REACT_APP_USER_CART;
-        const response = await axios.get(`${cartHead}/${userId}/${productNumber}`);
+        const response = await axios.get(`${SERVER}/user/cart/${userId}/${productId}`);
         const cartItem = response.data;
         const { quantity: fetchedQuantity, checked } = cartItem;
         setQuantity(fetchedQuantity);
@@ -24,11 +24,11 @@ const CartButtons = ({ productNumber, userId, handleCheckboxChange }) => {
     };
 
     fetchCartItem();
-  }, [userId, productNumber]);
+  }, [userId, productId, SERVER]);
 
   const updateCartItem = async (newQuantity, checked) => {
     try {
-      await axios.put(`${userCart}/update/${userId}/${productNumber}`, { quantity: newQuantity, checked });
+      await axios.put(`${SERVER}/user/cart/update/${userId}/${productId}`, { quantity: newQuantity, checked });
       if (newQuantity === 0) {
         await removeProductFromCart();
       }
@@ -39,7 +39,7 @@ const CartButtons = ({ productNumber, userId, handleCheckboxChange }) => {
 
   const removeProductFromCart = async () => {
     try {
-      await axios.delete(`${userCart}/remove/${userId}/${productNumber}`);
+      await axios.delete(`${SERVER}/user/cart/remove/${userId}/${productId}`);
       setMessage(`The product has been removed from the cart !!`);
       setTimeout(() => {
         window.location.reload();
@@ -68,7 +68,7 @@ const CartButtons = ({ productNumber, userId, handleCheckboxChange }) => {
   const handleCheckboxChangeLocal = (e) => {
     const checked = e.target.checked;
     setIsChecked(checked);
-    handleCheckboxChange(productNumber, checked);
+    handleCheckboxChange(productId, checked);
     updateCartItem(quantity, checked);
   };
 

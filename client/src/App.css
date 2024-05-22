@@ -37,7 +37,7 @@ input.question {
   text-align: right;
   width: 99%;
   height: 1.8em;
-  background: rgba(0, 0, 0, 0);
+  background-color: rgba(0, 0, 0, 0);
   transition: padding-top 0.2s ease, margin-top 0.2s ease;
   overflow-x: hidden;
 }
@@ -76,6 +76,7 @@ input.question:valid + label > span {
 input.question:valid + label {
   border-color: green;
   width: auto;
+  background-color: transparent;
 }
 
 input.question:invalid {
@@ -190,43 +191,6 @@ input.question + label > span {
   }
    */
 /* CAROUSEL CSS */
-
-.carousel-wrapper {
-  top: 20px;
-  width: 100vw; /* Full width of the viewport */
-  height: 70vw;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 20px;
-}
-
-.carousel-container {
-  width: 99vw; /* Full width of the viewport */
-  height: 45vw;
-  overflow: hidden;
-  margin: 0 auto;
-}
-
-.carousel {
-  display: flex;
-  width: 500vw;
-  animation: sliding 15s infinite linear;
-  opacity: 0.6;
-}
-
-.carousel div {
-  flex: 1;
-  min-width: 100vw; /* Full width of the viewport for each image */
-  height: 50vw;
-  background-size: cover;
-  background-position: center;
-}
-/* 
-.carousel:hover {
-  animation-play-state: paused;
-} */
-
 .carousel .image-one {
   background-image: url("./images/image1.jpg");
 }
@@ -246,146 +210,108 @@ input.question + label > span {
 .carousel .image-five {
   background-image: url("./images/image4.jpg");
 }
+.carousel-wrapper {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.carousel-container {
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.carousel {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  animation: sliding 15s infinite linear;
+}
+
+.carousel div {
+  flex: 1;
+  min-width: 100vw;
+  height: 100vh;
+  background-size: cover;
+  background-position: center;
+}
 
 @keyframes sliding {
-  0% {
+  0%, 100% {
     transform: translateX(0);
   }
-  20% {
-    transform: translateX(0);
-  }
-  35% {
+  20%, 25% {
     transform: translateX(-100vw);
   }
-  45% {
-    transform: translateX(-100vw);
-  }
-  55% {
+  45%, 50% {
     transform: translateX(-200vw);
   }
-  65% {
-    transform: translateX(-200vw);
-  }
-  75% {
+  70%, 75% {
     transform: translateX(-300vw);
   }
-  90% {
-    transform: translateX(-300vw);
-  }
-  100% {
-    transform: translateX(-400);
-  }
-  0% {
-    transform: translateX(0);
+  95% {
+    transform: translateX(-400vw);
   }
 }
 
-@media screen and (min-width: 768px) and ( max-width: 1023px ) {
-  .carousel-wrapper {
-    width: 100vw;
-    height: 200vh;    
-    border: 2px solid blue;
+@media screen and (min-width: 798px) and (max-width: 1023px) {
+  .carousel .image-one {
+    background-image: url("./images/1.png");
   }
-
+  
+  .carousel .image-two {
+    background-image: url("./images/2.png");
+  }
+  
+  .carousel .image-three {
+    background-image: url("./images/3.png");
+  }
+  
+  .carousel .image-four {
+    background-image: url("./images/5.png");
+  }
+  
+  .carousel .image-five {
+    background-image: url("./images/4.png");
+  }
   .carousel-container {
-    width: 100vw;
-    height: 140vh;
-    padding: 2px;
+    height: 100vh;
   }
 
-  .carousel {
-    width: 100vw;
-    height: 150vh;
-    margin: 2px;
-  }
-
-  .carousel > div {
-    min-width: 100vw;
-    padding: 2px;
-    height: 150vh;
-  }
-
-  @keyframes sliding {
-    0% {
-      transform: translateX(0);
-    }
-    20% {
-      transform: translateX(-100vw);
-    }
-    25% {
-      transform: translateX(-100vw);
-    }
-    45% {
-      transform: translateX(-200vw);
-    }
-    50% {
-      transform: translateX(-200vw);
-    }
-    70% {
-      transform: translateX(-300vw);
-    }
-    75% {
-      transform: translateX(-340vw);
-    }
-    95% {
-      transform: translateX(-400vw);
-    }
-    100% {
-      transform: translateX(0);
-    }
+  .carousel div {
+    height: 100vh;
   }
 }
-@media screen and (max-width: 768px) {
-  .carousel-wrapper {
-    width: 100vw;
-    height: 210vh;    
-  }
 
+@media screen and (max-width: 767px) {
+  .carousel .image-one {
+    background-image: url("./images/6.png");
+  }
+  
+  .carousel .image-two {
+    background-image: url("./images/2.png");
+  }
+  
+  .carousel .image-three {
+    background-image: url("./images/3.png");
+  }
+  
+  .carousel .image-four {
+    background-image: url("./images/4.png");
+  }
+  
+  .carousel .image-five {
+    background-image: url("./images/5.png");
+  }
   .carousel-container {
-    width: 100vw;
-    height: 100vh;
-    padding: 2px;
-  }
-
-  .carousel {
-    width: 800vw;
     height: 100vh;
   }
 
-  .carousel > div {
-    min-width: 50vw;
-    padding: 2px;
-    height: 650px;
-  }
-
-  @keyframes sliding {
-    0% {
-      transform: translateX(0);
-    }
-    20% {
-      transform: translateX(-100vw);
-    }
-    25% {
-      transform: translateX(-200vw);
-    }
-    45% {
-      transform: translateX(-300vw);
-    }
-    50% {
-      transform: translateX(-400vw);
-    }
-    70% {
-      transform: translateX(-500vw);
-    }
-    75% {
-      transform: translateX(-600vw);
-    }
-    95% {
-      transform: translateX(-650vw);
-    }
-    100% {
-      transform: translateX(0);
-    }
+  .carousel div {
+    height: 100vh;
   }
 }
 

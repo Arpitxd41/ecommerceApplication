@@ -1,5 +1,5 @@
-const userModel = require('../models/userModel');
-const cartModel = require('../models/cartModel');
+const userModel = require('../models/userModel.js');
+const cartModel = require('../models/cartModel.js');
 // const moment = require('moment');
 const bcrypt = require('bcrypt');
 const jwtToken = require('jsonwebtoken');
@@ -137,7 +137,7 @@ const login = async (req, res) => {
 // GRAB THE USER BY USER'S ID :-
 const getUser = async (req, res) => {
     try {
-        const userId = req.params.id;
+        const userId = req.params.userId;
         const user = await userModel.findById(userId);
         if (!user) {
             return res.status(404).json({
@@ -161,7 +161,7 @@ const getUser = async (req, res) => {
 };
 const addAddress = async (req, res) => {
     try {
-        const userId = req.params.id;
+        const userId = req.params.userId;
         const { street, city, postalCode, phoneNumber } = req.body;
 
         const user = await userModel.findById(userId);

@@ -6,15 +6,11 @@ const orderSchema = new mongoose.Schema({
     required: true
   },
   orderId: {
-    type: String,
+    type: mongoose.Schema.Types.ObjectId,
     required: true
   },
   selectedProducts: [
       {
-        productNumber: {
-          type: Number,
-          required: true
-        },
         quantity: {
           type: Number,
           required: true

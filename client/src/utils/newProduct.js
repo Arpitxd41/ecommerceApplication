@@ -1,7 +1,7 @@
 const addProduct = async (productData) => {
-      const dummyProducts = process.env.REACT_APP_PRODUCTS;
+      const DUMMY_PRODUCTS = process.env.REACT_APP_PRODUCTS;
       try {
-        const response = await fetch(`${dummyProducts}/add`, {
+        const response = await fetch(`${DUMMY_PRODUCTS}/add`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(productData)

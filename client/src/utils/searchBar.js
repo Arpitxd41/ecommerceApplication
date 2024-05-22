@@ -4,26 +4,30 @@ const SearchBar = ({ userId }) => {
   const [input, setInput] = useState("");
   const [results, setResults] = useState([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
-  const dummyProducts = process.env.REACT_APP_PRODUCTS;
-  const dummyProduct = process.env.REACT_APP_PRODUCT;
+  const DEVELOPMENT_SERVER = process.env.REACT_APP_DEVELOPMENT_SERVER;
+  // const PRODUCTION_SERVER = process.env.REACT_APP_PRODUCTION_SERVER;
 
   const fetchData = (value) => {
-    fetch(dummyProducts)
+    const request = `${DEVELOPMENT_SERVER}/all_products`;
+    
+    fetch(request)
       .then((response) => response.json())
       .then((data) => {
-        const products = data.products || [];
+        const products = data.products;
         const filteredResults = products.filter((product) => {
-          const titleMatch = product.title.toLowerCase().includes(value.toLowerCase());
-          const brandMatch = product.brand.toLowerCase().includes(value.toLowerCase());
-          const categoryMatch = product.category.toLowerCase().includes(value.toLowerCase());
+          const titleMatch = product.title && product.title.toLowerCase().includes(value.toLowerCase());
+          const brandMatch = product.brand && product.brand.toLowerCase().includes(value.toLowerCase());
+          const categoryMatch = product.category && product.category.toLowerCase().includes(value.toLowerCase());
           return titleMatch || brandMatch || categoryMatch;
         });
+      
         setResults(filteredResults.slice(0, 5));
         setShowSuggestions(true);
       })
       .catch((error) => {
         console.error('Error fetching data:', error);
       });
+      
   };
 
   const handleChange = (value) => {
@@ -33,8 +37,9 @@ const SearchBar = ({ userId }) => {
 
   const handleSelectSuggestion = (suggestion) => {
     setInput(suggestion.title);
-    const productNumber = suggestion.id;
-    const productUrl = `${dummyProduct}/${productNumber}`;
+    
+    const productId = suggestion._id;
+    const productUrl = `/product/${productId}`;
     window.location.href = productUrl;
     setShowSuggestions(false);
   };
@@ -62,7 +67,7 @@ const SearchBar = ({ userId }) => {
           <ul className="max-h-40 overflow-y-auto">
             {results.map((suggestion) => (
               <li
-                key={suggestion.id}
+                key={suggestion._id}
                 className="text-white cursor-pointer py-1 px-4 bg-black hover:bg-red-600 hover:opacity-100 hover:font-bold"
                 onClick={() => handleSelectSuggestion(suggestion)}
               >

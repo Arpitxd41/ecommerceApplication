@@ -6,14 +6,21 @@ const CounterButtons = ({ product, userId }) => {
   const [quantity, setQuantity] = useState(0);
   const [error, setError] = useState(null);
   const [inCart, setInCart] = useState(false);
-  const productNumber = product.id;
+  const productId = product._id;
+  
   const navigate = useNavigate();
-  const cartHead = process.env.REACT_APP_USER_CART;
+  const SERVER = process.env.REACT_APP_DEVELOPMENT_SERVER;
+  // const SERVER = process.env.REACT_APP_PRODUCTION_SERVER;
+  const dummyUser = process.env.REACT_APP_JOHN_DOE; 
 
   const handleAddToCart = async () => {
     try {
-      setInCart(true);
-      setQuantity(1);
+      if (userId === dummyUser.id) {
+        navigate(`/login`);
+      } else {
+        setInCart(true);
+        setQuantity(1);
+      }
     } catch (error) {
       console.error("Error adding product to cart", error);
       setError("An unexpected error occurred. Please try again.");
@@ -22,11 +29,13 @@ const CounterButtons = ({ product, userId }) => {
 
   const handleBuyNow = async () => {
     try {
-      // Make request to add product to cart
-      console.log('productNumber-------', productNumber);
-      await axios.post(`${cartHead}/add/${userId}/${productNumber}`, { quantity });
-      // Redirect to cart page
-      navigate(`/cart/${userId}`); 
+      if (userId === dummyUser.id) {
+        navigate(`/login`);
+      } else {
+        await axios.post(`${SERVER}/user/cart/add/${userId}/${productId}`, { quantity });
+        
+        navigate(`/cart/${userId}`); 
+      }
     } catch (error) {
       console.error('Error adding product to cart:', error);
     }
@@ -59,14 +68,14 @@ const CounterButtons = ({ product, userId }) => {
           onClick={handleAddToCart}
           className="bg-yellow-400 w-1/2 px-5 py-2 border-2 border-yellow-400 rounded-sm shadow-sm shadow-black"
         >
-          ADD TO CART
+          BUY NOW
         </button>
       )}
 
       <button 
         onClick={handleBuyNow}
         className='w-1/2 text-md bg-orange-500 px-8 py-2 rounded-sm shadow-sm shadow-black'>
-        BUY NOW
+        ADD TO CART
       </button>
     </div>
   );
