@@ -22,7 +22,7 @@ const order = async(req, res) => {
 
       const currency = 'INR';
       const options = {
-            amount: (totalAmount * 100).toString(),
+            amount: (totalAmount * 10000).toString(),
             currency: currency,
             receipt: randomString(),
       }
