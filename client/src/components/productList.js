@@ -8,15 +8,15 @@ const ProductList = ({ userDetails }) => {
   const [sortingOrder, setSortingOrder] = useState('default');
   const [sortingType, setSortingType] = useState('none');
   const [matchedProducts, setMatchedProducts] = useState([]);
-  const DEVELOPMENT_SERVER = process.env.REACT_APP_DEVELOPMENT_SERVER;
-  // const PRODUCTION_SERVER = process.env.REACT_APP_PRODUCTION_SERVER;
+  const SERVER = process.env.REACT_APP_DEVELOPMENT_SERVER;
+  // const SERVER = process.env.REACT_APP_PRODUCTION_SERVER;
   
 
   useEffect(() => {
     const fetchProducts = async () => {
       try {
         // await axios.get(`${DEVELOPMENT_SERVER}/fetch_all_products`);
-        const response = await axios.get(`${DEVELOPMENT_SERVER}/${selectedCategory ? `all_products/${selectedCategory}` : 'all_products'}`);
+        const response = await axios.get(`${SERVER}/${selectedCategory ? `all_products/${selectedCategory}` : 'all_products'}`);
         
         const data = response.data;
         const products = data.products;
