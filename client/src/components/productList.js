@@ -43,7 +43,7 @@ const ProductList = ({ userDetails }) => {
     };
 
     fetchProducts();
-  }, [selectedCategory, sortingOrder, sortingType, DEVELOPMENT_SERVER]);
+  }, [selectedCategory, sortingOrder, sortingType, SERVER]);
 
   const handleCategoryChange = (category) => {
     setSelectedCategory(category);
