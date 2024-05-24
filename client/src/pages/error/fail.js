@@ -23,11 +23,11 @@ const ErrorPage = () => {
         <p className='statement'>
           ...maybe the page you're looking for is not found or never existed.
         </p>
-        <div className='flex flex-col md:flex-row space-y-4 md:space-x-6 md:w-2/3'>
-          <button id='backhome' onClick={handleHomeClick} className='w-1/2'>
-            <i className="fa fa-sign-in"></i> LOGIN AGAIN
+        <div className='flex flex-col md:flex-row space-y-4 md:space-x-6 lg:w-2/3 w-full'>
+          <button id='backhome' onClick={handleHomeClick} className='md:w-1/2'>
+            <i className="fa fa-sign-in"></i> LOGIN
           </button>
-          <button id='goback' onClick={handleBackClick} className='w-1/2'>
+          <button id='goback' onClick={handleBackClick} className='md:w-1/2'>
             <i className="fa fa-home"></i> BACK
           </button>
         </div>

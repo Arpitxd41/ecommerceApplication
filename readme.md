@@ -10,13 +10,13 @@
 ---
 
 # :shopping: Full Stack e-Commerce Project
-([Go to app:paperclip:](https://))
+([Go to app:paperclip:](https://ecommerce-application-by-arpit.vercel.app))
 
 This is a standard E-Commerce project I am designing from scratch as a MERN STACK developer. Through this Project I will showcase how an actual ECOMMERCE-WEB APPLICATION is built along with the architecture of the Web Applications, highlighting the complex understanding of the environment we are working on with the detailed concepts used in this project. I will keep updating this project for better functions and UI/UX, better functionalities including most of what can be embedded into one Full Stack Project.
 
 
 
-## :label: MERN STACK :
+## :point_right: MERN STACK :
 
 Well then, What is a MERN Stack..? The MERN stack is a popular technology stack used for building _web applications_. It is an 'acronym' that represents a set of technologies:
 
@@ -42,7 +42,7 @@ When combined, these technologies form the **MERN stack**, which covers the full
 
 :paperclip: The MERN stack provides a cohesive and streamlined development experience for building modern, scalable, and efficient web applications. It is widely adopted by developers and organizations for its flexibility, performance, and the ability to use JavaScript across the entire development stack.
 
-## :label: Frontend Catalog Only :
+## :point_right: Frontend Catalog Only :
 In the frontend of the project I added a catalog where the user can see the products fetched from external. The product cards with limited details based on first-response-importance, without making any additional requests to the backend. When the user adds the item to cart triggering a request to backend with neccessary information, which then associates the product to the users cart updating the database accordingly. 
 
 - With this, my frontend doesn't need - to fetch the entire catalog each time a product information is required or to fire an api-request to fetch the data for the required product info.
@@ -50,7 +50,7 @@ In the frontend of the project I added a catalog where the user can see the prod
 - Users can get quick access to the product info without additional load from the backend.
 - Reduces the load on the frontend speeding up the UX. Contributing to smooth and responsive UX
 
-## :label: Roadmap for the Project : 
+## :bookmark: Roadmap for the Project : 
 
 - [x]  **PROJECT ARCHITECTURE** : with Frontend in `JavaScript` , `React` , `ReactRouter` , `CSS` , `TailwindCSS` & Backend with `NodeJS` , `Express`
 - [x]  **AXIOS** : For the communication between the frontend and the backend of the project
@@ -64,6 +64,8 @@ In the frontend of the project I added a catalog where the user can see the prod
 - [x]  **SERVER DEPLOYMENT** :
 - [x]  **TESTING, CODE FORMATTING** :
 - [ ]  **VERSION CONTROL, CODE MANAGEMENT & CONTINUOUS INTEGRATION** :
+
+![stats](./client/src/images/SalesSampleDashboard.png)
 
 ### Stage Two: Further Improvising
 - Use of `MySQL DB`

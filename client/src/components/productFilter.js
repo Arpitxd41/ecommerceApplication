@@ -57,10 +57,10 @@ const ProductFilter = ({ onCategoryChange, onSortingTypeChange, onSortingChange 
               {categories.map((category, index) => (
                 <option
                   className=''
-                  key={category.slug} // Use index as key
-                  value={category.slug} // Assuming the category is a string
+                  key={category.slug}
+                  value={category.slug}
                 >
-                  {category}
+                  {category.name}
                 </option>
               ))}
             </select>
