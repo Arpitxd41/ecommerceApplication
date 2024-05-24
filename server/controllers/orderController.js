@@ -22,14 +22,13 @@ const order = async(req, res) => {
 
       const currency = 'INR';
       const options = {
-            amount: (totalAmount * 10000).toString(),
+            amount: (totalAmount * 100).toString(),
             currency: currency,
             receipt: randomString(),
       }
 
       try {
             const response = await razorpay.orders.create(options);
-            console.log('response =>', response);
 
             const newOrder = new orderModel({
                   userId: userId,
@@ -47,6 +46,7 @@ const order = async(req, res) => {
                   id: response.id,
                   currency: response.currency,
                   amount: response.amount,
+                  selectedProducts: selectedProducts,
             })
       } catch (error) {
             console.error(error);
@@ -62,7 +62,6 @@ const verify = async (req, res) => {
         shasum.update(JSON.stringify(req.body))
         const digest = shasum.digest('hex')
     
-        // console.log('something', digest, req.headers['x-razorpay-signature']);
         if (digest === req.headers['x-razorpay-signature']) {
           const { event, payload } = req.body;
     
@@ -112,11 +111,9 @@ const verify = async (req, res) => {
 const grabOrder = async (receivedOrderId) => {
   try {
     const orderData = await orderModel.findOne({ orderId: receivedOrderId });
-    console.log('order data:', orderData);
     const userId = orderData.userId;
     
     const userCart = await cartModel.findOne({ user: userId }).select('cartItems');
-    console.log('userCart:', userCart);
 
     // Filter out checked items from the user's cart
     const updatedCartItems = userCart.cartItems.filter(item => !item.checked);
@@ -127,7 +124,6 @@ const grabOrder = async (receivedOrderId) => {
       { cartItems: updatedCartItems }, 
       { new: true }
     );
-    console.log('User cart updated successfully.', updatedCart);
 
     return orderData;
   } catch (error) {

@@ -26,7 +26,6 @@ const ProductFilter = ({ onCategoryChange, onSortingTypeChange, onSortingChange 
     setSortingType(type);
     onSortingTypeChange(type);
     
-    // If sorting type changes from 'none', reset sorting order to 'default'
     if (type === 'none') {
       setSortingOrder('default');
       setOrderDropdownActive(false);
@@ -55,8 +54,12 @@ const ProductFilter = ({ onCategoryChange, onSortingTypeChange, onSortingChange 
               value={selectedCategory}
               className='appearance-none rounded-sm bg-black border-x-0 border-t-0 text-white mx-1 w-full'>
               <option className='' value="">Category:</option>
-              {categories.map(category => (
-                <option className='' key={category} value={category}>
+              {categories.map((category, index) => (
+                <option
+                  className=''
+                  key={category.slug} // Use index as key
+                  value={category.slug} // Assuming the category is a string
+                >
                   {category}
                 </option>
               ))}

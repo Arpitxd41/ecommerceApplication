@@ -48,7 +48,7 @@ const HomePage = () => {
 
   useEffect(() => {
     if (initialized) {
-      console.log('user details', userDetails);
+      // console.log('user details', userDetails);
     }
   }, [initialized, userDetails]);
 

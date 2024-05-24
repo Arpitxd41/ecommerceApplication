@@ -13,8 +13,8 @@ const Orders = () => {
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
   const { userId } = useParams();
-  // const SERVER = process.env.REACT_APP_PRODUCTION_SERVER;
-  const SERVER = process.env.REACT_APP_DEVELOPMENT_SERVER;
+  const SERVER = process.env.REACT_APP_PRODUCTION_SERVER;
+  // const SERVER = process.env.REACT_APP_DEVELOPMENT_SERVER;
 
   useEffect(() => {
     const authToken = Cookies.get('authToken');
@@ -48,14 +48,15 @@ const Orders = () => {
           Authorization: `Bearer ${authToken}`
         }
       });
+      const ordersData = await response.json();
       if (response.ok) {
-        const ordersData = await response.json();
         setOrders(ordersData.reverse());
         setLoading(false);
       } else {
         console.error('Failed to fetch User orders:', response);
         setLoading(false);
       }
+      
     } catch (error) {
       console.error('Error fetching user orders:', error);
       setLoading(false);
@@ -78,7 +79,7 @@ const Orders = () => {
           <h1 className="text-md md:text-xl lg:text-3xl font-semibold">{userDetails.role} ACCESS</h1>
           <h1 className="text-sm md:text-lg lg:text-xl font-semibold"> <i className="fa fa-user-circle" aria-hidden="true"> </i>  UID-{userId}</h1>
         </div>
-      <div className="h-screen bg-cover lg:bg-contain lg:bg-fixed bg-center bg-no-repeat bg-origin-border" style={{backgroundImage: `url(${shoppers})`}}>
+      <div className="h-screen overflow-y-scroll bg-cover lg:bg-contain lg:bg-fixed bg-center bg-no-repeat bg-origin-border" style={{backgroundImage: `url(${shoppers})`}}>
         {loading ? (
           <p>Loading...</p>
         ) : (
@@ -90,9 +91,9 @@ const Orders = () => {
               </div>
             ) : (
               orders.map(order => (
-                <div key={order._id} className="lg:h-36 w-full object-contain flex md:flex-row flex-col border-5 border-red my-6 md:my-2">
-                  <div className='md:border-b border-black w-full bg-slate-100 text-black p-2 md:w-3/5 md:float-left lg:h-36 pl-5'>
-                    <h2 className="text-lg font-semibold text-blue-600 px-2">Order ID : {order.orderId}</h2>
+                <div key={order._id} className="lg:h-36 w-full object-contain flex md:flex-row flex-col border-5 border-red">
+                  <div className='md:border-b border-black w-full bg-slate-100 text-black p-2 md:w-1/2 md:float-left lg:h-36 pl-5'>
+                    <h2 className="text-lg text-white font-semibold bg-blue-600 px-2">Order ID: {order.orderId}</h2>
                     <div className='flex flex-col justify-evenly'>
                       <div className='w-full flex flex-row px-2 justify-between'>
                       {order.orderDetails.length > 0 && (
@@ -102,23 +103,23 @@ const Orders = () => {
                         {order.paymentDetails.length > 0 && (
                           <p className='font-bold'>Payment Method : {order.paymentDetails[0].method}</p>
                         )}
-                          <h4 className='font-bold'>Amount : $ {order.totalAmount}</h4>
+                          <h4 className='text-xl'>Amount : ₹ {order.totalAmount}</h4>
                         </div>
                       </div>
                       <div className='w-full flex flex-col px-2'>
                         <h4 className='font-semibold'>Delivery Address : </h4>
-                        <div className="h-12 overflow-y-scroll">
+                        <div className="h-20 md:h-12 overflow-y-scroll">
                           <div className="space-x-2">
-                            <u>Street : </u> <b>{order.selectedAddress.street}</b>
-                            <u>City : </u> <b>{order.selectedAddress.city}</b>
-                            <u>Postal Code : </u> <b>{order.selectedAddress.postalCode}</b>
-                            <u>Phone Number : </u> <b>{order.selectedAddress.phoneNumber}</b>
+                            <u className='underline underline-offset-1'>Street :</u> <b>{order.selectedAddress.street}</b>
+                            <u className='underline underline-offset-1'>City :</u> <b>{order.selectedAddress.city}</b>
+                            <u className='underline underline-offset-1'>Postal Code :</u> <b>{order.selectedAddress.postalCode}</b>
+                            <u className='underline underline-offset-1'>Phone Number :</u> <b>{order.selectedAddress.phoneNumber}</b>
                           </div>
                         </div>
                       </div>
                     </div>
                   </div>
-                  <div className='w-full md:w-2/5 bg-slate-100 border-b border-black flex flex-row md:float-right object-contain lg:h-36 items-center py-2 px-2'>
+                  <div className='w-full md:w-1/2 bg-slate-100 border-b border-black flex flex-row md:float-right object-contain lg:h-36 items-center py-2 px-2'>
                     <div className='w-full bg-white px-2 rounded-lg drop-shadow-xl shadow-inner shadow-black'>
                       <OrderBundle order={order} />
                     </div>

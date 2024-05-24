@@ -11,8 +11,8 @@ const ProfilePage = () => {
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
   const [userData, setUserData] = useState(null);
-  const DEVELOPMENT_SERVER = process.env.REACT_APP_DEVELOPMENT_SERVER;
-  // const PRODUCTION_SERVER = process.env.REACT_APP_PRODUCTION_SERVER;
+  // const SERVER = process.env.REACT_APP_DEVELOPMENT_SERVER;
+  const SERVER = process.env.REACT_APP_PRODUCTION_SERVER;
   
   useEffect(() => {
     const authToken = Cookies.get('authToken');
@@ -38,7 +38,7 @@ const ProfilePage = () => {
 
   const fetchUser = async (userId, authToken) => {
     try {
-      const response = await axios.get(`${DEVELOPMENT_SERVER}/getuser/${userId}`, {
+      const response = await axios.get(`${SERVER}/getuser/${userId}`, {
         headers: {
           Authorization: `Bearer ${authToken}`
         }

@@ -1,14 +1,9 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-// import addProduct from '../utils/newProduct.js';
-import image1 from '../images/icons/image1.png';
-import image2 from '../images/icons/image2.png';
-import image3 from '../images/icons/image3.png';
-import image4 from '../images/icons/image4.png';
-import image5 from '../images/icons/image5.png';
-import image6 from '../images/icons/image6.png';
+
 import NewProductCard from '../components/newProductCard.js';
 
+const image = 'https://cdn.pixabay.com/photo/2024/04/17/17/02/box-8702500_1280.jpg';
 const AddProduct = () => {
   const [formData, setFormData] = useState({
         title: '',
@@ -16,7 +11,7 @@ const AddProduct = () => {
         category: '',
         price: 0,
         stock: 0,
-        images: ['', image1, image2, image3, image4, image5, image6],
+        images: [image],
         description: ''
   });
 
@@ -32,12 +27,12 @@ const AddProduct = () => {
     setSelectedImage(image);
   };
 
-  const DEVELOPMENT_SERVER = process.env.REACT_APP_DEVELOPMENT_SERVER;
-  // const PRODUCTION_SERVER = process.env.REACT_APP_PRODUCTION_SERVER;
+  // const SERVER = process.env.REACT_APP_DEVELOPMENT_SERVER;
+  const SERVER = process.env.REACT_APP_PRODUCTION_SERVER;
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(`${DEVELOPMENT_SERVER}/addnewproduct`, formData)
+      const response = await axios.post(`${SERVER}/addnewproduct`, formData)
       const newProduct = response.data;;
       console.log('New product:', newProduct);
       setNewProduct(newProduct)
@@ -47,7 +42,7 @@ const AddProduct = () => {
             category: '',
             price: 0,
             stock: 0,
-            images: [''],
+            images: [image],
             description: ''
       });
     } catch (error) {
@@ -105,6 +100,17 @@ const AddProduct = () => {
                   required
               />
             </div>
+            <div className='flex flex-row justify-evenly'>
+              <label className='w-1/3 font-semibold text-lg'>Category:</label>
+              <input
+                  className='w-2/3 rounded-sm border border-slate-400'
+                  type="text"
+                  name="category"
+                  value={formData.category}
+                  onChange={handleChange}
+                  required
+              />
+            </div>
             <div className='flex flex-col md:flex-row justify-evenly'>
               <label className='md:w-1/3 font-semibold text-lg'>Description:</label>
               <textarea
@@ -119,15 +125,14 @@ const AddProduct = () => {
             <div className='flex flex-col items-center'>
               <h3 className='text-lg font-semibold'>Select an Image:</h3>
               <div className='flex flex-wrap justify-center'>
-                {formData.images.map((image, index) => (
+                
                   <img
-                    key={index}
                     src={image}
-                    alt={`product-${index}`}
+                    alt='product image'
                     onClick={() => handleImageClick(image)}
                     className={`w-24 h-24 m-2 border-2 ${selectedImage === image ? 'border-blue-500' : 'border-gray-300'} cursor-pointer`}
                   />
-                ))}
+                
               </div>
             </div>
             

@@ -9,8 +9,8 @@ const CounterButtons = ({ product, userId }) => {
   const productId = product._id;
   
   const navigate = useNavigate();
-  const SERVER = process.env.REACT_APP_DEVELOPMENT_SERVER;
-  // const SERVER = process.env.REACT_APP_PRODUCTION_SERVER;
+  // const SERVER = process.env.REACT_APP_DEVELOPMENT_SERVER;
+  const SERVER = process.env.REACT_APP_PRODUCTION_SERVER;
   const dummyUser = process.env.REACT_APP_JOHN_DOE; 
 
   const handleAddToCart = async () => {

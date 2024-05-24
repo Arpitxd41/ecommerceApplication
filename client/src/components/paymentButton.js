@@ -18,15 +18,14 @@ const loadScript = (src) => {
 const PayButton = ({ userId, totalAmount, selectedProducts, selectedAddress }) => {
   const [errorMessage, setErrorMessage] = useState('');
   const RAZOPRPAY_CHECKOUT = process.env.REACT_APP_CHECKOUT_SCRIPT;
-  
   const handlePaymentSuccess = () => {
     window.location.href = `/orders/${userId}`;
   };
 
   const displayRazorpay = async () => {
     const res = await loadScript(`${RAZOPRPAY_CHECKOUT}`)
-    const SERVER = process.env.REACT_APP_DEVELOPMENT_SERVER;
-    // const SERVER = process.env.REACT_APP_PRODUCTION_SERVER;
+    // const SERVER = process.env.REACT_APP_DEVELOPMENT_SERVER;
+    const SERVER = process.env.REACT_APP_PRODUCTION_SERVER;
     if (!res) {
       alert('Razorpay sdk failed to load. Check IF you are offline');
       return;
@@ -44,8 +43,6 @@ const PayButton = ({ userId, totalAmount, selectedProducts, selectedAddress }) =
         },
         body: JSON.stringify({ userId, totalAmount, selectedProducts, selectedAddress })
       }).then((t) => t.json());
-
-      console.log('data from backend', data);
       
       const options = {
         key: process.env.REACT_APP_RAZORPAY_API_KEY,
@@ -74,7 +71,6 @@ const PayButton = ({ userId, totalAmount, selectedProducts, selectedAddress }) =
           }
         }
       };
-  
       const paymentObject = new window.Razorpay(options);
       paymentObject.open();
     } catch (error) {

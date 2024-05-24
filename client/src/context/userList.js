@@ -13,9 +13,9 @@ const UserList = ({adminId}) => {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        // const PRODUCTION_SERVER = process.env.REACT_APP_PRODUCTION_SERVER;
-        const DEVELOPMENT_SERVER = process.env.REACT_APP_DEVELOPMENT_SERVER;
-        const response = await axios.get(`${DEVELOPMENT_SERVER}/getallusers`);
+        const SERVER = process.env.REACT_APP_PRODUCTION_SERVER;
+        // const DEVELOPMENT_SERVER = process.env.REACT_APP_DEVELOPMENT_SERVER;
+        const response = await axios.get(`${SERVER}/getallusers`);
         const userList = Object.values(response.data.users);
         setUsers(userList.reverse());
         setLoading(false);

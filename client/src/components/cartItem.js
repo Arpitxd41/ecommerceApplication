@@ -9,8 +9,8 @@ const CartItem = ({ productId, userId }) => {
   
   useEffect(() => {
     const fetchProductDetails = async () => {
-      const SERVER = process.env.REACT_APP_DEVELOPMENT_SERVER;
-      // const SERVER = process.env.REACT_APP_PRODUCTION_SERVER;
+      // const SERVER = process.env.REACT_APP_DEVELOPMENT_SERVER;
+      const SERVER = process.env.REACT_APP_PRODUCTION_SERVER;
       try {
         const response = await axios.get(`${SERVER}/product/${productId}`);
         const result = response.data.product;

@@ -30,8 +30,8 @@ const ProductPage = (dummyUserDetails) => {
   const [loadingProduct, setLoadingProduct] = useState(true);
   const [loadingSimilarProducts, setLoadingSimilarProducts] = useState(true);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const SERVER = process.env.REACT_APP_DEVELOPMENT_SERVER;
-  // const SERVER = process.env.REACT_APP_PRODUCTION_SERVER;
+  // const SERVER = process.env.REACT_APP_DEVELOPMENT_SERVER;
+  const SERVER = process.env.REACT_APP_PRODUCTION_SERVER;
   useEffect(() => {
     const fetchProduct = async () => {
       try {

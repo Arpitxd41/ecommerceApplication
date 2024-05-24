@@ -4,11 +4,11 @@ const SearchBar = ({ userId }) => {
   const [input, setInput] = useState("");
   const [results, setResults] = useState([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
-  const DEVELOPMENT_SERVER = process.env.REACT_APP_DEVELOPMENT_SERVER;
-  // const PRODUCTION_SERVER = process.env.REACT_APP_PRODUCTION_SERVER;
+  // const SERVER = process.env.REACT_APP_DEVELOPMENT_SERVER;
+  const SERVER = process.env.REACT_APP_PRODUCTION_SERVER;
 
   const fetchData = (value) => {
-    const request = `${DEVELOPMENT_SERVER}/all_products`;
+    const request = `${SERVER}/all_products`;
     
     fetch(request)
       .then((response) => response.json())

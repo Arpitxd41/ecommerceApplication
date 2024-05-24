@@ -7,8 +7,8 @@ const CartButtons = ({ productId, userId, handleCheckboxChange }) => {
   const [isChecked, setIsChecked] = useState(false);
   const [message, setMessage] = useState('');
   const navigate = useNavigate();
-  // const SERVER = process.env.REACT_APP_PRODUCTION_SERVER;
-  const SERVER = process.env.REACT_APP_DEVELOPMENT_SERVER;
+  const SERVER = process.env.REACT_APP_PRODUCTION_SERVER;
+  // const SERVER = process.env.REACT_APP_DEVELOPMENT_SERVER;
 
   useEffect(() => {
     const fetchCartItem = async () => {

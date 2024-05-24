@@ -24,15 +24,15 @@ const ProductCard = ({ product, userDetails }) => {
   const { _id, images, title, discountPercentage, price, rating } = product;
   const productId = _id;
   
-  const DEVELOPMENT_SERVER = process.env.REACT_APP_DEVELOPMENT_SERVER;
-  // const PRODUCTION_SERVER = process.env.REACT_APP_PRODUCTION_SERVER;
+  // const SERVER = process.env.REACT_APP_DEVELOPMENT_SERVER;
+  const SERVER = process.env.REACT_APP_PRODUCTION_SERVER;
   const handleAddToCart = async (e) => {
 
     if(!userId || userId === undefined) {
       redirect('/login');
     }
     try {
-      await axios.post(`${DEVELOPMENT_SERVER}/user/cart/add/${userId}/${productId}`, {quantity: 1});
+      await axios.post(`${SERVER}/user/cart/add/${userId}/${productId}`, {quantity: 1});
       setMessage(`${title} added to cart`);
       setTimeout(() => {
         setMessage('');

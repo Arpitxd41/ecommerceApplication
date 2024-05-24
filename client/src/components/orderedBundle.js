@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
 const OrderedBundle = ({ order }) => {
   const [products, setProducts] = useState([]);
@@ -6,18 +7,23 @@ const OrderedBundle = ({ order }) => {
 
   useEffect(() => {
     const fetchProducts = async () => {
-      const DUMMY_PRODUCTS = process.env.REACT_APP_PRODUCTS;
+      // const SERVER = process.env.REACT_APP_DEVELOPMENT_SERVER;
+      const SERVER = process.env.REACT_APP_PRODUCTION_SERVER;
+      
       try {
         setLoading(true);
         const promises = order.selectedProducts.map(async (product) => {
-          const response = await fetch(`${DUMMY_PRODUCTS}/${product.productNumber}`);
-          if (response.ok) {
-            const productDetails = await response.json();
-            return { ...productDetails, quantity: product.quantity };
+          
+          const response = await axios.get(`${SERVER}/product/${product.productId}`);
+          const ordered = response.data.product;
+          if (response) {
+            const order = { ...ordered, quantity: product.quantity };
+            return order;
           }
           throw new Error('Failed to fetch product details');
         });
         const productsData = await Promise.all(promises);
+        
         setProducts(productsData);
       } catch (error) {
         console.error(error);
@@ -25,7 +31,8 @@ const OrderedBundle = ({ order }) => {
         setLoading(false);
       }
     };
-
+    
+    
     fetchProducts();
   }, [order.selectedProducts]);
 
@@ -35,16 +42,16 @@ const OrderedBundle = ({ order }) => {
       {loading ? (
         <p>Loading...</p>
       ) : (
-        <div className='flex space-x-2 rounded-full object-contain items-center'>
+        <div className='flex space-x-2 object-contain items-center'>
           {products.map((product, index) => (
             <div key={index} className='flex flex-row mr-4 border-x h-30 py-2 items-center
-            hover:shadow-md space-x-2'>
+            shadow-md shadow-black space-x-2'>
                   <div className='w-24 p-1'>
-                        <img src={product.thumbnail} alt={product.title} className='w-20 h-20 object-cover border-black' />
+                        <img src={product.images[0]} alt={product.title} className='w-20 h-20 object-cover border-black' />
                   </div>
                   <div className='font-semibold w-44'>
                         <p className='overflow-x-hidden'>{product.title}</p>
-                        <p className=''> $ {product.price}</p>
+                        <p className='font-thin text-xl'> ₹ {product.price}</p>
                         <p className=''>Quantity: {product.quantity}</p>
                   </div>
             </div>

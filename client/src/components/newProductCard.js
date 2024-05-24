@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
-// import { Link } from 'react-router-dom';
+
 import Cookies from 'js-cookie';
-import productImage from '../images/NEW.png';
 
 const useUserAuthentication = () => {
   const [userDetails, setUserDetails] = useState({});
@@ -14,7 +13,7 @@ const useUserAuthentication = () => {
 
 const NewProductCard = ({ newProduct }) => {
   const userDetails = useUserAuthentication();
-  const { title, price } = newProduct;
+  const { title, price, images } = newProduct;
   if (!newProduct) {
     return <div>Loading...</div>;
   }
@@ -24,7 +23,7 @@ const NewProductCard = ({ newProduct }) => {
     
       <div className="rounded-sm object-cover h-70 flex items-center p-2 justify-center">
         <img
-          src={productImage}
+          src={images[0]}
           alt={title}
           className="w-auto h-80 mb-4 md:py-4 px-2 aspect-square objcect-cover md:object-contain"
         />

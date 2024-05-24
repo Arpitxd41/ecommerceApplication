@@ -34,9 +34,10 @@ const Cart = () => {
     const userId = storedUserDetails._id;
     
     const fetchUserCart = async () => {
-      const DEVELOPMENT_SERVER = process.env.REACT_APP_DEVELOPMENT_SERVER;
+      // const SERVER = process.env.REACT_APP_DEVELOPMENT_SERVER;
+      const SERVER = process.env.REACT_APP_PRODUCTION_SERVER;
       try {
-        const response = await axios.get(`${DEVELOPMENT_SERVER}/user/cart/${userId}`);
+        const response = await axios.get(`${SERVER}/user/cart/${userId}`);
 
         const cartData = response.data;
         setCartProducts(cartData.cartItems);

@@ -10,8 +10,8 @@ const Login = () => {
     const [password, setPassword] = useState('');
     const [errorMessage, setErrorMessage] = useState("");
     const navigate = useNavigate();
-    // const PRODUCTION_SERVER = process.env.REACT_APP_PRODUCTION_SERVER;
-    const DEVELOPMENT_SERVER = process.env.REACT_APP_DEVELOPMENT_SERVER;
+    const SERVER = process.env.REACT_APP_PRODUCTION_SERVER;
+    // const SERVER = process.env.REACT_APP_DEVELOPMENT_SERVER;
 
     useEffect(() => {
       // Disable browser back button
@@ -34,7 +34,7 @@ const Login = () => {
     const handleSubmit = async (e) => {
       e.preventDefault();    
       try {
-          const result = await axios.post(`${DEVELOPMENT_SERVER}/login`, { mail, password });
+          const result = await axios.post(`${SERVER}/login`, { mail, password });
           if (result.data.success) {
               const { token, user } = result.data;
               

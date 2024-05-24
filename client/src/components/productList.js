@@ -8,14 +8,14 @@ const ProductList = ({ userDetails }) => {
   const [sortingOrder, setSortingOrder] = useState('default');
   const [sortingType, setSortingType] = useState('none');
   const [matchedProducts, setMatchedProducts] = useState([]);
-  const SERVER = process.env.REACT_APP_DEVELOPMENT_SERVER;
-  // const SERVER = process.env.REACT_APP_PRODUCTION_SERVER;
+  // const SERVER = process.env.REACT_APP_DEVELOPMENT_SERVER;
+  const SERVER = process.env.REACT_APP_PRODUCTION_SERVER;
   
 
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        // await axios.get(`${DEVELOPMENT_SERVER}/fetch_all_products`);
+        // const response = await axios.get(`${SERVER}/fetch_all_products`);
         const response = await axios.get(`${SERVER}/${selectedCategory ? `all_products/${selectedCategory}` : 'all_products'}`);
         
         const data = response.data;
@@ -26,8 +26,13 @@ const ProductList = ({ userDetails }) => {
           return;
         }
 
+         // Shuffle the products array
+         const shuffledProducts = products.sort(() => 0.5 - Math.random());
+         // Select the first 50 products from the shuffled array
+         const randomProducts = shuffledProducts.slice(0, 50);
+
         if (sortingType === 'none') {
-          setMatchedProducts(products);
+          setMatchedProducts(randomProducts);
         } else {
           const sortedProducts = products.slice().sort((a, b) => {
             const valueA = sortingType === 'rating' ? a.rating : a.price;
@@ -66,7 +71,7 @@ const ProductList = ({ userDetails }) => {
       md:grid-cols-3 md:gap-0 md:mx-0 md:p-0">
         {matchedProducts && matchedProducts.length > 0 ? (
           matchedProducts.map((product) => (
-            <ProductCard product={product} userDetails={userDetails} />
+            <ProductCard key={product.id} product={product} userDetails={userDetails} />
           ))
         ) : (
           <p className='text-xl text-center rounded-full px-8 mx-2 py-2 text-white bg-black font-bold my-12'> ~ Loading....</p>

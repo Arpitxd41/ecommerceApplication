@@ -11,8 +11,8 @@ const StickyFooter = ({ cartProducts, setCartProducts, userDetails }) => {
   
   const userId = userDetails._id;
   const navigate = useNavigate();
-  const SERVER = process.env.REACT_APP_DEVELOPMENT_SERVER;
-  // const SERVER = process.env.REACT_APP_PRODUCTION_SERVER;
+  // const SERVER = process.env.REACT_APP_DEVELOPMENT_SERVER;
+  const SERVER = process.env.REACT_APP_PRODUCTION_SERVER;
 
   useEffect(() => {
     let price = 0;

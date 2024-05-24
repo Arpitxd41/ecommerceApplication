@@ -10,6 +10,7 @@ import Footer from '../../data/user/standardFooter.js';
 import UserList from '../../context/userList.js';
 import { validateToken } from '../../utils/filter.js';
 import logo from '../../images/icons/2.png';
+// import dashboardSample from '../images/SalesSampleDashboard.png'
 
 const AdminDashboard = () => {
   const [products, setProducts] = useState([]);

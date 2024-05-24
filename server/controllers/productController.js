@@ -8,14 +8,14 @@ const getProducts = async (req, res) => {
     const apiUrl = process.env.DUMMY_PRODUCTS; 
     const response = await axios.get(apiUrl);
     const products = response.data.products;
-    
+
     for(let product of products) {
       const newProduct = new ProductModel({
           productId: product.id,
           title: product.title,
           description: product.description,
           discountPercentage: product.discountPercentage,
-          price: product.price*45,
+          price: Math.round(product.price*45),
           rating: product.rating,
           brand: product.brand,
           images: product.images,
@@ -23,7 +23,6 @@ const getProducts = async (req, res) => {
           category: product.category,
           thumbnail: product.thumbnail,
       });
-  
       await newProduct.save();
     }
   } catch (error) {
@@ -45,8 +44,6 @@ const getAllProducts = async (req, res) => {
         products,
     });
 
-    console.log('All Products retrieved');
-
   } catch (error) {
     console.error('Error fetching products:', error);
     res.status(500).json({
@@ -59,7 +56,6 @@ const getAllProducts = async (req, res) => {
 const getCategoryProducts = async (req, res) => {
   try {
     const selectedCategory = req.params.category;
-    console.log('selectedCategory', selectedCategory);
     
     const products = await ProductModel.find({category: selectedCategory});
 
@@ -68,8 +64,6 @@ const getCategoryProducts = async (req, res) => {
         message: 'Products retrieved successfully',
         products,
     });
-
-    console.log('All Products retrieved');
 
   } catch (error) {
     console.error('Error fetching products:', error);
@@ -84,7 +78,6 @@ const getCategoryProducts = async (req, res) => {
 const getProductsById = async (req, res) => {
   try {
     const productId = req.params.productId;
-    console.log('product id ------------', productId);
     
     // Validate the productId
     let product;
@@ -103,7 +96,6 @@ const getProductsById = async (req, res) => {
       message: 'Product retrieved successfully',
       product,
     });
-    console.log(`Product retrieved: ${product.title}`);
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: 'Internal server error' });
@@ -112,12 +104,11 @@ const getProductsById = async (req, res) => {
 
 const addProduct = async(req, res) => {
   try {
-    const productId = await getNextProductId();
-    const newProductData = { productId: productId, ...req.body };
-    console.log('new product data', newProductData);
-    console.log('new product data', req.body);
+    // const productId = await getNextProductId();
+    const newProductData = req.body;
     
     const newProduct = await ProductModel.create(newProductData);
+    newProduct.save();
     res.status(201).json(newProduct);
   } catch (error) {
       console.error('Error creating product:', error);

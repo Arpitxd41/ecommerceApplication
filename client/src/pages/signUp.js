@@ -12,8 +12,8 @@ const Signup = () => {
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
-    // const PRODUCTION_SERVER = process.env.REACT_APP_PRODUCTION_SERVER;
-    const DEVELOPMENT_SERVER = process.env.REACT_APP_DEVELOPMENT_SERVER;
+    const SERVER = process.env.REACT_APP_PRODUCTION_SERVER;
+    // const DEVELOPMENT_SERVER = process.env.REACT_APP_DEVELOPMENT_SERVER;
     
     const navigate = useNavigate();
 
@@ -26,7 +26,7 @@ const Signup = () => {
                 return;
             }
             try {
-                const response = await axios.post(`${DEVELOPMENT_SERVER}/register`, {
+                const response = await axios.post(`${SERVER}/register`, {
                   firstName,
                   lastName,
                   dob,

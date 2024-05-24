@@ -6,7 +6,7 @@ const ErrorPage = () => {
   const navigate = useNavigate();
 
   function handleHomeClick() {
-    navigate(`/`);
+    navigate(`/login`);
   }
 
   function handleBackClick() {
@@ -23,12 +23,14 @@ const ErrorPage = () => {
         <p className='statement'>
           ...maybe the page you're looking for is not found or never existed.
         </p>
-        <button id='backhome' onClick={handleHomeClick}>
-          <i className="fa fa-home"></i> HOME
-        </button>
-        <button id='goback' onClick={handleBackClick}>
-          <i className="fa fa-arrow-left"></i> GO BACK
-        </button>
+        <div className='flex flex-col md:flex-row space-y-4 md:space-x-6 md:w-2/3'>
+          <button id='backhome' onClick={handleHomeClick} className='w-1/2'>
+            <i className="fa fa-sign-in"></i> LOGIN AGAIN
+          </button>
+          <button id='goback' onClick={handleBackClick} className='w-1/2'>
+            <i className="fa fa-home"></i> BACK
+          </button>
+        </div>
       </div>
     </div>
   );

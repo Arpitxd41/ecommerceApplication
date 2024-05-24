@@ -6,7 +6,7 @@ const orderSchema = new mongoose.Schema({
     required: true
   },
   orderId: {
-    type: mongoose.Schema.Types.ObjectId,
+    type: String,
     required: true
   },
   selectedProducts: [
@@ -15,7 +15,7 @@ const orderSchema = new mongoose.Schema({
           type: Number,
           required: true
         },
-        _id: {
+        productId: {
           type: mongoose.Schema.Types.ObjectId,
           required: true
         },

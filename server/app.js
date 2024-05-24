@@ -8,7 +8,7 @@ const userRouter = require('./routes/route.js');
 const app = express();
 
 const corsOptions = {
-    origin: [process.env.CLIENT_ROUTE_PRODUCTION],
+    origin: [process.env.CLIENT_ROUTE_PRODUCTION, process.env.CLIENT_ROUTE_DEVELOPMENT],
     methods: 'GET,PUT,POST,DELETE,PATCH',
     credentials: true,
     optionsSuccessStatus: 204,

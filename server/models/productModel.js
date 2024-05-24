@@ -18,10 +18,12 @@ const productSchema = new mongoose.Schema({
   brand: {
     type: String,
     required: true,
+    default: 'Private'
   },
   category: {
     type: String,
     required: true,
+    default: 'Custom'
   },
   description: {
     type: String,

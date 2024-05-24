@@ -23,8 +23,8 @@ const CheckOut = () => {
   const [selectedAddress, setSelectedAddress] = useState(null);
   const navigate = useNavigate();
 
-  const SERVER = process.env.REACT_APP_DEVELOPMENT_SERVER;
-  // const SERVER = process.env.REACT_APP_PRODUCTION_SERVER;
+  // const SERVER = process.env.REACT_APP_DEVELOPMENT_SERVER;
+  const SERVER = process.env.REACT_APP_PRODUCTION_SERVER;
 
   useEffect(() => {
     const fetchData = async () => {
@@ -102,7 +102,8 @@ const CheckOut = () => {
       const updatedProducts = await Promise.all(products.map(async (product) => {
         try {
           const productResponse = await axios.get(`${SERVER}/product/${product.productId}`);
-          const productData = productResponse.data;
+          const productData = productResponse.data.product;
+
           return { ...product, category: productData.category, brand: productData.brand };
         } catch (error) {
           console.error(`Error fetching product ${product.productId}:`, error);
@@ -190,14 +191,15 @@ const CheckOut = () => {
         </Link>
         <PayButton userId={userDetails._id} totalAmount={totalAmount} selectedProducts={selectedProducts} selectedAddress={selectedAddress} />
       </div>
+      <div className='h-auto'>
       {loading ? (
         <p>Loading...</p>
       ) : (
         <div className='p-5'>
           <h4 className='text-xl font-semibold'>Products checking out:</h4>
-          <div className='font-semibold h-96'>
-            <div className='bg-blue-600 text-white rounded-sm grid grid-cols-4 p-2 text-md md:font-semibold font-bold md:text-xl gap-4'>
-              <h3 className=''>Product</h3>
+          <div className='font-semibold'>
+            <div className='bg-blue-600 text-white rounded-sm grid grid-cols-5 p-2 text-md md:font-semibold font-bold md:text-xl gap-4'>
+              <h3 className='col-span-2'>Product</h3>
               <h3 className=''>Quantity</h3>
               <h3 className=''>Price/unit</h3>
               <h3 className=''>Price</h3>
@@ -205,12 +207,13 @@ const CheckOut = () => {
             {productDetails.map(product => (
               <div key={product.id}>
                 <div className='border-black border-b w-full'>
-                  <div className='grid grid-cols-4 justify-between md:justify-evenly p-2 md:pl-5'>
-                    <div className='md:space-x-4 md:pl-4 flex md:flex-row'>
-                      <img className='md:flex hidden md:w-16' src={product.images[0]} alt={product.title} />
+                  <div className='grid grid-cols-5 justify-between md:justify-evenly p-2'>
+                    <div className='md:space-x-2 flex md:flex-row col-span-2'>
+                      <img className='md:flex hidden h-20 w-20 border' src={product.images[0]} alt={product.title} />
                       <div>
                         <h4>{product.title}</h4>
                         <p className='text-orange-500'>{product.brand}</p>
+                        <p className='text-slate-500'>({product.category})</p>
                       </div>
                     </div>
                     <div className='pl-4'>{product.quantity}</div>
@@ -237,6 +240,7 @@ const CheckOut = () => {
           </div>
         </div>
       )}
+      </div>
       <div className='bg-gradient-to-tr from-gray-700 to-black p-5'>
         <h5 className='text-white font-bold text-lg'>Selected Address :</h5>
         <div className='w-full h-auto bg-white drop-shadow-lg shadow-inner shadow-black p-5 rounded-sm text-black font-semibold'>
