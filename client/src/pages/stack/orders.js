@@ -97,13 +97,13 @@ const Orders = () => {
                     <div className='flex flex-col justify-evenly'>
                       <div className='w-full flex flex-row px-2 justify-between'>
                       {order.orderDetails.length > 0 && (
-                        <p className='text-lime-500 font-semibold'>Status : {order.orderDetails[0].orderStatus}</p>
+                        <p className='bg-lime-500 text-white rounded-sm font-semibold'>Status : {order.orderDetails[0].orderStatus}</p>
                       )}
                         <div className='flex flex-row space-x-4'>
                         {order.paymentDetails.length > 0 && (
                           <p className='font-bold'>Payment Method : {order.paymentDetails[0].method}</p>
                         )}
-                          <h4 className='text-xl'>Amount : ₹ {order.totalAmount}</h4>
+                          <h4 className='text-xl'>Amount Paid : ₹ {order.totalAmount}</h4>
                         </div>
                       </div>
                       <div className='w-full flex flex-col px-2'>
