@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
-
+import React, { useState, useCallback } from 'react';
+import { useNavigate } from 'react-router-dom';
+import _ from 'lodash'
 const SearchBar = ({ userId }) => {
+  const navigate = useNavigate();
   const [input, setInput] = useState("");
   const [results, setResults] = useState([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
@@ -8,6 +10,10 @@ const SearchBar = ({ userId }) => {
   const SERVER = process.env.REACT_APP_PRODUCTION_SERVER;
 
   const fetchData = (value) => {
+    if(_.isEmpty(value)){
+      return;
+    }
+
     const request = `${SERVER}/all_products`;
     
     fetch(request)
@@ -30,9 +36,14 @@ const SearchBar = ({ userId }) => {
       
   };
 
+  const searchWithDebounce = useCallback(_.debounce((value) => {
+    fetchData(value);
+  }, 500, {leading: true})
+  , []);
+
   const handleChange = (value) => {
     setInput(value);
-    fetchData(value);
+    searchWithDebounce(value);
   };
 
   const handleSelectSuggestion = (suggestion) => {
@@ -40,7 +51,7 @@ const SearchBar = ({ userId }) => {
     
     const productId = suggestion._id;
     const productUrl = `/product/${productId}`;
-    window.location.href = productUrl;
+    navigate(productUrl);
     setShowSuggestions(false);
   };
 
@@ -54,12 +65,12 @@ const SearchBar = ({ userId }) => {
         </div>
         <input
           className="search-bar h-10 w-full outline-none text-sm md:text-md text-gray-800 font-semibold pr-2 pl-2 border-2 border-white bg-gray-100 rounded-r-full"
-          type="text"
+          type="search"
           id="search"
           placeholder="SEARCH SOMETHING.."
           value={input}
           onChange={(e) => handleChange(e.target.value)}
-          onBlur={() => setTimeout(() => setShowSuggestions(false), 200)}
+          onKeyDown={(e) => (e.key === 'Enter') && handleChange(e.target.value)}
         />
       </div>
       {showSuggestions && (

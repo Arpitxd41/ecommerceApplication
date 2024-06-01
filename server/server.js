@@ -7,7 +7,7 @@ const server = http.createServer(app);
 
 function startServer() {
     server.listen(PORT, () => {
-        console.log(`<< Server running @PORT:${PORT} ================ >>`);
+        console.log(`<< Server running @PORT:${PORT} in ${process.env.NODE_ENV} mode ================ >>`);
     });
 }
 

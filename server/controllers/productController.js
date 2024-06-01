@@ -37,7 +37,7 @@ const getProducts = async (req, res) => {
 const getAllProducts = async (req, res) => {
   try {
     const products = await ProductModel.find();
-
+    res.set('Cache-Control', 'public, max-age=60'); // Cache 1 minute
     res.status(200).json({
         success: true,
         message: 'Products retrieved successfully',

@@ -1,0 +1,37 @@
+[
+  {
+    "_id": "664c59945c88b83c217f6ba8",
+    "firstName": "Arpit",
+    "lastName": "Tiwari",
+    "mail": "arpitnt10@gmail.com",
+    "password": "$2b$10$sz9i6krrb912StEiBDEs..gwHH4uacX7MdIf5qCxrxNeYKFsaG3Ze",
+    "role": "ADMIN",
+    "address": [
+      {
+        "street": "Nehru Chowk, Bilaspur, India",
+        "city": "India",
+        "postalCode": 495001,
+        "phoneNumber": "8461812408",
+        "_id": "664dd0f54a3bb3ddaa6a0775"
+      },
+      {
+        "street": "Nehru Chowk, Bilaspur, India",
+        "city": "India",
+        "postalCode": 495001,
+        "phoneNumber": "8461812408",
+        "_id": "664dd1194a3bb3ddaa6a07a9"
+      }
+    ],
+    "__v": 13
+  },
+  {
+    "_id": "664fa18ffba8a90fd5dda6fd",
+    "firstName": "Alex",
+    "lastName": "Mahone",
+    "mail": "alex@california",
+    "password": "$2b$10$25VtMBRBdDnlsTUzyriS5.n4GvCniXdnH.sVlXwTLOAE1Cpor.GIG",
+    "role": "USER",
+    "address": [],
+    "__v": 0
+  }
+]

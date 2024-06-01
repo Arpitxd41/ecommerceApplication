@@ -1,0 +1,85 @@
+[
+  {
+    "_id": "66504199074c59fc803d293e",
+    "userId": "664c59945c88b83c217f6ba8",
+    "orderId": "order_OEFSujVzrACTeG",
+    "selectedProducts": [
+      {
+        "quantity": 1,
+        "productId": "66502bc0c8d40a7530e4ffc1",
+        "checked": true,
+        "category": "sports-accessories",
+        "brand": "Private",
+        "_id": "6650417b82f6f0c281b05fbb"
+      },
+      {
+        "quantity": 3,
+        "productId": "66502bc0c8d40a7530e4ffdc",
+        "checked": true,
+        "category": "sunglasses",
+        "brand": "Fashion Fun",
+        "_id": "6650416f82f6f0c281b05fb7"
+      }
+    ],
+    "selectedAddress": {
+      "street": "Nehru Chowk, Bilaspur, India",
+      "city": "India",
+      "postalCode": 495001,
+      "phoneNumber": "8461812408",
+      "_id": "664dd0f54a3bb3ddaa6a0775"
+    },
+    "totalAmount": 4725,
+    "orderDetails": [],
+    "paymentDetails": [],
+    "__v": 0
+  },
+  {
+    "_id": "66504489bdc0e41c2813592e",
+    "userId": "664c59945c88b83c217f6ba8",
+    "orderId": "order_OEFgA5vPVrnLm5",
+    "selectedProducts": [
+      {
+        "quantity": 1,
+        "productId": "66502bc0c8d40a7530e4ffc1",
+        "checked": true,
+        "category": "sports-accessories",
+        "brand": "Private",
+        "_id": "6650417b82f6f0c281b05fbb"
+      },
+      {
+        "quantity": 3,
+        "productId": "66502bc0c8d40a7530e4ffdc",
+        "checked": true,
+        "category": "sunglasses",
+        "brand": "Fashion Fun",
+        "_id": "6650416f82f6f0c281b05fb7"
+      }
+    ],
+    "selectedAddress": {
+      "street": "Nehru Chowk, Bilaspur, India",
+      "city": "India",
+      "postalCode": 495001,
+      "phoneNumber": "8461812408",
+      "_id": "664dd0f54a3bb3ddaa6a0775"
+    },
+    "totalAmount": 4725,
+    "orderDetails": [
+      {
+        "orderId": "order_OEFgA5vPVrnLm5",
+        "amountPaid": 472500,
+        "receiptNumber": "fOpYotrLXg",
+        "orderStatus": "paid",
+        "Date": "2024-05-24T07:40:57.000Z"
+      }
+    ],
+    "paymentDetails": [
+      {
+        "event": "order.paid",
+        "paymentId": "pay_OEFh1dKW6DL4HS",
+        "paymentAmount": 472500,
+        "method": "wallet"
+      }
+    ],
+    "__v": 0
+  }
+]

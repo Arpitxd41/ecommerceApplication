@@ -4,6 +4,7 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const connectToDB = require('./config/db.js');
 const userRouter = require('./routes/route.js');
+const runSeeder = require('./seeder/seeder.js');
 
 const app = express();
 
@@ -28,7 +29,8 @@ app.use(userRouter);
 
 module.exports = app;
 
-connectToDB(() => {
+connectToDB(async () => {
+    await runSeeder();
     const server = require('./server.js');
     server.start();
 });
