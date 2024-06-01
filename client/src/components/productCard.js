@@ -49,7 +49,7 @@ const ProductCard = ({ product, userDetails }) => {
 
   return (
     <div id='message-section' className="bg-white text-black border-slate-400 rounded-sm border hover:shadow-black hover:shadow-md object-contain">
-      <a href={`/product/${productId}`} className='space-y-2'>
+      <Link to={`/product/${productId}`} className='space-y-2'>
         <div className="rounded-sm object-cover h-70 flex items-center p-2 justify-center">
           <img
             src={images[0]}
@@ -63,9 +63,9 @@ const ProductCard = ({ product, userDetails }) => {
           <i className="fa-solid fa-star text-yellow-400 shadow-sm"></i>{rating}
         </h4>
       </div>
-      </a>
+      </Link>
       <div className="flex flex-col mt-2 justify-center items-center object-cover w-full">
-        <a href={`/product/${productId}`} className='space-y-2 border-t px-2 w-full'>
+        <Link to={`/product/${productId}`} className='space-y-2 border-t px-2 w-full'>
           <h3 className="text-xl h-7 font-semibold overflow-hidden text-left">{title} </h3>
            {message && 
             <div className='left-0 w-full absolute bg-black text-white font-bold px-6 py-4 text-2xl text-center'>
@@ -77,7 +77,7 @@ const ProductCard = ({ product, userDetails }) => {
                   <h3 className="flex flex-row items-center text-gray-950 font-thin text-2xl md:text-4xl lg:text-5xl"><span className='text-xl md:text-3xl'>₹</span>{price}/-</h3>
                 </div>
             </div>
-        </a>
+        </Link>
         <div className="w-full flex flex-row justify-between text-white text-xl font-bold">
           {userDetails && (
             <button onClick={handleAddToCart} className="w-full bg-black border border-black rounded-b-sm shadow-black">
