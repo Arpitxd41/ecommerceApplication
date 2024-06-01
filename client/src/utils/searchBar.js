@@ -67,6 +67,7 @@ const SearchBar = ({ userId }) => {
           className="search-bar h-10 w-full outline-none text-sm md:text-md text-gray-800 font-semibold pr-2 pl-2 border-2 border-white bg-gray-100 rounded-r-full"
           type="search"
           id="search"
+          autoComplete='off'
           placeholder="SEARCH SOMETHING.."
           value={input}
           onChange={(e) => handleChange(e.target.value)}
