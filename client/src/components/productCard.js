@@ -74,7 +74,7 @@ const ProductCard = ({ product, userDetails }) => {
             }
             <div className="flex flex-col space-y-5 items-center pb-2 justify-center">
                 <div className='text-center justify-start items-center w-full'>
-                  <h3 className="flex flex-row items-center text-gray-950 font-thin text-2xl md:text-4xl lg:text-5xl"><span className='text-xl md:text-3xl'>₹</span>{price}/-</h3>
+                  <h3 className="flex flex-row items-center text-gray-950 font-thin text-2xl md:text-3xl lg:text-4xl"><span className='text-xl md:text-3xl'>₹</span>{price}/-</h3>
                 </div>
             </div>
         </Link>
