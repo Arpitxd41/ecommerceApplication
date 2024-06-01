@@ -6,7 +6,7 @@ const userModel = require("../models/userModel");
 const usersInFile = require("./data/ecommerce.users.json");
 const ordersInFile = require("./data/ecommerce.orders.json");
 const productsInFile = require("./data/ecommerce.products.json");
-const userCartsInFile = require("./data/ecommerce.userCarts.json");
+const userCartsInFile = require("./data/ecommerce.usercarts.json");
 
 /**
  * Enters test data to db if not already present
