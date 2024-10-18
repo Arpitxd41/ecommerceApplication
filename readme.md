@@ -2,7 +2,7 @@
 | Label | Discription | links |
 | :- | :- | :-: |
 | *ISSUE* : | 001, MERN STACK PROJECT | - |
-| *TOPIC* : | Ecommerce Web Application | :paperclip: [open](/) |
+| *TOPIC* : | Ecommerce Web Application | :paperclip: [open](https://ecommerce-application-by-arpit.vercel.app) |
 | *AUTHOR* : | Arpit Tiwari | :paperclip: [Profile](https://portfolio.arpit.netlify.com) |
 | *DESIGNATION* : | Full Stack Javascript Web Developer | - |
 
